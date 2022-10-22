@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch } from 'store';
-import { loginByToken } from 'store/acccoutSlice';
+;
 
 //project imports
 
@@ -64,7 +64,7 @@ const JWTContextProvider = ({ children }: Props) => {
 
             if (typeof serviceToken === 'string') {
                 // @ts-ignore
-                dispatch(loginByToken(serviceToken));
+                // dispatch(loginByToken(serviceToken));
             }
         };
 

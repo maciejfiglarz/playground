@@ -16,7 +16,7 @@ let comments: Comment[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar1,
-            name: 'Sue Ponce',
+            login: 'Sue Ponce',
             time: '15 min ago '
         },
         data: {
@@ -34,7 +34,7 @@ let comments: Comment[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar2,
-            name: 'Estela Deleon',
+            login: 'Estela Deleon',
             time: '1 hour ago'
         },
         data: {
@@ -51,7 +51,7 @@ let comments: Comment[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar3,
-            name: 'Rhett Rubio',
+            login: 'Rhett Rubio',
             time: '15 min ago '
         },
         data: {
@@ -69,7 +69,7 @@ let comments: Comment[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar4,
-            name: 'Eleanor Rivera',
+            login: 'Eleanor Rivera',
             time: '1 hour ago'
         },
         data: {
@@ -86,7 +86,7 @@ let comments: Comment[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar5,
-            name: 'Arturo Marks',
+            login: 'Arturo Marks',
             time: '15 min ago '
         },
         data: {
@@ -104,7 +104,7 @@ let comments: Comment[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar6,
-            name: 'Keneth Lawrence',
+            login: 'Keneth Lawrence',
             time: '1 hour ago'
         },
         data: {
@@ -121,7 +121,7 @@ let comments: Comment[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar7,
-            name: 'Ezra Lindsey',
+            login: 'Ezra Lindsey',
             time: '1 hour ago'
         },
         data: {

@@ -6,7 +6,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import postsReducer from './postsSlice';
 import singlePostReducer from './postsSlice';
 import commentsReducer from './commentsSlice';
-import accountReducer from './acccoutSlice';
+import userReducer from './user/userSlice';
 
 const middlewares: Middleware[] = [];
 
@@ -15,7 +15,7 @@ const store = configureStore({
         posts: postsReducer,
         singlePost: singlePostReducer,
         comments: commentsReducer,
-        account: accountReducer
+        user: userReducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(

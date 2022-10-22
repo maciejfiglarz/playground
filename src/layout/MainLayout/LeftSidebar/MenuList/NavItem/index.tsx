@@ -22,7 +22,7 @@ const NavItem = ({ item }: NavItemProps) => {
         <>
             <ListItemButton>
                 <ListItemIcon sx={{ my: 'auto', minWidth: 36 }}>
-                    {/* <item.icon></item.icon> */}
+                    <item.icon></item.icon>
                 </ListItemIcon>
                 <ListItemText
                     primary={

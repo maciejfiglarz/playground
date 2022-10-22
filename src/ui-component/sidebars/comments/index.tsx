@@ -33,8 +33,8 @@ const CommentsList = () => {
     }, []);
     return (
         <>
-            {comments.map((comment, index) => (
-                <Item {...comment} />
+            {comments.map((comment, i) => (
+                <Item key={i} {...comment} />
             ))}
         </>
     );

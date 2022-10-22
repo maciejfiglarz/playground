@@ -98,8 +98,8 @@ const MainLayout = () => {
                     <Outlet />
                 </Main>
             </Box>
-            <Login />
-            <Register />
+            {/* <Login />
+            <Register /> */}
         </ThemeProvider>
     );
 };

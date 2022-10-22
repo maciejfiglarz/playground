@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 //project imports
-import axios from 'utils/axios';
+import axiosApi from 'utils/axiosApi';
 // import store from 'store';
 import { Profile } from 'types';
 import { RootState } from 'store';
@@ -30,7 +30,7 @@ type LoginPayload = {
 export const login = createAsyncThunk(
     'account/login',
     async (payload: LoginPayload) => {
-        const { data } = await axios.post(`/api/account/login`, payload);
+        const { data } = await axiosApi.post(`/api/account/login`, payload);
         localStorage.setItem('serviceToken', data.user.id);
         return data.user as Profile;
     }
@@ -39,7 +39,7 @@ export const login = createAsyncThunk(
 export const loginByToken = createAsyncThunk(
     'account/login-token',
     async (token: string) => {
-        const { data } = await axios.post(`/api/account/login-token`, {
+        const { data } = await axiosApi.post(`/api/account/login-token`, {
             token
         });
         return data.user as Profile;
@@ -51,7 +51,12 @@ export const slice = createSlice({
     initialState,
     reducers: {
         logout: (state) => {
+            console.log("dispatch");
             window.localStorage.setItem('serviceToken', null!);
+            return initialState;
+        },
+        register: (state) => {
+
             return initialState;
         }
         // addTodo: (state, action: PayloadAction<string>) => {
@@ -120,8 +125,8 @@ export const slice = createSlice({
     }
 });
 
-export const selectAccount = (state: RootState) => state.account;
+export const selectAccount = (state: RootState) => state.user;
 
-export const { logout } = slice.actions;
+export const { logout,register } = slice.actions;
 
 export default slice.reducer;

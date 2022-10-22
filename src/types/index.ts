@@ -24,7 +24,7 @@ export type NavItemType = {
 export interface Profile {
     id: string;
     avatar: string;
-    name: string;
+    login: string;
     time: string;
 }
 

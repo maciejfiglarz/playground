@@ -103,7 +103,7 @@ const ReplyComment = ({ reply ,toggleReply }: ReplyCommentProps) => {
                                                     variant="h5"
                                                     component="div"
                                                 >
-                                                    {reply.profile.name}
+                                                    {reply.profile.login}
                                                 </Typography>
                                             </Grid>
                                             <Grid item>

@@ -51,7 +51,7 @@ const validationSchema = yup.object().shape({
 const SinglePost = ({ id, profile, data }: Post) => {
     const theme = useTheme();
     const { title, description, image, comments } = data;
-    const { avatar, name: profilName } = profile;
+    const { avatar, login: profilName } = profile;
     const [anchorEl, setAnchorEl] = useState<Element | null>(null);
     // const [openComments, setOpenComments] = useState<CommentType[]>();
 

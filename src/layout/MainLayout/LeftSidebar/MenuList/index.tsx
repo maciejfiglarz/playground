@@ -28,8 +28,8 @@ const MenuList = () => {
                     </Typography>
                 }
             >
-                {category.items.map((item: NavItemType) => (
-                    <NavItem item={item} />
+                {category.items.map((item: NavItemType,i) => (
+                    <NavItem key={i} item={item} />
                 ))}
             </List>
         </>

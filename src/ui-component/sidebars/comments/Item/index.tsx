@@ -7,7 +7,7 @@ import Avatar from 'ui-component/extended/Avatar';
 import { Box, Grid, Typography } from '@mui/material';
 
 const Item = ({ id, profile, data }: Comment) => {
-    const { avatar, name } = profile;
+    const { avatar, login } = profile;
     const { text } = data;
     return (
         <Box>
@@ -22,7 +22,7 @@ const Item = ({ id, profile, data }: Comment) => {
                         {text}
                     </Typography>
                     <Typography align="left" variant="h5" component="div">
-                        {name}
+                        {login}
                     </Typography>
                 </Box>
             </Grid>

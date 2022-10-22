@@ -40,7 +40,7 @@ let posts: Post[] = [
                     profile: {
                         id: '#52JONE_DOE',
                         avatar: avatar2,
-                        name: 'Barney Thea',
+                        login: 'Barney Thea',
                         time: '15 min ago '
                     },
                     data: {
@@ -55,7 +55,7 @@ let posts: Post[] = [
                                 profile: {
                                     id: '#52JONE_DOE',
                                     avatar: avatar4,
-                                    name: 'John Doe',
+                                    login: 'John Doe',
                                     time: 'just now '
                                 },
                                 data: {
@@ -74,7 +74,7 @@ let posts: Post[] = [
                     profile: {
                         id: '#52JONE_DOE',
                         avatar: avatar5,
-                        name: 'John Been',
+                        login: 'John Been',
                         time: '1 hour ago'
                     },
                     data: {
@@ -91,7 +91,7 @@ let posts: Post[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar1,
-            name: 'John Doe',
+            login: 'John Doe',
             time: 'now'
         }
     },
@@ -105,7 +105,7 @@ let posts: Post[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar3,
-            name: 'John Doe',
+            login: 'John Doe',
             time: 'now'
         }
     },
@@ -122,7 +122,7 @@ let posts: Post[] = [
                     profile: {
                         id: '#52JONE_DOE',
                         avatar: avatar2,
-                        name: 'Barney Thea',
+                        login: 'Barney Thea',
                         time: '15 min ago '
                     },
                     data: {
@@ -137,7 +137,7 @@ let posts: Post[] = [
                                 profile: {
                                     id: '#52JONE_DOE',
                                     avatar: avatar4,
-                                    name: 'John Doe',
+                                    login: 'John Doe',
                                     time: 'just now '
                                 },
                                 data: {
@@ -156,7 +156,7 @@ let posts: Post[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar4,
-            name: 'John Doe',
+            login: 'John Doe',
             time: 'now'
         }
     },
@@ -170,7 +170,7 @@ let posts: Post[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar5,
-            name: 'John Doe',
+            login: 'John Doe',
             time: 'now'
         }
     },
@@ -185,7 +185,7 @@ let posts: Post[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar6,
-            name: 'John Doe',
+            login: 'John Doe',
             time: 'now'
         }
     },
@@ -200,7 +200,7 @@ let posts: Post[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar7,
-            name: 'John Doe',
+            login: 'John Doe',
             time: 'now'
         }
     },
@@ -215,7 +215,7 @@ let posts: Post[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar1,
-            name: 'John Doe',
+            login: 'John Doe',
             time: 'now'
         }
     },
@@ -230,7 +230,7 @@ let posts: Post[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar2,
-            name: 'John Doe',
+            login: 'John Doe',
             time: 'now'
         }
     },
@@ -245,7 +245,7 @@ let posts: Post[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar3,
-            name: 'John Doe',
+            login: 'John Doe',
             time: 'now'
         }
     },
@@ -260,7 +260,7 @@ let posts: Post[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar4,
-            name: 'John Doe',
+            login: 'John Doe',
             time: 'now'
         }
     },
@@ -275,7 +275,7 @@ let posts: Post[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar5,
-            name: 'John Doe',
+            login: 'John Doe',
             time: 'now'
         }
     },
@@ -290,7 +290,7 @@ let posts: Post[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar6,
-            name: 'John Doe',
+            login: 'John Doe',
             time: 'now'
         }
     },
@@ -305,7 +305,7 @@ let posts: Post[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar7,
-            name: 'John Doe',
+            login: 'John Doe',
             time: 'now'
         }
     },
@@ -319,7 +319,7 @@ let posts: Post[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar1,
-            name: 'John Doe',
+            login: 'John Doe',
             time: 'now'
         }
     },
@@ -334,7 +334,7 @@ let posts: Post[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar2,
-            name: 'John Doe',
+            login: 'John Doe',
             time: 'now'
         }
     },
@@ -349,7 +349,7 @@ let posts: Post[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar3,
-            name: 'John Doe',
+            login: 'John Doe',
             time: 'now'
         }
     },
@@ -364,7 +364,7 @@ let posts: Post[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar4,
-            name: 'John Doe',
+            login: 'John Doe',
             time: 'now'
         }
     },
@@ -379,7 +379,7 @@ let posts: Post[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar5,
-            name: 'John Doe',
+            login: 'John Doe',
             time: 'now'
         }
     },
@@ -394,7 +394,7 @@ let posts: Post[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar6,
-            name: 'John Doe',
+            login: 'John Doe',
             time: 'now'
         }
     },
@@ -409,7 +409,7 @@ let posts: Post[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar7,
-            name: 'John Doe',
+            login: 'John Doe',
             time: 'now'
         }
     },
@@ -424,7 +424,7 @@ let posts: Post[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar1,
-            name: 'John Doe',
+            login: 'John Doe',
             time: 'now'
         }
     },
@@ -439,7 +439,7 @@ let posts: Post[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar2,
-            name: 'John Doe',
+            login: 'John Doe',
             time: 'now'
         }
     },
@@ -454,7 +454,7 @@ let posts: Post[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar3,
-            name: 'John Doe',
+            login: 'John Doe',
             time: 'now'
         }
     },
@@ -469,7 +469,7 @@ let posts: Post[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar4,
-            name: 'John Doe',
+            login: 'John Doe',
             time: 'now'
         }
     },
@@ -483,7 +483,7 @@ let posts: Post[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar5,
-            name: 'John Doe',
+            login: 'John Doe',
             time: 'now'
         }
     },
@@ -498,7 +498,7 @@ let posts: Post[] = [
         profile: {
             id: '#52JONE_DOE',
             avatar: avatar6,
-            name: 'John Doe',
+            login: 'John Doe',
             time: 'now'
         }
     }
@@ -537,7 +537,7 @@ services.onPost('/api/posts/add').reply((request) => {
             profile: {
                 id: '#52JONE_DOE',
                 avatar: avatar6,
-                name: 'John Doe',
+                login: 'John Doe',
                 time: 'now'
             }
         };
