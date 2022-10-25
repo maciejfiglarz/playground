@@ -1,20 +1,17 @@
 import * as Yup from "yup";
 import { Formik } from "formik";
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 //project imports
 import AuthWrapper from "../StaticWrapper";
 import { register } from "store/user/userSlice";
 import { strengthColor, strengthIndicator } from "utils/password-strength";
-import { useAppDispatch } from "store";
+import { useAppDispatch, useAppSelector } from "store";
 import {
-  // DefaultRootStateProps,
   StringColorProps,
 } from "types";
 import AppContext from "contexts/AppContext";
-import axiosApi from "utils/axiosApi";
-// import Logo from 'ui-component/Logo';
 
 //material ui
 import {
@@ -39,19 +36,25 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const Register = () => {
-  const dispatch = useAppDispatch();
   const theme = useTheme();
+  const dispatch = useAppDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [strength, setStrength] = useState(0);
   const [level, setLevel] = useState<StringColorProps>();
   const [checked, setChecked] = useState(true);
-  const { setAuthModal } = useContext(AppContext);
-
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const { isFetching, userInfo, error } = useAppSelector((state) => state.user);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate(`/profile/:id`);
+    }
+  }, [navigate, userInfo]);
 
   const handleMouseDownPassword = (event: React.SyntheticEvent) => {
     event.preventDefault();
@@ -63,39 +66,17 @@ const Register = () => {
   };
 
   const renderBottom = (
-    <Grid item xs={12}>
-      <Grid item container direction="column" alignItems="center" xs={12}>
-        <Typography
-          component={Link}
-          to="/login"
-          variant="subtitle1"
-          sx={{ textDecoration: "none", cursor: "pointer" }}
-        >
-          Masz już konto?
-        </Typography>
-      </Grid>
+    <Grid item container direction="column" alignItems="center" xs={12}>
+      <Button
+        variant="text"
+        component={Link}
+        to="/login"
+        sx={{ textDecoration: "none", cursor: "pointer" }}
+      >
+        Masz już konto?
+      </Button>
     </Grid>
   );
-
-  const fetchData = async () => {
-    try {
-      const { data } = await axiosApi.get(`/auth/test`);
-
-      console.log("register response", data);
-    } catch (e: any) {
-      console.log("register errro response", e?.response?.data);
-    }
-  };
-
-  const logout = async () => {
-    try {
-      const { data } = await axiosApi.get(`/auth/logout`);
-
-      console.log("logout response", data);
-    } catch (e: any) {
-      console.log("logout errro response", e?.response?.data);
-    }
-  };
 
   return (
     <AuthWrapper
@@ -131,34 +112,6 @@ const Register = () => {
             } catch (err: any) {
               console.log("register error", err);
             }
-
-            // try {
-            //     await firebaseRegister(
-            //         values.email,
-            //         values.password
-            //     ).then(
-            //         () => {
-            //             // WARNING: do not set any formik state here as formik might be already destroyed here. You may get following error by doing so.
-            //             // Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application.
-            //             // To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
-            //             // github issue: https://github.com/formium/formik/issues/2430
-            //         },
-            //         (err: any) => {
-            //             if (scriptedRef.current) {
-            //                 setStatus({ success: false });
-            //                 setErrors({ submit: err.message });
-            //                 setSubmitting(false);
-            //             }
-            //         }
-            //     );
-            // } catch (err: any) {
-            //     console.error(err);
-            //     if (scriptedRef.current) {
-            //         setStatus({ success: false });
-            //         setErrors({ submit: err.message });
-            //         setSubmitting(false);
-            //     }
-            // }
           }}
         >
           {({
@@ -377,8 +330,6 @@ const Register = () => {
                   <FormHelperText error>{errors.submit}</FormHelperText>
                 </Box>
               )}
-              <div onClick={fetchData}>check</div>
-              <div onClick={logout}>logout</div>
               <Box sx={{ mt: 2 }}>
                 {/* <AnimateButton> */}
                 <Button

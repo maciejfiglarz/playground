@@ -26,11 +26,9 @@ const App = () => (
         <QueryClientProvider client={queryClient}>
             <Provider store={store}>
                 <CssBaseline />
-                <JWTContextProvider>
                     <AppContextProvider>
                         <Routes />
                     </AppContextProvider>
-                </JWTContextProvider>
             </Provider>
         </QueryClientProvider>
     </StyledEngineProvider>

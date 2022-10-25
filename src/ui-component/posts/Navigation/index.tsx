@@ -31,7 +31,7 @@ const Navigation = ({ tab, setTab }: Props) => {
                     alignItems: 'center'
                 }}
             >
-                {/* <Tabs value={tab} onChange={handleChange}>
+                <Tabs value={tab} onChange={handleChange}>
                     <Tab label="Popularne" />
                     <Tab label="Najnowsze" />
                     <Tab label="Grupy" />
@@ -45,7 +45,7 @@ const Navigation = ({ tab, setTab }: Props) => {
                     >
                         Dodaj
                     </Button>
-                </Box> */}
+                </Box>
             </Box>
             <CreatePost
                 isOpen={isOpenCreatePost}

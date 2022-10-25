@@ -23,10 +23,11 @@ import UserImage from "assets/images/users/user-round.svg";
 const UserLabel = () => {
   const userState = useAppSelector((state) => state.user);
   const theme = useTheme();
+
   return (
     <ListItemButton
       component="a"
-      href="/dodaj"
+      href={`/profile/${userState?.userInfo?.id}`}
       sx={{
         borderRadius: `${borderRadius}px`,
         // padding: 2

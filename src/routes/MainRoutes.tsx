@@ -11,8 +11,10 @@ const SingleCategory = Loadable(
 );
 
 // const AuthLogin = Loadable(lazy(() => import('views/pages/authentication/login')));
-const AuthRegister = Loadable(lazy(() => import("views/pages/register")));
-const AuthLogin = Loadable(lazy(() => import("views/authentication/login")));
+const Register = Loadable(lazy(() => import("views/pages/register")));
+const Login = Loadable(lazy(() => import("views/authentication/login")));
+const ForgotPassword = Loadable(lazy(() => import("views/authentication/forgot-password")));
+
 const AuthAdmin = Loadable(lazy(() => import("views/admin/auth")));
 
 // import Homepage from 'views/pages/homepage';
@@ -20,9 +22,7 @@ const AuthAdmin = Loadable(lazy(() => import("views/admin/auth")));
 const MainRoutes = {
   path: "/",
   element: (
-    // <AuthGuard>
     <MainLayout />
-    // </AuthGuard>
   ),
   children: [
     {
@@ -33,14 +33,20 @@ const MainRoutes = {
       path: "/auth",
       element: <AuthAdmin />,
     },
+
     {
       path: "/register",
-      element: <AuthRegister />,
+      element: <Register />,
     },
     {
       path: "/login",
-      element: <AuthLogin />,
+      element: <Login />,
     },
+    {
+      path: "/przypomnij-haslo",
+      element: <ForgotPassword />,
+    },
+
     {
       path: "/post/:id",
       element: <SinglePost />,

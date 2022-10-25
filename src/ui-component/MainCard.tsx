@@ -34,6 +34,7 @@ const MainCard = ({
             elevation={elevation}
             sx={{
                 border: border ? '1px solid' : 'none',
+                position:"relative",
                 borderColor:
                     theme.palette.mode === 'dark'
                         ? theme.palette.background.default

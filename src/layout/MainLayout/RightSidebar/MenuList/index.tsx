@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 //project imports
 import { OverrideIcon } from "types";
@@ -82,6 +82,12 @@ const MenuList = ({ setIsOpenNavigation }: Props) => {
   const { setAuthModal } = useContext(AppContext);
   const userState = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/", { replace: true });
+  };
 
   const menuItemsLoggedUser: MenuProps[] = [
     {
@@ -103,7 +109,7 @@ const MenuList = ({ setIsOpenNavigation }: Props) => {
       title: "Wyloguj",
       type: "item",
       icon: <IconLogout />,
-      action: () => dispatch(logout()),
+      action: () => handleLogout(),
     },
   ];
 
@@ -121,7 +127,7 @@ const MenuList = ({ setIsOpenNavigation }: Props) => {
             to="/login"
             style={{ marginBottom: 15 }}
             variant="contained"
-            onClick={()=>setIsOpenNavigation(false)}
+            onClick={() => setIsOpenNavigation(false)}
           >
             Zaloguj się
           </Button>
@@ -130,7 +136,7 @@ const MenuList = ({ setIsOpenNavigation }: Props) => {
             component={Link}
             to="/register"
             variant="outlined"
-            onClick={()=>setIsOpenNavigation(false)}
+            onClick={() => setIsOpenNavigation(false)}
           >
             Załóż konto
           </Button>
@@ -167,156 +173,6 @@ const MenuList = ({ setIsOpenNavigation }: Props) => {
         {menuItems.map((menu) => (
           <NavCollapse key={menu.id} {...menu} />
         ))}
-
-        {/* 
-{userState.userInfo ? (
-          // <ButtonBase sx={{ width: '100%', justifyContent: 'start' }}>
-          //     <Avatar
-          //         src={UserImage}
-          //         sx={{
-          //             ...theme.typography.mediumAvatar,
-          //             margin: '8px 0 8px 8px !important',
-          //             cursor: 'pointer'
-          //         }}
-          //         aria-haspopup="true"
-          //         color="inherit"
-          //     />
-          //     <Typography style={{ marginLeft: 10 }} variant="h4">
-          //         {userState.loggedUser?.name}
-          //     </Typography>
-          // </ButtonBase>
-          <List
-            component="nav"
-            sx={{
-              width: "100%",
-              maxWidth: 350,
-              minWidth: 300,
-              // backgroundColor: theme.palette.background.paper,
-              borderRadius: "10px",
-              [theme.breakpoints.down("md")]: {
-                minWidth: "100%",
-              },
-              "& .MuiListItemButton-root": {
-                // mt: 0.5
-              },
-            }}
-          >
-            {userState.userInfo && (
-              <ListItemButton
-                component="a"
-                href="/dodaj"
-                sx={{
-                  borderRadius: `${borderRadius}px`,
-                  // padding: 2
-                  // backgroundColor: theme.palette.background.paper,
-                }}
-              >
-                <ListItemIcon sx={{ minWidth: 35 }}>
-                  <Avatar
-                    src={UserImage}
-                    sx={{
-                      ...theme.typography.smallAvatar,
-                      // margin: '8px 0 8px 8px !important',
-                      cursor: "pointer",
-                    }}
-                    aria-haspopup="true"
-                    color="inherit"
-                  />
-                </ListItemIcon>
-                <ListItemText
-                  primary={
-                    <Typography variant="body2">
-                      {userState.loggedUser?.name}
-                    </Typography>
-                  }
-                />
-              </ListItemButton>
-            )}
-
-            {userState.userInfo && (
-              <ListItemButton
-                component="div"
-                sx={{
-                  borderRadius: `${borderRadius}px`,
-                  // padding: 2
-                  // backgroundColor: theme.palette.background.paper,
-                }}
-                onClick={() => dispatch(logout())}
-              >
-                <ListItemIcon sx={{ minWidth: 35 }}>
-                  <IconLogout stroke={1.5} size="20" />
-                </ListItemIcon>
-                <ListItemText
-                  primary={<Typography variant="body2">Wyloguj</Typography>}
-                />
-              </ListItemButton>
-            )}
-
-          </List>
-        ) : (
-          <>
-            <Button
-              onClick={() => handleSetAuthModal("login")}
-              style={{ marginBottom: 15 }}
-              variant="contained"
-            >
-              Zaloguj się
-            </Button>
-            <Button
-              onClick={() => handleSetAuthModal("register")}
-              variant="outlined"
-            >
-              Załóż konto
-            </Button>
-          </>
-        )}
- */}
-
-        {/* {menuItems.map((item) => (
-                <>
-                    {(!item.loggedUser || item.loggedUser === userInfo) && (
-                        <ListItemButton
-                            sx={{
-                                borderRadius: `${themeBorderRadius}px`,
-                                mb: 0.5,
-                                alignItems: 'flex-start'
-                                // backgroundColor:
-                                //     level > 1 ? 'transparent !important' : 'inherit',
-                                // py: level > 1 ? 1 : 1.25,
-                                // pl: `${level * 24}px`
-                            }}
-                            // selected={selected === menu.id}
-                            onClick={handleClick}
-                        >
-                            <ListItemIcon
-                            // sx={{ my: 'auto', minWidth: !menu.icon ? 18 : 36 }}
-                            >
-                                {item.icon}
-                            </ListItemIcon>
-                            <ListItemText
-                                primary={
-                                    <Typography
-                                        variant={
-                                            selected === item.id
-                                                ? 'h5'
-                                                : 'body1'
-                                        }
-                                        color="inherit"
-                                        sx={{ my: 'auto' }}
-                                    >
-                                        {item.title}
-                                    </Typography>
-                                }
-                            />
-                            {selected === item.id ? (
-                                <ExpandLessIcon fontSize="small" />
-                            ) : (
-                                <ExpandMoreIcon fontSize="small" />
-                            )}
-                        </ListItemButton>
-                    )}
-                </>
-            ))} */}
       </List>
     </>
   );

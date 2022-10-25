@@ -1,111 +1,115 @@
-import { OverridableComponent } from '@mui/material/OverridableComponent';
-import { SvgIconTypeMap } from '@mui/material';
-import { TablerIcon } from '@tabler/icons';
+import { OverridableComponent } from "@mui/material/OverridableComponent";
+import { SvgIconTypeMap } from "@mui/material";
+import { TablerIcon } from "@tabler/icons";
 
 export type OverrideIcon =
-    | (OverridableComponent<SvgIconTypeMap<{}, 'svg'>> & {
-          muiName: string;
-      })
-    | TablerIcon
-    | React.ReactElement
-    | any;
+  | (OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
+      muiName: string;
+    })
+  | TablerIcon
+  | React.ReactElement
+  | any;
 
 export type KeyedObject = {
-    [key: string]: string | number | KeyedObject | any;
+  [key: string]: string | number | KeyedObject | any;
 };
 
 export type NavItemType = {
-    id: string;
-    title: string;
-    icon: OverrideIcon;
-    url: string;
+  id: string;
+  title: string;
+  icon: OverrideIcon;
+  url: string;
 };
 
 export interface Profile {
-    id: string;
-    avatar: string;
-    login: string;
-    time: string;
+  id: string;
+  avatar: string;
+  login: string;
+  time: string;
 }
 
 export type Likes = {
-    like: boolean;
-    value: number;
+  like: boolean;
+  value: number;
 };
 
 export type ReplyComment = {
-    id: string;
-    profile: Profile;
-    data: CommentData;
+  id: string;
+  profile: Profile;
+  data: CommentData;
 };
 export type CommentData = {
-    name?: string;
-    text?: string;
-    likes?: Likes;
-    // video?: string;
-    replies?: ReplyComment[];
+  name?: string;
+  text?: string;
+  likes?: Likes;
+  // video?: string;
+  replies?: ReplyComment[];
 };
 
 export interface PostData {
-    title?: string;
-    description: string;
-    imageUrl?: string;
-    image: string;
-    comments?: Comment[];
-    likes?: Likes;
+  title?: string;
+  slug: string;
+  description: string;
+  type: string;
+  // imageUrl?: string;
+  image: string;
+  voteDown: number;
+  voteUp: number;
+  isActive: boolean;
+  isWaiting: boolean;
 }
 
 export interface Post {
-    id?: string;
-    data: PostData;
-    profile: Profile;
+  id?: string;
+  data: PostData;
+  profile: Profile;
 }
 
 export interface Category {
-    id: string;
-    name: string;
-    thumb: string;
-    cover: string;
-    slug: string;
-    description?: string;
+  id: string;
+  name: string;
+  thumb: string;
+  cover: string;
+  slug: string;
+  description?: string;
 }
 
 export type Comment = {
-    id: string;
-    profile: Profile;
-    data: CommentData;
+  id: string;
+  profile: Profile;
+  data: CommentData;
 };
 
 export type User = {
-    id: string;
-    email: string;
-    password: string;
-    name: string;
+  id: string;
+  email: string;
+  password: string;
+  name: string;
 };
 
 export interface FormInputProps {
-    // bug: KeyedObject;
-    fullWidth?: boolean;
-    size?: 'small' | 'medium' | undefined;
+  // bug: KeyedObject;
+  fullWidth?: boolean;
+  size?: "small" | "medium" | undefined;
+  label: string;
+  name: string;
+  required?: boolean;
+  InputProps?: {
     label: string;
-    name: string;
-    required?: boolean;
-    InputProps?: {
-        label: string;
-        startAdornment?: React.ReactNode;
-    };
+    startAdornment?: React.ReactNode;
+  };
 }
 
 export interface StringColorProps {
-    id?: string;
-    label?: string;
-    color?: string;
-    primary?: string;
-    secondary?: string;
+  id?: string;
+  label?: string;
+  color?: string;
+  primary?: string;
+  secondary?: string;
 }
 
 export interface JWTData {
-    userId: string;
+  userId: string;
 }
 
 /** ---- Common Functions types ---- */

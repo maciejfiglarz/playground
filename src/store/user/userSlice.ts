@@ -8,13 +8,17 @@ import { RootState } from "store";
 
 interface UserSliceState {
   userInfo: Profile | null;
-  loading: boolean;
+  isFetching: boolean;
+  isSuccess: boolean;
+  isError: boolean;
   error: any;
 }
 
 const initialState: UserSliceState = {
   userInfo: null,
-  loading: false,
+  isFetching: false,
+  isSuccess: false,
+  isError: false,
   error: null,
 };
 
@@ -50,12 +54,22 @@ export const register = createAsyncThunk(
 
 export const login = createAsyncThunk(
   "user/login",
-  async ({ email, password }: { email: string; password: string }) => {
-    const { data } = await axiosApi.post(`/auth/login`, {
-      email,
-      password,
-    });
-    return data;
+  async (
+    { email, password }: { email: string; password: string },
+    { rejectWithValue }
+  ) => {
+    try {
+      const response = await axiosApi.post(`/auth/login`, {
+        email,
+        password,
+      });
+      console.log("resoonseLoginData", response);
+      const { data } = response;
+      return data;
+    } catch (error: any) {
+      console.log("errorsLogin", error.response.data.message);
+      return rejectWithValue(error.response.data.message);
+    }
   }
 );
 export const getUserDetails = createAsyncThunk(
@@ -63,7 +77,6 @@ export const getUserDetails = createAsyncThunk(
   async () => {
     const response = await axiosApi.get(`/auth/user-details`);
     const { data } = response;
-    console.log("getUserDetails", data);
     return data;
   }
 );
@@ -74,41 +87,46 @@ export const slice = createSlice({
   reducers: {
     logout: (state) => {
       axiosApi.get(`/auth/logout`);
-      return initialState;
+      state.isFetching = false;
+      state.isSuccess = true;
+      state.userInfo = null;
+      return state;
     },
   },
 
   extraReducers: (builder) => {
     //login
     builder.addCase(login.pending, (state, action) => {
-      // if (!state.loading) {
-      state.loading = true;
-      state.error = null;
-      // }
+      state.isFetching = true;
     });
     builder.addCase(login.fulfilled, (state, action) => {
-      state.loading = false;
+      state.isFetching = false;
+      state.isSuccess = true;
       state.userInfo = action.payload as Profile;
+      console.log("errorsB", action);
     });
     builder.addCase(login.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.error;
+      state.isFetching = false;
+      state.error = action.payload;
+      console.log("errorsA", action);
     });
 
     builder.addCase(getUserDetails.pending, (state, action) => {
       // if (!state.loading) {
-      state.loading = true;
+      state.isFetching = true;
       state.error = null;
       // }
     });
     builder.addCase(getUserDetails.fulfilled, (state, action) => {
       const payload: Profile = action.payload;
-      state.loading = false;
+      state.isFetching = false;
+      state.isSuccess = true;
       state.userInfo = payload ? payload : null;
     });
     builder.addCase(getUserDetails.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.error;
+      state.isFetching = false;
+      state.isSuccess = true;
+      // state.error = action.error;
     });
   },
 });

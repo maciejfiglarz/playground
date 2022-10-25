@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { ReactElement } from "react";
+
+//project imports
 import { useAppDispatch, useAppSelector } from "store";
 import { getUserDetails } from "store/user/userSlice";
+import Loader from "ui-component/loaders/Content";
 
 export interface AppContextProps {
   readonly isOpenNavigation: boolean;
@@ -18,14 +21,20 @@ const AppContext = React.createContext({} as AppContextProps);
 
 const AppContextProvider = ({ children }: { children: ReactElement }) => {
   const dispatch = useAppDispatch();
-  const { loading, userInfo, error } = useAppSelector((state) => state.user);
+  const { isFetching, userInfo, error, isSuccess } = useAppSelector(
+    (state) => state.user
+  );
   const [isOpenNavigation, setIsOpenNavigation] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [authModal, setAuthModal] = useState<"login" | "register" | null>(null);
   const [mode, setMode] = useState<"light" | "dark">("light");
-  console.log("xxx", loading, userInfo, error);
+
   useEffect(() => {
-    dispatch(getUserDetails());
+    const fetchData = async () => {
+      await dispatch(getUserDetails());
+      console.log("xxx", isSuccess, isFetching, userInfo, error);
+    };
+    fetchData();
   }, []);
 
   return (
@@ -39,7 +48,7 @@ const AppContextProvider = ({ children }: { children: ReactElement }) => {
         setAuthModal,
       }}
     >
-      {loading ? <div>Loading...</div> : children}
+      {isSuccess ? children : <Loader/>}
     </AppContext.Provider>
   );
 };

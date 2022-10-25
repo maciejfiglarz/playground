@@ -45,31 +45,6 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [checked, setChecked] = useState(true);
   const userState = useAppSelector((state) => state.user);
-  console.log("errorsLogin", error);
-
-  // useEffect(()=>{
-  //   const data = async() =>{
-  //     try {
-  //       const response = await axiosApi.post(`/auth/login`, {
-  //         email:"test",
-  //         password:'test',
-  //       });
-  //       console.log("errorsLoginDataComponent", response);
-  //       const { data } = response;
-  //       return data;
-  //     } catch (error: any) {
-  //       console.log("errorsLoginComponent", error);
-  //       // if (error.response && error.response.data.message) {
-
-  //       //   return rejectWithValue(error.response.data.message);
-  //       // } else {
-  //       //   return rejectWithValue(error.message);
-  //       // }
-  //     }
-  //   }
-  //   data();
-
-  // },[])
 
   useEffect(() => {
     if (userInfo) {
@@ -86,7 +61,7 @@ const Login = () => {
 
   const renderBottom = (
     <Grid item xs={12}>
-      <Grid item container direction="column" alignItems="center" xs={12}>
+      {/* <Grid item container direction="column" alignItems="center" xs={12}>
         <Button
           variant="text"
           component={Link}
@@ -95,15 +70,24 @@ const Login = () => {
         >
           Nie masz konta?
         </Button>
-      </Grid>
+        <Button
+        variant="text"
+        component={Link}
+        to="/login"
+        sx={{ textDecoration: "none", cursor: "pointer" }}
+      >
+        Masz już konto?
+      </Button>
+      </Grid> */}
     </Grid>
   );
   return (
     <AuthWrapper
       isLoading={isFetching}
-      title="Witaj z powrotem!"
+      title="Zapomniałeś hasła?"
       renderBottom={renderBottom}
       type="login"
+      isSocialAuth={false}
     >
       <Grid item xs={12}>
         {error && <Alert type="error" message={error} />}
@@ -170,74 +154,6 @@ const Login = () => {
                 )}
               </FormControl>
 
-              <FormControl
-                fullWidth
-                error={Boolean(touched.password && errors.password)}
-                sx={{
-                  ...theme.typography.customInput,
-                }}
-              >
-                <InputLabel htmlFor="password-login">Hasło</InputLabel>
-                <OutlinedInput
-                  id="password-login"
-                  type={showPassword ? "text" : "password"}
-                  value={values.password}
-                  name="password"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                        size="large"
-                      >
-                        {showPassword ? <Visibility /> : <VisibilityOff />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  label="Hasło"
-                  inputProps={{}}
-                />
-                {touched.password && errors.password && (
-                  <FormHelperText
-                    error
-                    id="standard-weight-helper-text-password-login"
-                  >
-                    {errors.password}
-                  </FormHelperText>
-                )}
-              </FormControl>
-              <Stack
-                direction="row"
-                alignItems="center"
-                justifyContent="space-between"
-                spacing={1}
-              >
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={checked}
-                      onChange={(event) => setChecked(event.target.checked)}
-                      name="checked"
-                      color="primary"
-                    />
-                  }
-                  label="Zapamiętaj mnie"
-                />
-
-                <Button
-                  variant="text"
-                  component={Link}
-                  to="/przypomnij-haslo"
-                  sx={{ textDecoration: "none", cursor: "pointer" }}
-                >
-                  Zapomniałeś hasła?
-                </Button>
-              </Stack>
-
               {errors.submit && (
                 <Box sx={{ mt: 3 }}>
                   <FormHelperText error>{errors.submit}</FormHelperText>
@@ -255,7 +171,7 @@ const Login = () => {
                   variant="contained"
                   color="secondary"
                 >
-                  Zaloguj się
+                  Wyślij
                 </Button>
                 {/* </AnimateButton> */}
               </Box>
