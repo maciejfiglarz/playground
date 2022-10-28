@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 //import project
-import CreatePost from 'ui-component/posts/Create';
+
 
 //material ui
 import Box from '@mui/material/Box';
@@ -41,16 +42,13 @@ const Navigation = ({ tab, setTab }: Props) => {
                         startIcon={<AddCircleOutlineIcon />}
                         variant="contained"
                         size="small"
-                        onClick={() => setIsOpenCreatePost(true)}
+                        component={Link}
+                        to="/dodaj"
                     >
                         Dodaj
                     </Button>
                 </Box>
             </Box>
-            <CreatePost
-                isOpen={isOpenCreatePost}
-                setIsOpen={setIsOpenCreatePost}
-            />
         </>
     );
 };

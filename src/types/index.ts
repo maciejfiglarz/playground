@@ -46,7 +46,21 @@ export type CommentData = {
   replies?: ReplyComment[];
 };
 
-export interface PostData {
+// export interface PostData {
+//   title?: string;
+//   slug: string;
+//   description: string;
+//   type: string;
+//   // imageUrl?: string;
+//   image: string;
+//   voteDown: number;
+//   voteUp: number;
+//   isActive: boolean;
+//   isWaiting: boolean;
+//   comments:[]
+// }
+
+export interface Post {
   title?: string;
   slug: string;
   description: string;
@@ -57,12 +71,12 @@ export interface PostData {
   voteUp: number;
   isActive: boolean;
   isWaiting: boolean;
-}
-
-export interface Post {
-  id?: string;
-  data: PostData;
-  profile: Profile;
+  comments: [];
+  user: Profile;
+  createdAt: string;
+  linkTitle: string | null;
+  linkDescription: string | null;
+  linkSiteUrl: string | null;
 }
 
 export interface Category {

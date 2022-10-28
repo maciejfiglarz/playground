@@ -21,7 +21,7 @@ const InfiniteList = () => {
     setPage((prev) => page + 1);
   }, []);
 
-  console.log("actionx",results, pageTotal, total);
+  console.log("actionx", results, pageTotal, total);
 
   return (
     <>
@@ -30,8 +30,6 @@ const InfiniteList = () => {
         next={updateData}
         hasMore={true}
         pullDownToRefreshThreshold={50}
-        // todo
-        // loader={<Loader />}
         loader={<div style={{ clear: "both" }}>Loading...</div>}
         endMessage={
           <p style={{ textAlign: "center" }}>
@@ -39,10 +37,12 @@ const InfiniteList = () => {
           </p>
         }
       >
-        {results.map((post, index) => (
-        //   <SinglePost key={index} {...post} />
-        <div>{post?.title}</div>
-        ))}
+        {results.map((post, index) => {
+              console.log("post",post);
+          return (
+            <SinglePost key={index} {...post} />
+          );
+        })}
       </InfiniteScroll>
     </>
   );

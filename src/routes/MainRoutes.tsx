@@ -3,17 +3,21 @@ import { lazy } from "react";
 // project imports
 import MainLayout from "layout/MainLayout";
 import Loadable from "ui-component/Loadable";
+import CreatePage from "views/pages/create";
 
 const Homepage = Loadable(lazy(() => import("views/pages/homepage")));
 const SinglePost = Loadable(lazy(() => import("views/pages/post/single")));
 const SingleCategory = Loadable(
   lazy(() => import("views/pages/category/single"))
 );
+const Create = Loadable(lazy(() => import("views/pages/create")));
 
 // const AuthLogin = Loadable(lazy(() => import('views/pages/authentication/login')));
 const Register = Loadable(lazy(() => import("views/pages/register")));
 const Login = Loadable(lazy(() => import("views/authentication/login")));
 const ForgotPassword = Loadable(lazy(() => import("views/authentication/forgot-password")));
+
+
 
 const AuthAdmin = Loadable(lazy(() => import("views/admin/auth")));
 
@@ -41,6 +45,10 @@ const MainRoutes = {
     {
       path: "/login",
       element: <Login />,
+    },
+    {
+      path: "/dodaj",
+      element: <Create />,
     },
     {
       path: "/przypomnij-haslo",

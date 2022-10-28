@@ -1,26 +1,28 @@
-import { configureStore, Middleware } from '@reduxjs/toolkit';
+import { configureStore, Middleware } from "@reduxjs/toolkit";
 // import thunkMiddleware from 'redux-thunk';
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 // @ts-ignore
-import postsReducer from './postsSlice';
-import singlePostReducer from './postsSlice';
-import commentsReducer from './commentsSlice';
-import userReducer from './user/userSlice';
+import postsReducer from "./postsSlice";
+import createPostReducer from "./createPostSlice";
+import singlePostReducer from "./postsSlice";
+import commentsReducer from "./commentsSlice";
+import userReducer from "./user/userSlice";
 
 const middlewares: Middleware[] = [];
 
 const store = configureStore({
-    reducer: {
-        posts: postsReducer,
-        singlePost: singlePostReducer,
-        comments: commentsReducer,
-        user: userReducer
-    },
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(
-            middlewares as ReturnType<typeof getDefaultMiddleware>
-        )
+  reducer: {
+    posts: postsReducer,
+    createPost: createPostReducer,
+    singlePost: singlePostReducer,
+    comments: commentsReducer,
+    user: userReducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(
+      middlewares as ReturnType<typeof getDefaultMiddleware>
+    ),
 });
 
 export default store;
