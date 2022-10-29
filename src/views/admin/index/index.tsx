@@ -2,8 +2,8 @@ import React from 'react'
 
 function Index() {
   return (
-    <div>adminIndex</div>
+    <div></div>
   )
 }
 
-export default Index
+export default Index;
