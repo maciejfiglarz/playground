@@ -20,6 +20,7 @@
       // "src/*": ["*"]
     }
   },
-  "include": ["src", "src/**/*"]
+  "include": ["src", "src/**/*"],
+  "exclude": ["node_modules", "build"]
   // "extends": "./tsconfig.paths.json"
 }
