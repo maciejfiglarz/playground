@@ -8,7 +8,7 @@ import Stack from "@mui/material/Stack";
 
 type AlertProps = {
   type: "error" | "warning" | "info" | "success";
-  message: "string";
+  message: string;
   variant?: "filled" | "outlined" | "standard";
   sx?: {};
 };
@@ -16,7 +16,6 @@ type AlertProps = {
 const Alert = ({ type, message, variant = "filled", sx }: AlertProps) => {
   const theme = useTheme();
   const matchDownSm = useMediaQuery(theme.breakpoints.down("sm"));
-  console.log("message", message);
   return (
     <Stack sx={{ width: "100%", marginBottom: 2, ...sx }} spacing={2}>
       <MuiAlert variant={variant} severity={type}>

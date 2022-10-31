@@ -16,6 +16,7 @@ type Props = {
     setTab: React.Dispatch<React.SetStateAction<number>>;
 };
 
+
 const Navigation = ({ tab, setTab }: Props) => {
     const [isOpenCreatePost, setIsOpenCreatePost] = useState(false);
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {

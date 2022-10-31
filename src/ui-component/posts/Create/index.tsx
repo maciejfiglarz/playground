@@ -1,46 +1,72 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 //project imports
 import Post from "./Post";
 import Graphic from "./Graphic";
 import Modal from "ui-component/Modal";
-import Navigation from "./Navigation";
+import Navigation from "./Tabs";
 
 //material ui
 import { Button } from "@mui/material";
-import ChromeReaderModeIcon from "@mui/icons-material/ChromeReaderMode";
-import PhotoSizeSelectActualIcon from "@mui/icons-material/PhotoSizeSelectActual";
-import PollIcon from "@mui/icons-material/Poll";
-import CollectionsBookmarkIcon from "@mui/icons-material/CollectionsBookmark";
-import LinkIcon from "@mui/icons-material/Link";
-import { OverrideIcon } from "types";
 
 export type PostTypes = "post" | "link" | "graphic";
 export type LabelTypes = "post" | "link" | "graphic";
 
 type CreatePostState = {
   type: PostTypes;
+  post: {
+    title: string;
+    description: string;
+    imageID: null | string;
+    imageUrl: null | string;
+  };
+  link: {
+    title: string;
+    description: string;
+    imageID: null | string;
+    imageUrl: null | string;
+  };
+  graphic: {
+    title: string;
+    description: string;
+    // imageID: null | string;
+    // imageUrl: null | string;
+  };
 };
 
-// type TabsData = {
-//   [key: number]: {
-//     icon: OverrideIcon;
-//     key: "post" | "link" | "graphic";
-//     label: "Post" | "Grafika" | "Ankieta" | "Link" | "Galeria";
-//   };
-// };
+const initialData: CreatePostState = {
+  type: "post",
+  post: {
+    title: "",
+    description: "",
+    imageID: null,
+    imageUrl: null,
+  },
+  link: {
+    title: "",
+    description: "",
+    imageID: null,
+    imageUrl: null,
+  },
+  graphic: {
+    title: "",
+    description: "",
+  },
+};
 
-// const tabs: TabsData  = {
-//   0: { icon: <ChromeReaderModeIcon />, key: "post", label: "Post" },
-//   1: { icon: <PhotoSizeSelectActualIcon />, key: "graphic", label: "Grafika" },
-//   2: { icon: <PollIcon />, key: "pool", label: "Ankieta" },
-//   3: { icon: <LinkIcon />, key: "link", label: "Link" },
-//   4: { icon: <CollectionsBookmarkIcon />, key: "gallery", label: "Galeria" },
-// };
+export interface ContextProps {
+  state: CreatePostState;
+  setState: React.Dispatch<React.SetStateAction<CreatePostState>>;
+}
+
+export const CreatePostContext = React.createContext({} as ContextProps);
 
 const CreatePost = () => {
   const [tab, setTab] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [state, setState] = useState<CreatePostState>(initialData);
+
+  console.log("state", state);
 
   useEffect(() => {
     // console.log("tab", tabs[tab]);
@@ -59,8 +85,9 @@ const CreatePost = () => {
     //     size="md"
     //     title="Dodaj"
     // >
-    <>
+    <CreatePostContext.Provider value={{ setState, state }}>
       <Navigation tab={tab} setTab={setTab} />
+
 
       {/* <Box
                 component="form"
@@ -84,7 +111,7 @@ const CreatePost = () => {
       >
         Opublikuj
       </Button>
-    </>
+    </CreatePostContext.Provider>
     // </Modal>
   );
 };

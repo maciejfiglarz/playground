@@ -5,6 +5,9 @@ import { PostTypes } from "..";
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import { OverrideIcon } from "types";
+
+//assets
 import ChromeReaderModeIcon from "@mui/icons-material/ChromeReaderMode";
 import PhotoSizeSelectActualIcon from "@mui/icons-material/PhotoSizeSelectActual";
 import PollIcon from "@mui/icons-material/Poll";
@@ -16,18 +19,25 @@ type Props = {
   setTab: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const tabs = [
-  { icon: <ChromeReaderModeIcon />, key: "post", label: "Post" },
-  { icon: <PhotoSizeSelectActualIcon />, key: "graphic", label: "Grafika" },
-  { icon: <PollIcon />, key: "pool", label: "Ankieta" },
-  { icon: <LinkIcon />, key: "link", label: "Link" },
-  { icon: <CollectionsBookmarkIcon />, key: "gallery", label: "Galeria" },
-];
+type TabsData = {
+  [key: number]: {
+    icon: OverrideIcon;
+    key: "post" | "graphic" | "link" | "gallery" | "pool";
+    label: "Post" | "Grafika" | "Link" | "Ankieta" | "Galeria";
+  };
+};
+
+const tabs: TabsData = {
+  0: { icon: <ChromeReaderModeIcon />, key: "post", label: "Post" },
+  1: { icon: <PhotoSizeSelectActualIcon />, key: "graphic", label: "Grafika" },
+  2: { icon: <PollIcon />, key: "pool", label: "Ankieta" },
+  3: { icon: <LinkIcon />, key: "link", label: "Link" },
+  4: { icon: <CollectionsBookmarkIcon />, key: "gallery", label: "Galeria" },
+};
 
 const Switcher = ({ tab, setTab }: Props) => {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setTab(Number(newValue));
-    
   };
   return (
     <Box sx={{ width: "100%", mb: 3 }}>
@@ -37,12 +47,12 @@ const Switcher = ({ tab, setTab }: Props) => {
         value={tab}
         onChange={handleChange}
       >
-        {tabs.map((item, index) => (
+        {Object.values(tabs).map(({ key, label }) => (
           <Tab
-            key={index}
+            key={key}
             // icon={item.icon}
             iconPosition="start"
-            label={item.label}
+            label={label}
           />
         ))}
       </Tabs>
