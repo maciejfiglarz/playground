@@ -7,13 +7,16 @@ import Modal from "ui-component/Modal";
 import axiosApi from "utils/axiosApi";
 
 //material ui
-import { Grid, Button, Typography } from "@mui/material";
+import { Grid, Button, Typography, IconButton } from "@mui/material";
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
-import { Box, Stack } from "@mui/system";
+import { Box } from "@mui/system";
 import Alert from "ui-component/Alert";
 import { CreatePostContext } from "..";
+import { useTheme } from "@mui/material/styles";
+import { Close } from "@mui/icons-material";
 
 type CustomType = "jpg" | "png" | "svg";
+
 type FileInfoType = {
   id: number;
   path: string;
@@ -25,6 +28,7 @@ const Image = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [fileInfo, setFileInfo] = useState<null | FileInfoType>(null);
   const [error, setError] = useState<null | string>(null);
+  const theme = useTheme();
 
   const onChangeFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
@@ -82,6 +86,20 @@ const Image = () => {
       setFileInfo(null);
       setIsOpen(false);
     }
+  };
+
+  const clearPreview = () => {
+    setFileInfo(null);
+    setState({
+      ...state,
+      post: {
+        ...state.post,
+        ...{
+          imageID: null,
+          imageUrl: null,
+        },
+      },
+    });
   };
 
   return (
@@ -164,7 +182,29 @@ const Image = () => {
                     </Box>
                   ) : (
                     <>
-                      <Box sx={{ textAlign: "center", mb: 3 }}>
+                      <Box
+                        sx={{
+                          textAlign: "center",
+                          mb: 3,
+                          position: "relative",
+                        }}
+                      >
+                        <IconButton
+                          size="small"
+                          onClick={clearPreview}
+                          sx={{
+                            position: "absolute",
+                            top: 4,
+                            right: 4,
+                            backgroundColor: theme.palette.grey[300],
+                            "&:hover": {
+                              backgroundColor: theme.palette.grey[200],
+                            },
+                            transform: "scale(0.6)",
+                          }}
+                        >
+                          <Close />
+                        </IconButton>
                         <img style={{ maxWidth: "100%" }} src={fileInfo.path} />
                       </Box>
                       <Box

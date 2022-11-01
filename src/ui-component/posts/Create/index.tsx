@@ -5,6 +5,7 @@ import Post from "./Post";
 import Graphic from "./Graphic";
 import Modal from "ui-component/Modal";
 import Navigation from "./Tabs";
+import axiosApi from "utils/axiosApi";
 
 //material ui
 import { Button } from "@mui/material";
@@ -75,7 +76,21 @@ const CreatePost = () => {
   // const handleClose = () => {
   //     setIsOpen(false);
   // };
-  const saveForm = async () => {};
+  const saveForm = async () => {
+    const { type, post } = state;
+    let payload = {};
+    if (type === "post") {
+      const { title, description, imageID } = post;
+      payload = { type, title, description, tempImageID: imageID };
+    }
+    console.log("payload", payload);
+    try {
+      const response = await axiosApi.post(`post`, { ...payload });
+      console.log("response", response);
+    } catch (e) {
+      console.log("response erro", e);
+    }
+  };
   return (
     // <Modal
     //     isLoading={isLoading}
@@ -87,7 +102,6 @@ const CreatePost = () => {
     // >
     <CreatePostContext.Provider value={{ setState, state }}>
       <Navigation tab={tab} setTab={setTab} />
-
 
       {/* <Box
                 component="form"
