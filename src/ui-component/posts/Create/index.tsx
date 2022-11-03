@@ -7,6 +7,7 @@ import Modal from "ui-component/Modal";
 import Navigation from "./Tabs";
 import axiosApi from "utils/axiosApi";
 import { useAppDispatch, useAppSelector } from "store";
+import { useNavigate } from "react-router-dom";
 
 //material ui
 import { Button, Checkbox, FormControlLabel } from "@mui/material";
@@ -70,7 +71,7 @@ const CreatePost = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [state, setState] = useState<CreatePostState>(initialData);
   const userState = useAppSelector((state) => state.user);
-
+  const navigate = useNavigate();
   console.log("userState", userState);
 
   useEffect(() => {
@@ -93,8 +94,10 @@ const CreatePost = () => {
     }
     console.log("payload", payload);
     try {
-      const response = await axiosApi.post(`post`, { ...payload });
-      console.log("response", response);
+      const { data } = await axiosApi.post(`post`, { ...payload });
+      const { id } = data;
+      navigate(`/post/${id}`);
+      console.log("response", data);
     } catch (e) {
       console.log("response erro", e);
     }

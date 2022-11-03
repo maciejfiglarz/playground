@@ -48,11 +48,10 @@ const AuthWrapper = ({
   return (
     <MainCard
       border={true}
+      isSection={true}
       sx={{
         marginBottom: 5,
         maxWidth: 700,
-        margin: "0 auto",
-        position: "relative",
       }}
     >
       {isLoading && <Loader />}

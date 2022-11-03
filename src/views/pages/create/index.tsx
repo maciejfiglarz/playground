@@ -8,11 +8,10 @@ const CreatePage = () => {
   return (
     <MainCard
       border={true}
+      isSection={true}
       sx={{
         marginBottom: 5,
         maxWidth: 900,
-        margin: "0 auto",
-        position: "relative",
       }}
     >
       <Create />
