@@ -8,7 +8,7 @@ import SinglePost from "./posts/Single";
 // import Loader from './Loader';
 
 const InfiniteList = () => {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const { data } = useAppSelector(selectPosts);
   const { results, pageTotal, total } = data;
   const dispatch = useAppDispatch();
@@ -25,25 +25,27 @@ const InfiniteList = () => {
 
   return (
     <>
-      <InfiniteScroll
-        dataLength={results.length}
-        next={updateData}
-        hasMore={true}
-        pullDownToRefreshThreshold={50}
-        loader={<div style={{ clear: "both" }}>Loading...</div>}
-        endMessage={
-          <p style={{ textAlign: "center" }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
-      >
-        {results.map((post, index) => {
-              console.log("post",post);
-          return (
-            <SinglePost key={index} {...post} />
-          );
-        })}
-      </InfiniteScroll>
+      {results.length > 0 ? (
+        <InfiniteScroll
+          dataLength={results.length}
+          next={updateData}
+          hasMore={true}
+          pullDownToRefreshThreshold={150}
+          loader={<div style={{ clear: "both" }}>Loading...</div>}
+          endMessage={
+            <p style={{ textAlign: "center" }}>
+              <b>To już koniec...</b>
+            </p>
+          }
+        >
+          {results.map((post, index) => {
+            console.log("post", post);
+            return <SinglePost key={index} {...post} />;
+          })}
+        </InfiniteScroll>
+      ) : (
+        <div>Brak rezultatów</div>
+      )}
     </>
   );
 };

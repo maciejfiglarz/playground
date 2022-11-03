@@ -73,6 +73,7 @@ export interface Post {
   isWaiting: boolean;
   comments: [];
   user: Profile;
+  prefix?: string;
   createdAt: string;
   linkTitle: string | null;
   linkDescription: string | null;

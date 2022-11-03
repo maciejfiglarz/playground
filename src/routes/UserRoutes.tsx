@@ -6,9 +6,10 @@ import Loadable from "ui-component/Loadable";
 import AuthGuard from "utils/route-guard/AuthGuard";
 
 const Profile = Loadable(lazy(() => import("views/user/profile")));
+const Create = Loadable(lazy(() => import("views/pages/create")));
 
 const MainRoutes = {
-  path: "/profile",
+  path: "/",
   element: (
     <AuthGuard>
       <MainLayout />
@@ -18,6 +19,10 @@ const MainRoutes = {
     {
       path: "/profile/:id",
       element: <Profile />,
+    },
+    {
+      path: "/dodaj",
+      element: <Create />,
     },
   ],
 };

@@ -24,6 +24,7 @@ import MoreVertTwoToneIcon from "@mui/icons-material/MoreVertTwoTone";
 
 //assets
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+import emptyAvatar from "assets/images/emptyAvatar.png";
 
 const HeaderBar = ({ user, createdAt }: Post) => {
   const { login, avatar } = user;
@@ -41,7 +42,7 @@ const HeaderBar = ({ user, createdAt }: Post) => {
   return (
     <Grid container wrap="nowrap" alignItems="center" spacing={1}>
       <Grid item>
-        <Avatar alt="User 1" src={avatar} />
+        {<Avatar size="xs" alt={login} src={avatar ? avatar : emptyAvatar} />}
       </Grid>
       <Grid item xs zeroMinWidth>
         <Grid container alignItems="center" spacing={1}>
