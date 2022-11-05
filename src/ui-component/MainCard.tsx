@@ -31,8 +31,6 @@ const MainCard = ({
   const theme = useTheme();
   return (
     <Card
-      // ref={ref}
-      // {...others}
       elevation={elevation}
       sx={{
         border: border ? "1px solid" : "none",

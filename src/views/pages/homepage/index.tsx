@@ -30,13 +30,13 @@ const Homepage = () => {
       justifyContent="space-around"
       spacing={gridSpacing}
     >
-      <Grid item lg={2} xl={2} sx={{ display: { xs: "none", lg: "block" } }}>
+      <Grid item lg={2} xl={2.5} sx={{ display: { xs: "none", lg: "block" } }}>
         <SidebarCategories />
       </Grid>
-      <Grid item xs={12} lg={7} xl={5}>
+      <Grid item xs={12} lg={7} xl={7}>
         <PostsList />
       </Grid>
-      <Grid item lg={3} xl={3} sx={{ display: { xs: "none", lg: "block" } }}>
+      <Grid item lg={3} xl={2.5} sx={{ display: { xs: "none", lg: "block" } }}>
         <SidebarTitle text={"Komentarze"} />
         <SidebarComments />
       </Grid>
