@@ -25,7 +25,8 @@ export interface Profile {
   id: string;
   avatar: string;
   login: string;
-  time: string;
+  cover: string | null;
+  // time: string;
 }
 
 export type Likes = {
@@ -35,7 +36,7 @@ export type Likes = {
 
 export type ReplyComment = {
   id: string;
-  profile: Profile;
+  profile: User;
   data: CommentData;
 };
 export type CommentData = {
@@ -98,8 +99,9 @@ export type Comment = {
 export type User = {
   id: string;
   email: string;
-  password: string;
-  name: string;
+  login: string;
+  avatar: string;
+  cover: string;
 };
 
 export interface FormInputProps {

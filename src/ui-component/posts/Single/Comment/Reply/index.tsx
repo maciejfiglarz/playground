@@ -119,7 +119,7 @@ const ReplyComment = ({ reply ,toggleReply }: ReplyCommentProps) => {
                                                             m: '0 5px'
                                                         }}
                                                     />{' '}
-                                                    {reply.profile.time}
+                                                    {/* {reply.profile.time} */}
                                                 </Typography>
                                             </Grid>
                                         </Grid>

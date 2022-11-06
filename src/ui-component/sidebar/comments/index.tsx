@@ -3,15 +3,15 @@ import { useEffect, useState } from "react";
 //projec
 import axios from "utils/axios";
 import SidebarTitle from "../Title";
+import { List } from "@mui/material";
 
-//import projects
 // import { useAppDispatch, useAppSelector } from 'store';
 // import {
 //     fetchRecent
 //     // selectRecentComments
 // } from 'store/commentsSlice';
 import { Comment } from "types";
-import Item from "./Item";
+import NavItem from "./NavItem";
 // import { Comment } from 'types';;
 
 type PropsType = {
@@ -39,10 +39,16 @@ const CommentsList = ({ text }: PropsType) => {
   }, []);
   return (
     <>
-      <SidebarTitle text={text} />
+      {/* <SidebarTitle text={text} />
       {comments.map((comment, i) => (
         <Item key={i} {...comment} />
-      ))}
+      ))} */}
+
+      <List subheader={<SidebarTitle text={text} />}>
+        {comments.map((item: Comment) => (
+          <NavItem key={item.id} {...item} />
+        ))}
+      </List>
     </>
   );
 };

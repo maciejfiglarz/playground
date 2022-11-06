@@ -10,6 +10,7 @@ const SinglePost = Loadable(lazy(() => import("views/pages/post/single")));
 const SingleCategory = Loadable(
   lazy(() => import("views/pages/category/single"))
 );
+const Profile = Loadable(lazy(() => import("views/user/profile")));
 
 
 // const AuthLogin = Loadable(lazy(() => import('views/pages/authentication/login')));
@@ -54,6 +55,11 @@ const MainRoutes = {
     {
       path: "/post/:id",
       element: <SinglePost />,
+    },
+
+    {
+      path: "/profil/:id",
+      element: <Profile />,
     },
     {
       path: "/kategoria/:id",

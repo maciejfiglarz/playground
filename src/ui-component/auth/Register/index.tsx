@@ -52,7 +52,7 @@ const Register = () => {
 
   useEffect(() => {
     if (userInfo) {
-      navigate(`/profile/:id`);
+      navigate(`/profil/:id`);
     }
   }, [navigate, userInfo]);
 

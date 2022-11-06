@@ -15,44 +15,12 @@ import SidebarComments from "ui-component/sidebar/comments";
 import MainGrid from "ui-component/MainGrid";
 
 // material-ui
-import { Grid, CardMedia, Typography, Button, Stack } from "@mui/material";
+import { Grid, CardMedia, Typography, Button, Stack, Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 //assets
 import PersonAddTwoToneIcon from "@mui/icons-material/PersonAddTwoTone";
-// import { IconFriends, IconInbox, IconPhoto, IconUserPlus, IconUsers } from '@tabler/icons';
-
-// const tabOptions = [
-//     {
-//         to: '/user/social-profile/posts',
-//         icon: <IconInbox stroke={1.5} size="1.1rem" />,
-//         label: 'Profile'
-//     },
-//     {
-//         to: '/user/social-profile/follower',
-//         icon: <IconUsers stroke={1.5} size="1.1rem" />,
-//         label: 'Followers'
-//     },
-//     {
-//         to: '/user/social-profile/friends',
-//         icon: <IconFriends stroke={1.5} size="1.1rem" />,
-//         label: (
-//             <>
-//                 {/* friends <Chip label="100" size="small" chipcolor="secondary" sx={{ ml: 1.5 }} /> */}
-//             </>
-//         )
-//     },
-//     {
-//         to: '/user/social-profile/gallery',
-//         icon: <IconPhoto stroke={1.5} size="1.1rem" />,
-//         label: 'Gallery'
-//     },
-//     {
-//         to: '/user/social-profile/friend-request',
-//         icon: <IconUserPlus stroke={1.5} size="1.1rem" />,
-//         label: 'Friend Request'
-//     }
-// ];
+import TodayIcon from "@mui/icons-material/Today";
 
 const CategorySingle = () => {
   const { id: idParam } = useParams();
@@ -76,8 +44,8 @@ const CategorySingle = () => {
       {/* <Grid item lg={2} xl={2} sx={{ display: { xs: "none", lg: "block" } }}>
         <SidebarCategories />
       </Grid> */}
-      <Grid item xs={12} lg={10} xl={12}>
-        {category && (
+      {category && (
+        <Grid item xs={12} lg={10} xl={12}>
           <>
             <MainCard
               border={true}
@@ -153,15 +121,12 @@ const CategorySingle = () => {
                 </Grid>
                 <Grid sx={{ mt: 3.5 }} item xs={12} md={10}>
                   <Grid container spacing={gridSpacing}>
-                    <Grid item xs={12} md={4}>
+                    <Grid item xs={12} md={8}>
                       <Typography sx={{ fontWeight: 600 }} variant="h3">
                         {category.name}
                       </Typography>
-                      {/* <Typography variant="subtitle2">
-                                                {category.description}
-                                            </Typography> */}
                     </Grid>
-                    <Grid item xs={12} md={8}>
+                    <Grid item xs={12} md={4}>
                       <Grid
                         container
                         spacing={1}
@@ -196,25 +161,34 @@ const CategorySingle = () => {
               </Grid>
             </MainCard>
           </>
-        )}
-        <Grid justifyContent="space-between" container spacing={gridSpacing}>
-          <Grid item xs={12} md={3}>
-            <MainCard border={true} sx={{}}>
-              <>
-                Europe: 50 (+6) countries, 230 languages, 746M people… 1
-                subreddit.
-              </>
-              <Stack></Stack>
-            </MainCard>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <PostsList />
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <SidebarComments text="Ostatnie komentarze" />
+
+          <Grid justifyContent="space-between" container spacing={gridSpacing}>
+            <Grid item xs={12} md={3}>
+              <MainCard border={true} sx={{}}>
+                <Stack>
+                  <Box>
+                    Użytkowników: <b>1500</b>
+                  </Box>
+                  <Box>
+                  Utworzono: Jan 25, 2008 <TodayIcon />
+                </Box>
+                </Stack>
+
+                <Typography sx={{ mt: 1 }} variant="subtitle2">
+                  {category.description}
+                </Typography>
+   
+              </MainCard>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <PostsList />
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <SidebarComments text="Ostatnie komentarze" />
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      )}
     </MainGrid>
   );
 };

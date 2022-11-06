@@ -1,3 +1,3 @@
 import './comments';
-import './account';
+import './users';
 import './categories';

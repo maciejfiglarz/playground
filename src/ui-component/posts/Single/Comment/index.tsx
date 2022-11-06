@@ -213,7 +213,7 @@ const Comment = ({
                             m: "0 5px",
                           }}
                         />{" "}
-                        {comment.profile.time}
+                        {/* {comment.profile.time} */}
                       </Typography>
                     </Grid>
                   </Grid>

@@ -16,14 +16,14 @@ import thumb10 from "./categories/10.webp";
 
 import thumb11 from "./categories/11.webp";
 import thumb12 from "./categories/12.webp";
-import thumb13 from "./categories/3.webp";
-import thumb14 from "./categories/4.webp";
-import thumb15 from "./categories/5.webp";
-import thumb16 from "./categories/6.webp";
-import thumb17 from "./categories/7.webp";
-import thumb18 from "./categories/8.webp";
-import thumb19 from "./categories/9.webp";
-import thumb20 from "./categories/10.webp";
+import thumb13 from "./categories/13.webp";
+import thumb14 from "./categories/14.webp";
+import thumb15 from "./categories/15.webp";
+import thumb16 from "./categories/16.webp";
+import thumb17 from "./categories/17.webp";
+import thumb18 from "./categories/18.webp";
+import thumb19 from "./categories/19.webp";
+import thumb20 from "./categories/20.webp";
 
 let categories: Category[] = [
   {
@@ -108,7 +108,7 @@ let categories: Category[] = [
     description:
       "INK is a solution for founders who want to win at content marketing. We use proprietary AI to analyze the competition for your topic, and to help you create optimized content faster with state of the art AI generation.",
     cover: cover,
-    thumb: thumb9,
+    thumb: thumb10,
   },
 
   {
@@ -192,7 +192,7 @@ let categories: Category[] = [
     description:
       "INK is a solution for founders who want to win at content marketing. We use proprietary AI to analyze the competition for your topic, and to help you create optimized content faster with state of the art AI generation.",
     cover: cover,
-    thumb: thumb19,
+    thumb: thumb20,
   },
 ];
 

@@ -22,7 +22,7 @@ const NavItem = ({ item }: PropType) => {
       <ListItemButton component="a" href={`/kategoria/${item.id}`}>
         <ListItemIcon sx={{ my: "auto", minWidth: 36 }}>
           <img
-            style={{ maxWidth: 35, borderRadius: "50%", marginRight: 10 }}
+            style={{ maxWidth: 32, borderRadius: "50%", marginRight: 10 }}
             src={item.thumb}
           />
         </ListItemIcon>
