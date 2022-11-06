@@ -51,7 +51,7 @@ const Youtube = () => {
       const timeOutId = setTimeout(() => {
         const fetchData = async () => {
           try {
-            const response = await axiosApi.post(`post/youtube-thumb/${youtubeID}`);
+            const response = await axiosApi.get(`post/youtube-thumb/${youtubeID}`);
             console.log("youtube link response", response);
           } catch (e) {
             console.log("youtube link", e);

@@ -5,17 +5,17 @@ import MainCard from "ui-component/MainCard";
 import axios from "utils/axios";
 import { Category } from "types";
 import Avatar from "ui-component/extended/Avatar";
-// import { fetchById } from 'store/singlePostSlice';
-// import { useAppDispatch } from 'store';
+
 import { gridSpacing } from "config/theme";
 import { useParams } from "react-router-dom";
-import SidebarCategories from "ui-component/sidebars/categories";
+import SidebarCategories from "ui-component/sidebar/categories";
 import { borderRadius as themeBorderRadius } from "config/theme";
 import PostsList from "ui-component/posts/list";
-import SidebarComments from "ui-component/sidebars/comments";
+import SidebarComments from "ui-component/sidebar/comments";
+import MainGrid from "ui-component/MainGrid";
 
 // material-ui
-import { Grid, CardMedia, Typography, Button } from "@mui/material";
+import { Grid, CardMedia, Typography, Button, Stack } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 //assets
@@ -72,11 +72,11 @@ const CategorySingle = () => {
   }, []);
 
   return (
-    <Grid maxWidth="xl" container spacing={gridSpacing}>
-      <Grid item lg={2} xl={2} sx={{ display: { xs: "none", lg: "block" } }}>
+    <MainGrid>
+      {/* <Grid item lg={2} xl={2} sx={{ display: { xs: "none", lg: "block" } }}>
         <SidebarCategories />
-      </Grid>
-      <Grid item xs={12} lg={10} xl={10}>
+      </Grid> */}
+      <Grid item xs={12} lg={10} xl={12}>
         {category && (
           <>
             <MainCard
@@ -200,18 +200,22 @@ const CategorySingle = () => {
         <Grid justifyContent="space-between" container spacing={gridSpacing}>
           <Grid item xs={12} md={3}>
             <MainCard border={true} sx={{}}>
-              <></>
+              <>
+                Europe: 50 (+6) countries, 230 languages, 746M people… 1
+                subreddit.
+              </>
+              <Stack></Stack>
             </MainCard>
           </Grid>
-          <Grid item xs={12} md={5}>
+          <Grid item xs={12} md={6}>
             <PostsList />
           </Grid>
           <Grid item xs={12} md={3}>
-            <SidebarComments />
+            <SidebarComments text="Ostatnie komentarze" />
           </Grid>
         </Grid>
       </Grid>
-    </Grid>
+    </MainGrid>
   );
 };
 

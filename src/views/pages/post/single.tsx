@@ -4,12 +4,13 @@ import { useEffect, useState } from "react";
 import { Grid } from "@mui/material";
 import axiosApi from "utils/axiosApi";
 import { Post } from "types";
-import { gridSpacing } from "config/theme";
-import SidebarTitle from "ui-component/sidebars/Title";
-import SidebarComments from "ui-component/sidebars/comments";
-import SidebarCategories from "ui-component/sidebars/categories";
+
+//project imports
+import SidebarComments from "ui-component/sidebar/comments";
+import SidebarCategories from "ui-component/sidebar/categories";
 import { useParams } from "react-router-dom";
 import Single from "ui-component/posts/Single";
+import { gridSpacing } from "config/theme";
 
 const SinglePost = () => {
   const { id: idParam } = useParams();
@@ -33,14 +34,13 @@ const SinglePost = () => {
       spacing={gridSpacing}
     >
       <Grid item lg={2} xl={2} sx={{ display: { xs: "none", lg: "block" } }}>
-        <SidebarCategories />
+        <SidebarCategories text="Aktywne grupy" />
       </Grid>
       <Grid item xs={12} lg={7} xl={5}>
         {post && <Single {...post} />}
       </Grid>
       <Grid item lg={3} xl={3} sx={{ display: { xs: "none", lg: "block" } }}>
-        <SidebarTitle text={"Komentarze"} />
-        <SidebarComments />
+        <SidebarComments text="Ostatnie komentarze" />
       </Grid>
     </Grid>
   );
