@@ -26,55 +26,29 @@ const Homepage = () => {
     <MainGrid>
       <Grid
         item
-        // lg={2}
-        // xl={2}
         xs={12}
         lg={3}
         xl={3}
-        // sx={{
-        //   outline: { lg: "1px solid red", md: "1px solid green" },
-        //   display: { xs: "none", lg: "block" },
-        //   // display: { xs: "none", lg: "block" },
-        // }}
+        sx={{
+          display: { xs: "none", lg: "block" },
+        }}
       >
-        {/* <div style={{ width: "100%", height: "100%", background: "red" }}> */}
         <SidebarCategories text="Popularne grupy" />
-        {/* </div> */}
       </Grid>
-      <Grid
-        item
-        xs={12}
-        md={9}
-        lg={6}
-        xl={6}
-        // sx={{
-        //   outline: { lg: "1px solid red", md: "1px solid green" },
-        // }}
-        // xs={12} lg={7} xl={7}
-      >
-        {/* <div style={{ width: "100%", height: "100%", background: "red" }}> */}
+      <Grid item xs={12} md={9} lg={6} xl={6}>
         <PostsList />
-        {/* </div> */}
       </Grid>
       <Grid
         item
         xs={12}
-        // lg={3}
-        // xl={2}
         md={3}
         lg={3}
         xl={3}
-        // sx={{
-        //   outline: { lg: "1px solid red", md: "1px solid green" },
-        //   display: { xs: "none", md: "block" },
-        //   // display: { xs: "none", lg: "block" },
-        // }}
+        sx={{
+          display: { xs: "none", md: "block" },
+        }}
       >
-        {/* <div style={{ width: "100%", height: "100%", background: "red" }}> */}
-
         <SidebarComments text="Ostatnie komentarze" />
-
-        {/* </div> */}
       </Grid>
     </MainGrid>
   );

@@ -14,8 +14,8 @@ type Props = {
     isOpen: boolean;
     // setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
     handleClose: () => void;
-    isLoading: boolean;
-    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+    isLoading?: boolean;
+    setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
     children: React.ReactNode | React.ReactNode[];
     size?: DialogProps['maxWidth'];
     title?: string;

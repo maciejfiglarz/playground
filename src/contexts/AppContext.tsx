@@ -15,6 +15,8 @@ export interface AppContextProps {
   readonly setAuthModal: React.Dispatch<
     React.SetStateAction<"login" | "register" | null>
   >;
+  readonly isGuardModal: boolean;
+  readonly setIsGuardModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AppContext = React.createContext({} as AppContextProps);
@@ -27,6 +29,7 @@ const AppContextProvider = ({ children }: { children: ReactElement }) => {
   const [isOpenNavigation, setIsOpenNavigation] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [authModal, setAuthModal] = useState<"login" | "register" | null>(null);
+  const [isGuardModal, setIsGuardModal] = useState(false);
   const [mode, setMode] = useState<"light" | "dark">("light");
 
   useEffect(() => {
@@ -46,9 +49,11 @@ const AppContextProvider = ({ children }: { children: ReactElement }) => {
         setMode,
         authModal,
         setAuthModal,
+        isGuardModal,
+        setIsGuardModal,
       }}
     >
-      {isSuccess ? children : <Loader/>}
+      {isSuccess ? children : <Loader />}
     </AppContext.Provider>
   );
 };

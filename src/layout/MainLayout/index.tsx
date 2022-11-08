@@ -13,6 +13,7 @@ import getTheme from "theme";
 // import { leftSidebarWidth } from 'config/theme';
 import Login from "ui-component/auth/Login";
 import Register from "ui-component/auth/Register";
+import ModalGuard from "ui-component/AuthGuard";
 
 interface MainStyleProps {
   theme: Theme;
@@ -100,6 +101,7 @@ const MainLayout = () => {
           <Outlet />
         </Main>
       </Box>
+      <ModalGuard />
       {/* <Login />
             <Register /> */}
     </ThemeProvider>
