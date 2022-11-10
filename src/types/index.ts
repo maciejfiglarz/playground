@@ -36,13 +36,15 @@ export type Likes = {
 
 export type ReplyComment = {
   id: string;
-  profile: User;
+  user: User;
   data: CommentData;
 };
 export type CommentData = {
   name?: string;
   text?: string;
   likes?: Likes;
+  // voteUp: 0;
+  // voteDown: 2;
   // video?: string;
   replies?: ReplyComment[];
 };
@@ -72,7 +74,7 @@ export interface Post {
   voteUp: number;
   isActive: boolean;
   isWaiting: boolean;
-  comments: [];
+  comments: Comment[];
   user: User;
   prefix: string | null;
   youtubeID: string | null;
@@ -91,7 +93,7 @@ export interface Category {
 
 export type Comment = {
   id: string;
-  profile: Profile;
+  user: Profile;
   data: CommentData;
 };
 

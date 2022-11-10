@@ -193,14 +193,14 @@ const Comment = ({
                     sx={{ width: 24, height: 24 }}
                     size="sm"
                     alt="User 1"
-                    src={comment.profile && comment.profile.avatar}
+                    src={comment.user && comment.user.avatar}
                   />
                 </Grid>
                 <Grid item xs zeroMinWidth>
                   <Grid container alignItems="center" spacing={1}>
                     <Grid item>
                       <Typography align="left" variant="h5" component="div">
-                        {comment.profile.login}
+                        {comment.user.login}
                       </Typography>
                     </Grid>
                     <Grid item>
@@ -213,7 +213,7 @@ const Comment = ({
                             m: "0 5px",
                           }}
                         />{" "}
-                        {/* {comment.profile.time} */}
+                        {/* {comment.user.time} */}
                       </Typography>
                     </Grid>
                   </Grid>
@@ -353,7 +353,7 @@ const Comment = ({
                   <Avatar
                     sx={{ mt: 1.5 }}
                     alt="User 1"
-                    src={comment.profile && comment.profile.avatar}
+                    src={comment.user && comment.user.avatar}
                   />
                 </Grid>
                 <Grid item xs zeroMinWidth sx={{ mt: 1 }}>

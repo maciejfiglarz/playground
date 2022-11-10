@@ -2,7 +2,8 @@ import services from "utils/mockAdapter";
 import { Post } from "types";
 import { v4 as UIDV4 } from "uuid";
 import { users } from "./users";
-import { User } from "types";
+
+import { comments } from "./comments";
 
 import image1 from "assets/images/posts/1.jpg";
 import image2 from "assets/images/posts/2.jpg";
@@ -60,7 +61,7 @@ const graphicsCollection = [
   graphic14,
 ];
 
-const randomElement = (array: string[]) =>
+const randomElement = <A>(array: any): any =>
   array[Math.floor(Math.random() * array.length)];
 
 //posts
@@ -80,7 +81,7 @@ let posts: Post[] = [
     type: "post",
     youtubeID: null,
     prefix: null,
-    comments: [],
+    comments: [randomElement(comments)],
     voteDown: 10,
     voteUp: 20,
     isActive: true,
@@ -125,7 +126,7 @@ let posts: Post[] = [
     type: "post",
     youtubeID: "TmJWmYUHJo8",
     prefix: null,
-    comments: [],
+    comments: [randomElement(comments)],
     voteDown: 10,
     voteUp: 20,
     isActive: true,
@@ -147,7 +148,7 @@ let posts: Post[] = [
     type: "link",
     youtubeID: null,
     prefix: null,
-    comments: [],
+    comments: [randomElement(comments)],
     voteDown: 10,
     voteUp: 20,
     isActive: true,

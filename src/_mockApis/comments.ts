@@ -12,10 +12,11 @@ import avatar7 from "assets/images/users/avatar-7.png";
 import { users } from "./users";
 
 //posts
-let comments: Comment[] = [
+
+export let comments: Comment[] = [
   {
-    id: "b2339dac",
-    profile: {
+    id: "b2339dgggac",
+    user: {
       ...users[0],
     },
     data: {
@@ -23,193 +24,115 @@ let comments: Comment[] = [
       text: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
       likes: {
         like: true,
-        value: 65,
+        value: 1,
       },
-      replies: [],
+      replies: [
+        {
+          id: "b2339dgggac",
+          user: {
+            ...users[1],
+          },
+          data: {
+            name: "",
+            text: "Tolerably earnestly middleton extremely distrusts she boy now not. Add and offered prepare how cordial two promise. Greatly who affixed suppose but enquire compact prepare all put. Added forth chief trees but rooms think may. Wicket do manner others seemed enable rather in. Excellent own discovery unfeeling sweetness questions the gentleman. Chapter shyness matters mr parlors if mention thought.",
+            likes: {
+              like: true,
+              value: 88,
+            },
+          },
+        },
+        {
+          id: "254465479784234574435",
+          user: {
+            ...users[2],
+          },
+          data: {
+            name: "",
+            text: "Oh to talking improve produce in limited offices fifteen an. Wicket branch to answer do we. Place are decay men hours tiled. If or of ye throwing friendly required. Marianne interest in exertion as. Offering my branched confined oh dashwood.",
+            likes: {
+              like: true,
+              value: 15,
+            },
+          },
+        },
+      ],
     },
   },
   {
-    id: "cebcabd6-6b49-4474-ac48-a978d1aa40d8",
-    profile: {
+    id: "b2339d45436565431gc",
+    user: {
       ...users[1],
     },
     data: {
       name: "",
-      text: "A look at the massacre at a post office in France.",
+      text: "Their could can widen ten she any. As so we smart those money in. Am wrote up whole so tears sense oh. Absolute required of reserved in offering no. How sense found our those gay again taken the. Had mrs outweigh desirous sex overcame. Improved property reserved disposal do offering me.",
       likes: {
         like: true,
-        value: 65,
+        value: 6,
       },
-      replies: [],
+      replies: [
+        {
+          id: "254465479780574435",
+          user: {
+            ...users[3],
+          },
+          data: {
+            name: "",
+            text: "In up so discovery my middleton eagerness dejection explained. Estimating excellence ye contrasted insensible as. Oh up unsatiable advantages decisively as at interested. Present suppose in esteems in demesne colonel it to. End horrible she landlord screened stanhill. Repeated offended you opinions off dissuade ask packages screened. She alteration everything sympathize impossible his get compliment. Collected few extremity suffering met had sportsman.",
+            likes: {
+              like: true,
+              value:9,
+            },
+          },
+        },
+      ],
     },
+    
   },
-
   {
-    id: "80932c52-1bb5-42e7-a985-35f4c1fec7e1",
-    profile: {
-      ...users[2],
-    },
-    data: {
-      name: "",
-      text: "The war on terror has changed the way we understand and define terrorism. Here is a look at the defining moments in the war on terrorism.",
-      likes: {
-        like: true,
-        value: 65,
-      },
-      replies: [],
-    },
-  },
-
-  {
-    id: "242dce94-6be2-4cff-a66b-bc3a55dde8c6",
-    profile: {
-      ...users[3],
-    },
-    data: {
-      name: "",
-      text: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-      likes: {
-        like: true,
-        value: 65,
-      },
-      replies: [],
-    },
-  },
-
-  {
-    id: "5bfc604c764",
-    profile: {
+    id: "b2339dgggrggrd4435gac",
+    user: {
       ...users[4],
     },
     data: {
       name: "",
-      text: "How can we keep our country safe? And how can we keep going?",
+      text: "Insipidity the sufficient discretion imprudence resolution sir him decisively. Proceed how any engaged visitor. Explained propriety off out perpetual his you. Feel sold off felt nay rose met you. We so entreaties cultivated astonished is. Was sister for few longer mrs sudden talent become. Done may bore quit evil old mile. If likely am of beauty tastes.",
       likes: {
         like: true,
-        value: 65,
+        value:2,
       },
-      replies: [],
+      replies: [
+        {
+          id: "b2339dggdgd45353ggac",
+          user: {
+            ...users[3],
+          },
+          data: {
+            name: "",
+            text: "Do am he horrible distance marriage so although. Afraid assure square so happen mr an before. His many same been well can high that. Forfeited did law eagerness allowance improving assurance bed. Had saw put seven joy short first. Pronounce so enjoyment my resembled in forfeited sportsman. Which vexed did began son abode short may. Interested astonished he at cultivated or me. Nor brought one invited she produce her.",
+            likes: {
+              like: true,
+              value: 0,
+            },
+          },
+        },
+        {
+          id: "25446547978423gdrgrdgrdgrd4574435",
+          user: {
+            ...users[1],
+          },
+          data: {
+            name: "",
+            text: "Now eldest new tastes plenty mother called misery get. Longer excuse for county nor except met its things. Narrow enough sex moment desire are. Hold who what come that seen read age its. Contained or estimable earnestly so perceived. Imprudence he in sufficient cultivated. Delighted promotion improving acuteness an newspaper offending he. Misery in am secure theirs giving an. Design on longer thrown oppose am.",
+            likes: {
+              like: true,
+              value: 6,
+            },
+          },
+        },
+      ],
     },
   },
-  {
-    id: "5bfc6043-cec2-4670-a79e-720b2612c764",
-    profile: {
-      ...users[5],
-    },
-    data: {
-      name: "",
-      text: 'I had no idea the war was growing so quickly. My spies report that the empire of the north is preparing for a new offensive. If we do not act swiftly, the dwarves will soon be killing our beloved friends.',
-      likes: {
-        like: true,
-        value: 65,
-      },
-      replies: [],
-    },
-  },
-  // {
-  //     id: '#2COMMENT_JONE_DOE',
-  //     profile: {
-  //         id: '#52JONE_DOE',
-  //         avatar: avatar2,
-  //         login: 'Estela Deleon',
-  //         time: '1 hour ago'
-  //     },
-  //     data: {
-  //         text:'The American Civil War was fought from 1861 to 1865. This historical war is the most extensively studied U.S. war. It is also the war that most Americans are aware of.',
-  //         likes: {
-  //             like: true,
-  //             value: 65
-  //         },
-  //         replies: []
-  //     }
-  // },
-  // {
-  //     id: '#2COMMENT_JONE_DOE',
-  //     profile: {
-  //         id: '#52JONE_DOE',
-  //         avatar: avatar3,
-  //         login: 'Rhett Rubio',
-  //         time: '15 min ago '
-  //     },
-  //     data: {
-  //         name: '',
-  //         text: 'A look at the massacre at a post office in France.',
-  //         likes: {
-  //             like: true,
-  //             value: 65
-  //         },
-  //         replies: []
-  //     }
-  // },
-  // {
-  //     id: '#2COMMENT_JONE_DOE',
-  //     profile: {
-  //         id: '#52JONE_DOE',
-  //         avatar: avatar4,
-  //         login: 'Eleanor Rivera',
-  //         time: '1 hour ago'
-  //     },
-  //     data: {
-  //         text: 'I had no idea the war was growing so quickly. My spies report that the empire of the north is preparing for a new offensive. If we do not act swiftly, the dwarves will soon be killing our beloved friends.',
-  //         likes: {
-  //             like: true,
-  //             value: 65
-  //         },
-  //         replies: []
-  //     }
-  // },
-  // {
-  //     id: '#2COMMENT_JONE_DOE',
-  //     profile: {
-  //         id: '#52JONE_DOE',
-  //         avatar: avatar5,
-  //         login: 'Arturo Marks',
-  //         time: '15 min ago '
-  //     },
-  //     data: {
-  //         name: '',
-  //         text: 'The war on terror has changed the way we understand and define terrorism. Here is a look at the defining moments in the war on terrorism.',
-  //         likes: {
-  //             like: true,
-  //             value: 65
-  //         },
-  //         replies: []
-  //     }
-  // },
-  // {
-  //     id: '#2COMMENT_JONE_DOE',
-  //     profile: {
-  //         id: '#52JONE_DOE',
-  //         avatar: avatar6,
-  //         login: 'Keneth Lawrence',
-  //         time: '1 hour ago'
-  //     },
-  //     data: {
-  //         text: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
-  //         likes: {
-  //             like: true,
-  //             value: 65
-  //         },
-  //         replies: []
-  //     }
-  // },
-  // {
-  //     id: '#2COMMENT_JONE_DOE',
-  //     profile: {
-  //         id: '#52JONE_DOE',
-  //         avatar: avatar7,
-  //         login: 'Ezra Lindsey',
-  //         time: '1 hour ago'
-  //     },
-  //     data: {
-  //         text:  'How can we keep our country safe? And how can we keep going?',
-  //         likes: {
-  //             like: true,
-  //             value: 65
-  //         },
-  //         replies: []
-  //     }
-  // }
 ];
 
 // const delay = (timeout: number) =>

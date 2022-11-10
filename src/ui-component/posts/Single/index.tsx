@@ -52,7 +52,7 @@ const validationSchema = yup.object().shape({
 
 const SinglePost = (post: Post) => {
   const theme = useTheme();
-  const { title, description, image, user, createdAt } = post;
+  const { title, description, image, user, createdAt, comments } = post;
   const { avatar, login: profilName } = user;
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
   // const [openComments, setOpenComments] = useState<CommentType[]>();
@@ -80,22 +80,6 @@ const SinglePost = (post: Post) => {
     resolver: yupResolver(validationSchema),
   });
   const { handleSubmit, control } = methods;
-
-  let commentsResult: React.ReactElement[] = [];
-
-  // if (comments && comments.length > 0) {
-  //     commentsResult = comments.map((comment) => (
-  //         <Comment
-  //             // postId={id}
-  //             comment={comment}
-  //             key={comment.id}
-  //             user={comment.profile}
-  //             // replyAdd={replyAdd}
-  //             // handleCommentLikes={handleCommentLikes}
-  //             // handleReplayLikes={handleReplayLikes}
-  //         />
-  //     ));
-  // }
 
   // ==============================|| COMMENT TEXTFIELD ||============================== //
 
@@ -184,7 +168,6 @@ const SinglePost = (post: Post) => {
           >
             <Content {...post} />
           </Grid>
-        
 
           {/* post - comment, likes and replay history */}
           <Grid item xs={12}>
@@ -300,7 +283,18 @@ const SinglePost = (post: Post) => {
             </form>
           </Grid>
         </Grid>
-        {commentsResult}
+        {comments.map((comment) => (
+          <Comment
+            // postId={id}
+            comment={comment}
+            key={comment.id}
+            user={comment.user}
+            // replyAdd={replyAdd}
+            // handleCommentLikes={handleCommentLikes}
+            // handleReplayLikes={handleReplayLikes}
+          />
+        ))}
+        
       </Grid>
     </MainCard>
   );

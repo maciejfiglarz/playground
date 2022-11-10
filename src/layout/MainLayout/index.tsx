@@ -92,7 +92,7 @@ const MainLayout = () => {
               : "none",
           }}
         >
-          <Toolbar>
+          <Toolbar sx={{ pl: 1, pr: 1 }}>
             <Header />
           </Toolbar>
         </AppBar>

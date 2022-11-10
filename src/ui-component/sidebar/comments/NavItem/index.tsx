@@ -12,8 +12,8 @@ import {
   ListItemButton,
 } from "@mui/material";
 
-const Item = ({ id, profile, data }: Comment) => {
-  const { avatar, login, id: userId } = profile;
+const Item = ({ id, user, data }: Comment) => {
+  const { avatar, login, id: userId } = user;
   const { text } = data;
   return (
     <ListItemButton component="a" href={`/profil/${userId}`}>
