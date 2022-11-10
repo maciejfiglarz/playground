@@ -37,6 +37,8 @@ import { useTheme } from "@mui/material/styles";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
+
+
 const Login = () => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
@@ -46,6 +48,12 @@ const Login = () => {
   const [checked, setChecked] = useState(true);
   const userState = useAppSelector((state) => state.user);
   console.log("errorsLogin", error);
+
+
+
+  
+
+
 
   // useEffect(()=>{
   //   const data = async() =>{
@@ -98,6 +106,10 @@ const Login = () => {
       </Grid>
     </Grid>
   );
+
+
+
+
   return (
     <AuthWrapper
       isLoading={isFetching}
@@ -105,6 +117,8 @@ const Login = () => {
       renderBottom={renderBottom}
       type="login"
     >
+      <div>Jakaś treść!</div>
+
       <Grid item xs={12}>
         {error && <Alert type="error" message={error} />}
         <Formik

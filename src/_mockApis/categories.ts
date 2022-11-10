@@ -159,7 +159,7 @@ let categories: Category[] = [
     thumb: thumb15,
   },
   {
-    id: "16455254",
+    id: "1645bbbb5254",
     slug: "sushi",
     name: "Wszyscy lubią Sushi",
     description:

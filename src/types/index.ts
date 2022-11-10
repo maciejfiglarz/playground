@@ -62,22 +62,21 @@ export type CommentData = {
 // }
 
 export interface Post {
-  title?: string;
+  id: string;
+  title: string | null;
   slug: string;
-  description: string;
+  description: string | null;
   type: string;
-  // imageUrl?: string;
   image: string;
   voteDown: number;
   voteUp: number;
   isActive: boolean;
   isWaiting: boolean;
   comments: [];
-  user: Profile;
-  prefix?: string;
+  user: User;
+  prefix: string | null;
+  youtubeID: string | null;
   createdAt: string;
-  linkTitle: string | null;
-  linkDescription: string | null;
   linkSiteUrl: string | null;
 }
 

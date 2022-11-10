@@ -1,29 +1,73 @@
-import React from "react";
+import React, { useState } from "react";
+import ReactPlayer from "react-player/youtube";
 
 //project imports
 import { Post as PostType } from "types";
 import { apiURL } from "config";
 
 //material ui
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, Box } from "@mui/material";
+
+//assets
+import iconPlay from "assets/icons/play.png";
 
 const Post = (post: PostType) => {
-  const { title, description, image, prefix } = post;
+  const { title, description, image, youtubeID } = post;
+  const [isPlayerDisplayed, setIsPlayerDisplayed] = useState(false);
+
   return (
     <Grid container wrap="nowrap" spacing={2} flexDirection={"column"}>
       <Grid item>
         <Typography sx={{ mb: 1 }} variant="h4">
-          {title}
+          {title} {youtubeID}
         </Typography>
         <Typography component="p">{description}</Typography>
       </Grid>
-      <Grid item>
-        {image && (
+      <Grid item sx={{ textAlign: "center" }}>
+        {!youtubeID && (
           <img
-            style={{ width: "100%" }}
-            src={`${apiURL}posts/${prefix}/${image}`}
-            alt={title}
+            style={{ maxWidth: "100%" }}
+            src={image}
+            alt={title ? title : ""}
           />
+        )}
+
+        {youtubeID && (
+          <>
+            {isPlayerDisplayed ? (
+              <iframe
+                width="100%"
+                height="315"
+                src={`https://www.youtube.com/embed/${youtubeID}?autoplay=1`}
+                title=""
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            ) : (
+              <Box
+                onClick={() => (youtubeID ? setIsPlayerDisplayed(true) : null)}
+                sx={{ position: "relative", cursor: "pointer" }}
+              >
+                <img
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%,-50%)",
+                    width: 50,
+                  }}
+                  src={iconPlay}
+                />
+
+                <img
+                  style={{ maxWidth: "100%" }}
+                  src={image}
+                  alt={title ? title : ""}
+                />
+              </Box>
+            )}
+          </>
         )}
       </Grid>
     </Grid>

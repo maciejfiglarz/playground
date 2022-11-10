@@ -6,7 +6,9 @@ const Link = (post: Post) => {
   return (
     <Grid container wrap="nowrap" spacing={2} justifyContent={"space-between"}>
       <Grid item>
-        <img style={{ maxWidth: "150px" }} src={image} alt={title} />
+        <img style={{ maxWidth: "150px" }} src={image} 
+        // alt={title}
+         />
       </Grid>
       <Grid item>
         <Typography sx={{ mb: 1 }} variant="h4">

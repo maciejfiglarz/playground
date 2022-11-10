@@ -79,21 +79,21 @@ export const slice = createSlice({
       const prevResults = current(state).data.results;
       const results = action.payload.results;
 
-      console.log("action", current(state));
+      // console.log("action", current(state));
 
-      //   console.log("action", action.payload, {
-      //     ...state,
-      //     data: { ...action.payload, results: { ...results, ...prevResults } },
-      //   });
+      // //   console.log("action", action.payload, {
+      // //     ...state,
+      // //     data: { ...action.payload, results: { ...results, ...prevResults } },
+      // //   });
 
-      if (state.loading && state.currentRequestId === requestId) {
-        state.loading = false;
-        state.data = {
-          ...action.payload,
-          results: [...results, ...prevResults],
-        };
-        state.currentRequestId = undefined;
-      }
+      // if (state.loading && state.currentRequestId === requestId) {
+      //   state.loading = false;
+      //   state.data = {
+      //     ...action.payload,
+      //     results: [...results, ...prevResults],
+      //   };
+      //   state.currentRequestId = undefined;
+      // }
     });
     builder.addCase(pagination.rejected, (state, action) => {
       state.loading = false;

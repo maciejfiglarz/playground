@@ -10,8 +10,9 @@ import SinglePost from "./posts/Single";
 const InfiniteList = () => {
   const [page, setPage] = useState(0);
   const { data } = useAppSelector(selectPosts);
-  const { results, pageTotal, total } = data;
+  const { posts,  total } = data;
   const dispatch = useAppDispatch();
+
   const updateData = () => {
     dispatch(pagination({ page }));
     setPage((prev) => page + 1);
@@ -21,13 +22,12 @@ const InfiniteList = () => {
     setPage((prev) => page + 1);
   }, []);
 
-  console.log("actionx", results, pageTotal, total);
 
   return (
     <>
-      {results.length > 0 ? (
+      {posts.length > 0 ? (
         <InfiniteScroll
-          dataLength={results.length}
+          dataLength={total}
           next={updateData}
           hasMore={true}
           pullDownToRefreshThreshold={150}
@@ -38,7 +38,7 @@ const InfiniteList = () => {
             </p>
           }
         >
-          {results.map((post, index) => {
+          {posts.map((post, index) => {
             console.log("post", post);
             return <SinglePost key={index} {...post} />;
           })}

@@ -4,6 +4,7 @@ import React from "react";
 import { Post as PostType } from "types";
 import Post from "./Post";
 import Link from "./Link";
+import Graphic from "./Graphic";
 
 //material ui
 
@@ -14,6 +15,7 @@ const Content = (props: PostType) => {
     <>
       {type === "post" && <Post {...props} />}
       {type === "link" && <Link {...props} />}
+      {type === "graphic" && <Graphic {...props} />}
     </>
   );
 };
