@@ -68,7 +68,7 @@ const Modal = ({
                         {title}
                     </DialogTitle>
                 )}
-                <Divider />
+                {/* <Divider /> */}
                 <DialogContent>{children}</DialogContent>
             </>
         </Dialog>

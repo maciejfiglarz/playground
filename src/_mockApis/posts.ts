@@ -77,7 +77,6 @@ let posts: Post[] = [
     linkSiteUrl: null,
 
     image: randomElement(imagesCollection),
-
     type: "post",
     youtubeID: null,
     prefix: null,

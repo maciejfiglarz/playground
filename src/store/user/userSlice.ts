@@ -3,11 +3,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 //project imports
 import axiosApi from "utils/axiosApi";
 // import store from 'store';
-import { Profile } from "types";
+import { User } from "types";
 import { RootState } from "store";
 
 interface UserSliceState {
-  userInfo: Profile | null;
+  userInfo: User | null;
   isFetching: boolean;
   isSuccess: boolean;
   isError: boolean;
@@ -102,7 +102,7 @@ export const slice = createSlice({
     builder.addCase(login.fulfilled, (state, action) => {
       state.isFetching = false;
       state.isSuccess = true;
-      state.userInfo = action.payload as Profile;
+      state.userInfo = action.payload as User;
       console.log("errorsB", action);
     });
     builder.addCase(login.rejected, (state, action) => {
@@ -118,7 +118,7 @@ export const slice = createSlice({
       // }
     });
     builder.addCase(getUserDetails.fulfilled, (state, action) => {
-      const payload: Profile = action.payload;
+      const payload: User = action.payload;
       state.isFetching = false;
       state.isSuccess = true;
       state.userInfo = payload ? payload : null;

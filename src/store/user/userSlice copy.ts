@@ -3,11 +3,11 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 //project imports
 import axiosApi from 'utils/axiosApi';
 // import store from 'store';
-import { Profile } from 'types';
+import { User } from 'types';
 import { RootState } from 'store';
 
 interface UserSliceState {
-    loggedUser: Profile | null;
+    loggedUser: User | null;
     loading: boolean;
     isLogged: boolean;
     currentRequestId: string | undefined;
@@ -32,7 +32,7 @@ export const login = createAsyncThunk(
     async (payload: LoginPayload) => {
         const { data } = await axiosApi.post(`/api/account/login`, payload);
         localStorage.setItem('serviceToken', data.user.id);
-        return data.user as Profile;
+        return data.user as User;
     }
 );
 
@@ -42,7 +42,7 @@ export const loginByToken = createAsyncThunk(
         const { data } = await axiosApi.post(`/api/account/login-token`, {
             token
         });
-        return data.user as Profile;
+        return data.user as User;
     }
 );
 
@@ -88,7 +88,7 @@ export const slice = createSlice({
             const { requestId } = action.meta;
             if (state.loading && state.currentRequestId === requestId) {
                 state.loading = false;
-                state.loggedUser = action.payload as Profile;
+                state.loggedUser = action.payload as User;
                 state.isLogged = true;
                 state.currentRequestId = undefined;
             }
@@ -110,7 +110,7 @@ export const slice = createSlice({
             const { requestId } = action.meta;
             if (state.loading && state.currentRequestId === requestId) {
                 state.loading = false;
-                state.loggedUser = action.payload as Profile;
+                state.loggedUser = action.payload as User;
                 state.isLogged = true;
                 state.currentRequestId = undefined;
             }

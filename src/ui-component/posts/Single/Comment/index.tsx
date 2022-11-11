@@ -11,7 +11,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 //project imports
 import {
   Comment as CommentProps,
-  Profile,
+  User,
   FormInputProps,
   CommentData,
 } from "types";
@@ -53,7 +53,7 @@ export interface CommentComponentProps {
   // handleReplayLikes: PostProps['handleReplayLikes'];
   // handleCommentLikes: PostProps['handleCommentLikes'];
   // replyAdd: PostProps['replyAdd'];
-  user: Profile;
+  user: User;
 }
 
 const validationSchema = yup.object().shape({

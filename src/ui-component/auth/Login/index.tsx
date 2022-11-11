@@ -117,7 +117,6 @@ const Login = () => {
       renderBottom={renderBottom}
       type="login"
     >
-      <div>Jakaś treść!</div>
 
       <Grid item xs={12}>
         {error && <Alert type="error" message={error} />}

@@ -21,14 +21,6 @@ export type NavItemType = {
   url: string;
 };
 
-export interface Profile {
-  id: string;
-  avatar: string;
-  login: string;
-  cover: string | null;
-  // time: string;
-}
-
 export type Likes = {
   like: boolean;
   value: number;
@@ -93,7 +85,7 @@ export interface Category {
 
 export type Comment = {
   id: string;
-  user: Profile;
+  user: User;
   data: CommentData;
 };
 

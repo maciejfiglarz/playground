@@ -6,7 +6,7 @@ import { Post as PostType } from "types";
 import { apiURL } from "config";
 
 //material ui
-import { Grid, Typography, Box } from "@mui/material";
+import { Grid, Typography, Box, Button } from "@mui/material";
 
 //assets
 import iconPlay from "assets/icons/play.png";
@@ -14,14 +14,28 @@ import iconPlay from "assets/icons/play.png";
 const Post = (post: PostType) => {
   const { title, description, image, youtubeID } = post;
   const [isPlayerDisplayed, setIsPlayerDisplayed] = useState(false);
-
+  const [isExpanded, setIsExpanded] = useState(false);
+  console.log(typeof description === "string");
   return (
     <Grid container wrap="nowrap" spacing={2} flexDirection={"column"}>
       <Grid item>
         <Typography sx={{ mb: 1 }} variant="h4">
           {title} {youtubeID}
         </Typography>
-        <Typography component="p">{description}</Typography>
+        <Typography component="p">
+          {typeof description === "string" &&
+            (isExpanded ? description : `${description.substring(0, 250)}`)}
+          {!isExpanded && (
+            <Button
+              onClick={() => setIsExpanded(true)}
+              size="small"
+              sx={{ display: "inline" }}
+              variant="text"
+            >
+              więcej...
+            </Button>
+          )}
+        </Typography>
       </Grid>
       <Grid item sx={{ textAlign: "center" }}>
         {!youtubeID && (

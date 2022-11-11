@@ -21,14 +21,9 @@ const ModalGuard = () => {
       size="xs"
       isOpen={isGuardModal}
       handleClose={() => setIsGuardModal(false)}
+      title="Dołącz do nas"
     >
       <Box sx={{ p: 1 }}>
-        <Typography
-          sx={{ fontSize: 19, textAlign: "center", fontWeight: 500 }}
-          variant="h2"
-        >
-          Dołącz do nas
-        </Typography>
         <Typography sx={{ mt: 4, fontSize: 14 }} component="p">
           Aby skorzystać z wszystkich funkcji musisz posiadać konto w naszym
           serwisie.

@@ -45,6 +45,7 @@ import ChatBubbleTwoToneIcon from "@mui/icons-material/ChatBubbleTwoTone";
 
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
+import Shares from "./Shares";
 
 const validationSchema = yup.object().shape({
   name: yup.string().required("To pole nie może zostać puste!"),
@@ -54,27 +55,8 @@ const SinglePost = (post: Post) => {
   const theme = useTheme();
   const { title, description, image, user, createdAt, comments } = post;
   const { avatar, login: profilName } = user;
-  const [anchorEl, setAnchorEl] = useState<Element | null>(null);
-  // const [openComments, setOpenComments] = useState<CommentType[]>();
 
   const matchesXS = useMediaQuery(theme.breakpoints.down("md"));
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const handleClick = (event: React.SyntheticEvent) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const [anchorSharedEl, setAnchorSharedEl] = useState<Element | null>(null);
-
-  const handleSharedClick = (event: React.MouseEvent) => {
-    setAnchorSharedEl(event.currentTarget);
-  };
-
-  const handleSharedClose = () => {
-    setAnchorSharedEl(null);
-  };
 
   const methods = useForm({
     resolver: yupResolver(validationSchema),
@@ -145,6 +127,18 @@ const SinglePost = (post: Post) => {
     // reset({ name: '' });
   };
 
+  const displayCommentLabel = () => {
+    const commentsNumber = comments.length;
+    console.log("commentsNumber", commentsNumber);
+    if (commentsNumber === 1) {
+      return `1 komentarz`;
+    } else if (commentsNumber > 1) {
+      return `${commentsNumber} komentarz`;
+    } else {
+      return `0 komentarzy`;
+    }
+  };
+
   return (
     <MainCard border={true} sx={{ marginBottom: 5 }}>
       <Grid container spacing={1}>
@@ -191,49 +185,12 @@ const SinglePost = (post: Post) => {
                     color="inherit"
                     startIcon={<ChatBubbleTwoToneIcon color="secondary" />}
                   >
-                    {/* {data.comments
-                                            ? data.comments.length
-                                            : 0}{' '} */}
-                    0 komentarzy
+                    {displayCommentLabel()}
                   </Button>
                 </Stack>
               </Grid>
               <Grid item>
-                <IconButton onClick={handleSharedClick} size="large">
-                  <ShareTwoToneIcon sx={{ width: "1rem", height: "1rem" }} />
-                </IconButton>
-                <Menu
-                  id="menu-post"
-                  anchorEl={anchorSharedEl}
-                  keepMounted
-                  open={Boolean(anchorSharedEl)}
-                  onClose={handleSharedClose}
-                  variant="selectedMenu"
-                  anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "right",
-                  }}
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  sx={{
-                    "& .MuiSvgIcon-root": {
-                      marginRight: "14px",
-                      fontSize: "1.25rem",
-                    },
-                  }}
-                >
-                  <MenuItem onClick={handleSharedClose}>
-                    <FacebookIcon fontSize="inherit" /> Udostepnij na Facebooku
-                  </MenuItem>
-                  <MenuItem onClick={handleSharedClose}>
-                    <TwitterIcon fontSize="inherit" /> Udostepnij na Twitterze
-                  </MenuItem>
-                  <MenuItem onClick={handleSharedClose}>
-                    <ContentCopyTwoToneIcon fontSize="inherit" /> Kopiuj link
-                  </MenuItem>
-                </Menu>
+                <Shares url={`https://komentatory.pl/post/${post.id}`} />
               </Grid>
             </Grid>
           </Grid>
@@ -294,7 +251,6 @@ const SinglePost = (post: Post) => {
             // handleReplayLikes={handleReplayLikes}
           />
         ))}
-        
       </Grid>
     </MainCard>
   );
