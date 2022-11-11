@@ -8,7 +8,7 @@ import Avatar from "ui-component/extended/Avatar";
 import Comment from "./Comment";
 import Content from "./Content";
 import Vote from "./Vote";
-import HeaderBar from "./HeaderBar";
+import Bar from "./Bar";
 // import AnimateButton from 'ui-component/extended/AnimateButton';
 import {
   Post,
@@ -149,7 +149,7 @@ const SinglePost = (post: Post) => {
     <MainCard border={true} sx={{ marginBottom: 5 }}>
       <Grid container spacing={1}>
         <Grid item xs={12}>
-          <HeaderBar {...post} />
+          <Bar {...post} />
 
           {/* post - content */}
           <Grid

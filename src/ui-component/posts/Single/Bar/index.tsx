@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import moment from "moment";
+import 'moment/locale/pl';
+
+
 //project imports
 import Avatar from "ui-component/extended/Avatar";
 import { Post } from "types";
@@ -26,7 +30,8 @@ import MoreVertTwoToneIcon from "@mui/icons-material/MoreVertTwoTone";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import emptyAvatar from "assets/images/emptyAvatar.png";
 
-const HeaderBar = ({ user, createdAt }: Post) => {
+const Bar = ({ user, createdAt }: Post) => {
+
   const { login, avatar } = user;
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
@@ -38,7 +43,13 @@ const HeaderBar = ({ user, createdAt }: Post) => {
   const handleClick = (event: React.SyntheticEvent) => {
     setAnchorEl(event.currentTarget);
   };
+  const prepareDate = (value:string)=>{
+const date =  new Date(value);
+moment("20120620", "YYYYMMDD").fromNow()
 
+    console.log("date",date.toLocaleDateString("en-US"));
+  }
+prepareDate("2022-11-03T18:26:51.000Z");
   return (
     <Grid container wrap="nowrap" alignItems="center" spacing={1}>
       <Grid item>
@@ -60,7 +71,8 @@ const HeaderBar = ({ user, createdAt }: Post) => {
                   opacity: 0.5,
                   m: "0 5px",
                 }}
-              />{" "}
+              />
+              {moment("20120620", "YYYYMMDD").fromNow()}
               {createdAt}
             </Typography>
           </Grid>
@@ -117,4 +129,4 @@ const HeaderBar = ({ user, createdAt }: Post) => {
   );
 };
 
-export default HeaderBar;
+export default Bar;

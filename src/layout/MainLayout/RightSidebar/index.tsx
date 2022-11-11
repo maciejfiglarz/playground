@@ -46,6 +46,7 @@ const Header = styled("div")(({ theme }: { theme: Theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
+  position:"relative",
 }));
 
 const UserSidebar = () => {
@@ -72,7 +73,7 @@ const UserSidebar = () => {
   //   setAuthModal(type);
   // };
 
-  console.log("userState ", userState );
+  console.log("userState ", userState);
 
   return (
     <>
@@ -130,16 +131,23 @@ const UserSidebar = () => {
           style: { padding: 15, width: matchUpMd ? "auto" : "100%" },
         }}
       >
-        <IconButton
-          style={{ position: "absolute", left: 15, right: 0 }}
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          <CloseIcon />
-        </IconButton>
+
+
+   
+
         <Header>
           <Box sx={{ margin: "25px auto" }}>
             <Logo />
           </Box>
+
+
+          <IconButton
+          style={{ position: "absolute", left: 15, top: 15 }}
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <CloseIcon />
+        </IconButton>
+
         </Header>
 
         {/* <Divider /> */}
@@ -150,7 +158,7 @@ const UserSidebar = () => {
         <MenuList setIsOpenNavigation={setIsOpen} />
 
         <Divider sx={{ margin: "25px 0" }} />
-        
+
         <Box
           sx={{
             position: "absolute",
