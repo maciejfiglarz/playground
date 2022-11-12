@@ -15,7 +15,7 @@ const Post = (post: PostType) => {
   const { title, description, image, youtubeID } = post;
   const [isPlayerDisplayed, setIsPlayerDisplayed] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
-  console.log(typeof description === "string");
+
   return (
     <Grid container wrap="nowrap" spacing={2} flexDirection={"column"}>
       <Grid item>

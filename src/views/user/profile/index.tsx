@@ -30,8 +30,6 @@ const ProfileIndex = () => {
     setUser(response.data);
   };
 
-  console.log("user", user);
-
   useEffect(() => {
     getUser();
   }, []);

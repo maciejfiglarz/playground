@@ -73,7 +73,6 @@ const UserSidebar = () => {
   //   setAuthModal(type);
   // };
 
-  console.log("userState ", userState);
 
   return (
     <>

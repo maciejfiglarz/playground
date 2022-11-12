@@ -72,7 +72,7 @@ const CreatePost = () => {
   const [state, setState] = useState<CreatePostState>(initialData);
   const userState = useAppSelector((state) => state.user);
   const navigate = useNavigate();
-  console.log("userState", userState);
+
 
   useEffect(() => {
     // console.log("tab", tabs[tab]);

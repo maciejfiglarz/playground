@@ -16,7 +16,7 @@ const AuthGuard = ({ children }: Props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("userInfox", userInfo);
+
     if (!userInfo) {
       navigate("/login", { replace: true });
     }

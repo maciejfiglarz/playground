@@ -39,7 +39,6 @@ const InfiniteList = () => {
           }
         >
           {posts.map((post, index) => {
-            console.log("post", post);
             return <SinglePost key={index} {...post} />;
           })}
         </InfiniteScroll>

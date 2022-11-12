@@ -8,7 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 // import AnimateButton from 'ui-component/extended/AnimateButton';
 import {
   Post,
-  CommentData,
+  Comment,
   FormInputProps,
   // Comment as CommentType
 } from "types";
@@ -33,8 +33,8 @@ const Shares = ({ url }: PropsType) => {
 
   const popup = (url: string, w = 550, h = 285) => {
     //@ts-ignore
-    const left = screen.width / 2 - w / 2;
-    const top = screen.height / 2 - h / 2;
+    const left = window.screen.width / 2 - w / 2;
+    const top = window.screen.height / 2 - h / 2;
     window.open(
       url,
       "_blank",
@@ -91,13 +91,13 @@ const Shares = ({ url }: PropsType) => {
           },
         }}
       >
-        <MenuItem onClick={handleSharedClose}>
+        <MenuItem onClick={fbShare}>
           <FacebookIcon fontSize="inherit" /> Udostepnij na Facebooku
         </MenuItem>
-        <MenuItem onClick={handleSharedClose}>
+        <MenuItem onClick={twitterShare}>
           <TwitterIcon fontSize="inherit" /> Udostepnij na Twitterze
         </MenuItem>
-        <MenuItem onClick={handleSharedClose}>
+        <MenuItem onClick={copyToClipboard }>
           <ContentCopyTwoToneIcon fontSize="inherit" /> Kopiuj link
         </MenuItem>
       </Menu>

@@ -35,7 +35,6 @@ export const pagination = createAsyncThunk(
   async ({ page }: { page: number }, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(`api/posts`);
-      console.log("posts", data);
       return { posts: data.posts, total: data.total };
       // return data.posts as Post[];
     } catch (error: any) {
@@ -88,7 +87,6 @@ export const slice = createSlice({
       }
     });
     builder.addCase(pagination.fulfilled, (state, action) => {
-      console.log("loading", action, action.payload);
       const prevPosts = current(state).data.posts;
       const { posts, total } = action.payload;
 

@@ -13,9 +13,9 @@ import {
   Comment as CommentProps,
   User,
   FormInputProps,
-  CommentData,
 } from "types";
 import ReplyComment from "./Reply";
+import { useAppSelector } from "store";
 
 // material-ui
 import { useTheme } from "@mui/material/styles";
@@ -38,6 +38,7 @@ import {
   // useMediaQuery
 } from "@mui/material";
 import Avatar from "ui-component/extended/Avatar";
+import Create from "./Create";
 
 // assets
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
@@ -49,7 +50,7 @@ import AttachmentRoundedIcon from "@mui/icons-material/AttachmentRounded";
 
 export interface CommentComponentProps {
   comment: CommentProps;
-  // postId: string;
+  postID: string;
   // handleReplayLikes: PostProps['handleReplayLikes'];
   // handleCommentLikes: PostProps['handleCommentLikes'];
   // replyAdd: PostProps['replyAdd'];
@@ -60,11 +61,11 @@ const validationSchema = yup.object().shape({
   name: yup.string().required("Reply Field is Required"),
 });
 
-// ==============================|| SOCIAL PROFILE - COMMENT ||============================== //
+// ==============================|| CREATE COMMENT ||============================== //
 
 const Comment = ({
   comment,
-  // postId,
+  postID,
   user,
 }: CommentComponentProps) => {
   const theme = useTheme();
@@ -84,10 +85,10 @@ const Comment = ({
   let repliesResult: React.ReactElement[] | React.ReactElement = <></>;
   if (
     Object.keys(comment).length > 0 &&
-    comment.data?.replies &&
-    comment.data?.replies.length
+    comment.replies &&
+    comment.replies.length
   ) {
-    repliesResult = comment.data?.replies.map((reply, index) => (
+    repliesResult = comment.replies.map((reply, index) => (
       <ReplyComment
         //     postId={postId}
         //     commentId={comment.id}
@@ -153,7 +154,7 @@ const Comment = ({
     handleSubmit,
     // errors, reset
   } = methods;
-  const onSubmit = async (reply: CommentData) => {
+  const onSubmit = async (reply: any) => {
     // handleChangeReply();
     // const replyId = uniqueId('#REPLY_');
     // const newReply = {
@@ -186,6 +187,10 @@ const Comment = ({
           }}
         >
           <Grid container spacing={1}>
+            <Grid item xs={12} sx={{ mb: 2 }}>
+              <Create postID={postID} />
+            </Grid>
+
             <Grid item xs={12}>
               <Grid container wrap="nowrap" alignItems="center" spacing={1}>
                 <Grid item>
@@ -213,7 +218,7 @@ const Comment = ({
                             m: "0 5px",
                           }}
                         />{" "}
-                        {/* {comment.user.time} */}
+                        {comment.createdAt}
                       </Typography>
                     </Grid>
                   </Grid>
@@ -265,15 +270,13 @@ const Comment = ({
                     }}
                   >
                     <MenuItem onClick={handleClose}>Zgłoś</MenuItem>
-                    {/* <MenuItem onClick={handleClose}>
-                                            Delete
-                                        </MenuItem> */}
                   </Menu>
                 </Grid>
               </Grid>
+
               <Grid item xs={12} sx={{ "&.MuiGrid-root": { pt: 1.5 } }}>
                 <Typography align="left" variant="body2">
-                  {comment.data.text}
+                  {comment.text}
                 </Typography>
               </Grid>
               <Grid item xs={12}>
@@ -299,15 +302,15 @@ const Comment = ({
                     startIcon={
                       <ThumbUpAltTwoToneIcon
                         color={
-                          comment.data.likes && comment.data.likes.like
+                          comment.likes && comment.likes.like
                             ? "secondary"
                             : "inherit"
                         }
                       />
                     }
                   >
-                    {comment.data.likes && comment.data.likes.value
-                      ? comment.data.likes.value
+                    {comment.likes && comment.likes.value
+                      ? comment.likes.value
                       : 0}{" "}
                     likes
                   </Button>
@@ -318,7 +321,7 @@ const Comment = ({
                     size="small"
                     startIcon={<ReplyTwoToneIcon color="primary" />}
                   >
-                    {comment.data?.replies ? comment.data?.replies.length : 0}{" "}
+                    {comment.replies ? comment.replies.length : 0}{" "}
                     odpowiedz
                   </Button>
                 </Stack>
@@ -327,6 +330,7 @@ const Comment = ({
           </Grid>
         </Card>
       </Grid>
+
       {repliesResult}
       {/* comment - add new replay */}
       <Collapse in={isOpenReply} sx={{ width: "100%" }}>

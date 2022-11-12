@@ -35,7 +35,6 @@ const AppContextProvider = ({ children }: { children: ReactElement }) => {
   useEffect(() => {
     const fetchData = async () => {
       await dispatch(getUserDetails());
-      console.log("xxx", isSuccess, isFetching, userInfo, error);
     };
     fetchData();
   }, []);

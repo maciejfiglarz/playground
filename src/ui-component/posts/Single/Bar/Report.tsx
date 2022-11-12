@@ -5,6 +5,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 //project imports
+import axios from "utils/axios";
 import Modal from "ui-component/Modal";
 import Avatar from "ui-component/extended/Avatar";
 // import AnimateButton from 'ui-component/extended/AnimateButton';
@@ -14,7 +15,7 @@ import MoreVertTwoToneIcon from "@mui/icons-material/MoreVertTwoTone";
 
 import {
   Post,
-  CommentData,
+  Comment,
   FormInputProps,
   // Comment as CommentType
 } from "types";
@@ -26,18 +27,11 @@ import {
   Button,
   ButtonBase,
   FormControl,
-  FormControlLabel,
   FormHelperText,
-  Grid,
-  IconButton,
   Menu,
   MenuItem,
-  Stack,
   TextField,
-  Typography,
-  useMediaQuery,
-  OutlinedInput,
-  InputLabel,
+  Box,
 } from "@mui/material";
 
 //assets
@@ -68,6 +62,7 @@ const Report = () => {
   const methods = useForm({
     resolver: yupResolver(validationSchema),
   });
+
   return (
     <>
       <Modal
@@ -86,30 +81,17 @@ const Report = () => {
             report: yup.string().max(1555).required("Musisz wpisać treść"),
           })}
           onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
-            // try {
-            //     await firebaseEmailPasswordSignIn(values.email, values.password).then(
-            //         () => {
-            //             // WARNING: do not set any formik state here as formik might be already destroyed here. You may get following error by doing so.
-            //             // Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application.
-            //             // To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
-            //             // github issue: https://github.com/formium/formik/issues/2430
-            //         },
-            //         (err: any) => {
-            //             if (scriptedRef.current) {
-            //                 setStatus({ success: false });
-            //                 setErrors({ submit: err.message });
-            //                 setSubmitting(false);
-            //             }
-            //         }
-            //     );
-            // } catch (err: any) {
-            //     console.error(err);
-            //     if (scriptedRef.current) {
-            //         setStatus({ success: false });
-            //         setErrors({ submit: err.message });
-            //         setSubmitting(false);
-            //     }
-            // }
+            try {
+              const response = await axios.post(`/auth/login`, {
+                text: values.report,
+              });
+              console.log("resoonseLoginData", response);
+              const { data } = response;
+              return data;
+            } catch (error: any) {
+              console.log("errorsLogin", error);
+              // return rejectWithValue(error.response.data.message);
+            }
           }}
         >
           {({
@@ -147,19 +129,20 @@ const Report = () => {
                     {errors.report}
                   </FormHelperText>
                 )}
+              </FormControl>
+              <Box textAlign="center">
                 <Button
                   disableElevation
                   disabled={isSubmitting}
-                  fullWidth
                   size="large"
                   type="submit"
                   variant="contained"
                   color="secondary"
-                  sx={{mt:1.5}}
+                  sx={{ mt: 1.5 }}
                 >
                   Wyślij
                 </Button>
-              </FormControl>
+              </Box>
             </form>
           )}
         </Formik>

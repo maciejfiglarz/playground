@@ -2,9 +2,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 //project imports
 import axiosApi from "utils/axiosApi";
+import axios from "utils/axios";
 // import store from 'store';
 import { User } from "types";
 import { RootState } from "store";
+import { setCookie } from "utils/cookies";
 
 interface UserSliceState {
   userInfo: User | null;
@@ -59,7 +61,7 @@ export const login = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const response = await axiosApi.post(`/auth/login`, {
+      const response = await axios.post(`/auth/login`, {
         email,
         password,
       });
@@ -67,7 +69,7 @@ export const login = createAsyncThunk(
       const { data } = response;
       return data;
     } catch (error: any) {
-      console.log("errorsLogin", error.response.data.message);
+      console.log("errorsLogin", error);
       return rejectWithValue(error.response.data.message);
     }
   }
@@ -75,7 +77,7 @@ export const login = createAsyncThunk(
 export const getUserDetails = createAsyncThunk(
   "user/getUserDetails",
   async () => {
-    const response = await axiosApi.get(`/auth/user-details`);
+    const response = await axios.get(`/auth/user-details`);
     const { data } = response;
     return data;
   }
@@ -86,10 +88,11 @@ export const slice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      axiosApi.get(`/auth/logout`);
+      // axiosApi.get(`/auth/logout`);
       state.isFetching = false;
       state.isSuccess = true;
       state.userInfo = null;
+      setCookie("user","");
       return state;
     },
   },
@@ -103,12 +106,11 @@ export const slice = createSlice({
       state.isFetching = false;
       state.isSuccess = true;
       state.userInfo = action.payload as User;
-      console.log("errorsB", action);
+      setCookie("user",action.payload.id);
     });
     builder.addCase(login.rejected, (state, action) => {
       state.isFetching = false;
       state.error = action.payload;
-      console.log("errorsA", action);
     });
 
     builder.addCase(getUserDetails.pending, (state, action) => {
@@ -121,7 +123,7 @@ export const slice = createSlice({
       const payload: User = action.payload;
       state.isFetching = false;
       state.isSuccess = true;
-      state.userInfo = payload ? payload : null;
+      state.userInfo = action.payload as User;
     });
     builder.addCase(getUserDetails.rejected, (state, action) => {
       state.isFetching = false;

@@ -10,7 +10,6 @@ import Graphic from "./Graphic";
 
 const Content = (props: PostType) => {
   const { type } = props;
-  console.log("postX", props);
   return (
     <>
       {type === "post" && <Post {...props} />}

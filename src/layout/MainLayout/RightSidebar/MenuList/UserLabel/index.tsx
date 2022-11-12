@@ -27,7 +27,7 @@ const UserLabel = () => {
   return (
     <ListItemButton
       component="a"
-      href={`/profile/${userState?.userInfo?.id}`}
+      href={`/profil/${userState?.userInfo?.id}`}
       sx={{
         borderRadius: `${borderRadius}px`,
         // padding: 2

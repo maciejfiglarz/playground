@@ -6,15 +6,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 //project imports
 import Avatar from "ui-component/extended/Avatar";
 import Comment from "./Comment";
+import Shares from "./Shares";
 import Content from "./Content";
 import Vote from "./Vote";
 import Bar from "./Bar";
 // import AnimateButton from 'ui-component/extended/AnimateButton';
 import {
   Post,
-  CommentData,
   FormInputProps,
-  // Comment as CommentType
 } from "types";
 
 //material ui
@@ -22,30 +21,15 @@ import { useTheme } from "@mui/material/styles";
 import MainCard from "ui-component/MainCard";
 import {
   Button,
-  ButtonBase,
-  // CardMedia,
-  // Collapse,
-  // FormHelperText,
   Grid,
-  IconButton,
-  Menu,
-  MenuItem,
   Stack,
   TextField,
-  Typography,
   useMediaQuery,
 } from "@mui/material";
 
 //assets
-import ShareTwoToneIcon from "@mui/icons-material/ShareTwoTone";
-
-import ContentCopyTwoToneIcon from "@mui/icons-material/ContentCopyTwoTone";
-
 import ChatBubbleTwoToneIcon from "@mui/icons-material/ChatBubbleTwoTone";
 
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import Shares from "./Shares";
 
 const validationSchema = yup.object().shape({
   name: yup.string().required("To pole nie może zostać puste!"),
@@ -53,7 +37,7 @@ const validationSchema = yup.object().shape({
 
 const SinglePost = (post: Post) => {
   const theme = useTheme();
-  const { title, description, image, user, createdAt, comments } = post;
+  const { id, title, description, image, user, createdAt, comments } = post;
   const { avatar, login: profilName } = user;
 
   const matchesXS = useMediaQuery(theme.breakpoints.down("md"));
@@ -108,7 +92,7 @@ const SinglePost = (post: Post) => {
     );
   };
 
-  const onSubmit = async (comment: CommentData) => {
+  const onSubmit = async (comment: Comment) => {
     // handleChangeComment();
     // const commentId = uniqueId('#COMMENT_');
     // const newComment: Reply = {
@@ -129,7 +113,7 @@ const SinglePost = (post: Post) => {
 
   const displayCommentLabel = () => {
     const commentsNumber = comments.length;
-    console.log("commentsNumber", commentsNumber);
+
     if (commentsNumber === 1) {
       return `1 komentarz`;
     } else if (commentsNumber > 1) {
@@ -195,54 +179,11 @@ const SinglePost = (post: Post) => {
             </Grid>
           </Grid>
 
-          {/* add new comment */}
-          <Grid item xs={12} sx={{ pt: 2 }}>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <Grid container spacing={2} alignItems="flex-start">
-                <Grid
-                  item
-                  sx={{
-                    display: { xs: "none", sm: "block" },
-                  }}
-                >
-                  <Avatar
-                    sx={{ mt: 0.75 }}
-                    alt="User 1"
-                    // src={profile.avatar}
-                    size="xs"
-                  />
-                </Grid>
-                <Grid item xs zeroMinWidth>
-                  <FormProvider {...methods}>
-                    <FormInput
-                      fullWidth
-                      name="name"
-                      label="Treść komentarza..."
-                      size={matchesXS ? "small" : "medium"}
-                      // bug={errors}
-                    />
-                  </FormProvider>
-                </Grid>
-                <Grid item>
-                  {/* <AnimateButton> */}
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="secondary"
-                    // size={matchesXS ? 'small' : 'large'}
-                    sx={{ mt: 0.5 }}
-                  >
-                    Dodaj
-                  </Button>
-                  {/* </AnimateButton> */}
-                </Grid>
-              </Grid>
-            </form>
-          </Grid>
+    
         </Grid>
         {comments.map((comment) => (
           <Comment
-            // postId={id}
+            postID={id}
             comment={comment}
             key={comment.id}
             user={comment.user}

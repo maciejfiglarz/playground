@@ -29,17 +29,29 @@ export type Likes = {
 export type ReplyComment = {
   id: string;
   user: User;
-  data: CommentData;
-};
-export type CommentData = {
-  name?: string;
-  text?: string;
-  likes?: Likes;
+  text: string;
+  likes: Likes;
+  createdAt: string;
   // voteUp: 0;
   // voteDown: 2;
   // video?: string;
-  replies?: ReplyComment[];
+  replies?: Comment[];
 };
+
+
+export type Comment = {
+  id: string;
+  user: User;
+  text: string;
+  likes: Likes;
+  createdAt: string;
+  // voteUp: 0;
+  // voteDown: 2;
+  // video?: string;
+  replies?: Comment[];
+};
+
+
 
 // export interface PostData {
 //   title?: string;
@@ -54,6 +66,13 @@ export type CommentData = {
 //   isWaiting: boolean;
 //   comments:[]
 // }
+
+export interface Report {
+  id: string;
+  text: string;
+  user: User;
+  createdAt: string;
+}
 
 export interface Post {
   id: string;
@@ -83,11 +102,6 @@ export interface Category {
   description?: string;
 }
 
-export type Comment = {
-  id: string;
-  user: User;
-  data: CommentData;
-};
 
 export type User = {
   id: string;

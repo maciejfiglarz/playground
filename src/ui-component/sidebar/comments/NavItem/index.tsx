@@ -12,9 +12,8 @@ import {
   ListItemButton,
 } from "@mui/material";
 
-const Item = ({ id, user, data }: Comment) => {
+const Item = ({ id, user, text }: Comment) => {
   const { avatar, login, id: userId } = user;
-  const { text } = data;
   return (
     <ListItemButton component="a" href={`/profil/${userId}`}>
       <Grid container wrap="nowrap">
