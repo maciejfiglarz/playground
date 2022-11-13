@@ -20,7 +20,7 @@ type PropsType = {
 
 const CommentsList = ({ text }: PropsType) => {
   const [comments, setComments] = useState<Comment[] | []>([]);
-  console.log("comments", comments);
+  // console.log("comments", comments);
   // const { recent: comments } = useAppSelector(selectRecentComments);
   // const dispatch = useAppDispatch();
 
@@ -30,7 +30,6 @@ const CommentsList = ({ text }: PropsType) => {
 
   const getPost = async () => {
     const response = await axios.get(`/api/comments`);
-    console.log("repsonse", response);
     setComments(response.data);
   };
 

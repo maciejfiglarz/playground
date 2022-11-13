@@ -20,7 +20,6 @@ const SidebarCategories = ({ text }: PropType) => {
   const [categories, setCategories] = useState<Category[] | []>([]);
   const getCategories = async () => {
     const response = await axios.get(`/api/categories`);
-    console.log("repsonse", response);
     setCategories(response.data);
   };
 

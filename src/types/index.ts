@@ -35,9 +35,8 @@ export type ReplyComment = {
   // voteUp: 0;
   // voteDown: 2;
   // video?: string;
-  replies?: Comment[];
+  replies: Comment[];
 };
-
 
 export type Comment = {
   id: string;
@@ -45,13 +44,12 @@ export type Comment = {
   text: string;
   likes: Likes;
   createdAt: string;
+  postID: string;
   // voteUp: 0;
   // voteDown: 2;
   // video?: string;
-  replies?: Comment[];
+  replies: Comment[];
 };
-
-
 
 // export interface PostData {
 //   title?: string;
@@ -101,7 +99,6 @@ export interface Category {
   slug: string;
   description?: string;
 }
-
 
 export type User = {
   id: string;

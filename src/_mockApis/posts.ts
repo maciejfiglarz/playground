@@ -80,7 +80,8 @@ let posts: Post[] = [
     type: "post",
     youtubeID: null,
     prefix: null,
-    comments: [randomElement(comments)],
+    // comments: [randomElement(comments)],
+    comments: [comments[0]],
     voteDown: 10,
     voteUp: 20,
     isActive: true,
@@ -177,35 +178,7 @@ services.onGet(/\/api\/post\/\w+/).reply((request) => {
   }
 });
 
-services.onPost("/api/posts/add").reply((request) => {
-  try {
-    const { data } = JSON.parse(request.data);
-    const { id, userID, postID, text } = data;
-    const user = users.find((user) => user.id === userID);
-    const post = posts.find((post) => post.id === postID);
-    if (!user || !post) {
-      return [500, { message: "Nie znaleziono autora lub postu" }];
-    }
 
-    const newComment: Comment = {
-      id: UIDV4(),
-      user,
-      // post,
-      text,
-      likes: {
-        like: true,
-        value: 3,
-      },
-      createdAt: "2022-11-03T18:26:51.000Z",
-    };
-    
-
-    return [200, newComment];
-  } catch (err) {
-    console.error(err);
-    return [500, { message: "Internal server error1" }];
-  }
-});
 services.onPost("/api/posts/add").reply((request) => {
   try {
     const { data } = JSON.parse(request.data);

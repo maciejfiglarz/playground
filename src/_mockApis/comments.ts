@@ -1,13 +1,7 @@
 import services from "utils/mockAdapter";
 import { Comment } from "types";
 
-import avatar1 from "assets/images/users/avatar-1.png";
-import avatar2 from "assets/images/users/avatar-2.png";
-import avatar3 from "assets/images/users/avatar-3.png";
-import avatar4 from "assets/images/users/avatar-4.png";
-import avatar5 from "assets/images/users/avatar-5.png";
-import avatar6 from "assets/images/users/avatar-6.png";
-import avatar7 from "assets/images/users/avatar-7.png";
+import { v4 as UIDV4 } from "uuid";
 
 import { users } from "./users";
 
@@ -19,11 +13,12 @@ export let comments: Comment[] = [
     user: {
       ...users[0],
     },
-    text: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+    text: "0It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
     likes: {
       like: true,
       value: 1,
     },
+    postID: "5e8882f1f0c9216397e05a9b",
     createdAt: "2022-11-03T18:26:51.000Z",
     replies: [
       {
@@ -32,12 +27,29 @@ export let comments: Comment[] = [
           ...users[1],
         },
 
-        text: "Tolerably earnestly middleton extremely distrusts she boy now not. Add and offered prepare how cordial two promise. Greatly who affixed suppose but enquire compact prepare all put. Added forth chief trees but rooms think may. Wicket do manner others seemed enable rather in. Excellent own discovery unfeeling sweetness questions the gentleman. Chapter shyness matters mr parlors if mention thought.",
+        text: "1Tolerably earnestly middleton extremely distrusts she boy now not. Add and offered prepare how cordial two promise. Greatly who affixed suppose but enquire compact prepare all put. Added forth chief trees but rooms think may. Wicket do manner others seemed enable rather in. Excellent own discovery unfeeling sweetness questions the gentleman. Chapter shyness matters mr parlors if mention thought.",
         likes: {
           like: true,
           value: 88,
         },
+        postID: "5e8882f1f0c9216397e05a9b",
         createdAt: "2022-11-03T18:26:51.000Z",
+        replies: [
+          {
+            id: "25446547978423gdrgrdgrdgrd4574435",
+            user: {
+              ...users[1],
+            },
+            createdAt: "2022-11-03T18:26:51.000Z",
+            text: "2Now eldest new tastes plenty mother called misery get. Longer excuse for county nor except met its things. Narrow enough sex moment desire are. Hold who what come that seen read age its. Contained or estimable earnestly so perceived. Imprudence he in sufficient cultivated. Delighted promotion improving acuteness an newspaper offending he. Misery in am secure theirs giving an. Design on longer thrown oppose am.",
+            likes: {
+              like: true,
+              value: 6,
+            },
+            postID: "516397e05a9b",
+            replies: [],
+          },
+        ],
       },
       {
         id: "254465479784234574435",
@@ -45,11 +57,13 @@ export let comments: Comment[] = [
           ...users[2],
         },
 
-        text: "Oh to talking improve produce in limited offices fifteen an. Wicket branch to answer do we. Place are decay men hours tiled. If or of ye throwing friendly required. Marianne interest in exertion as. Offering my branched confined oh dashwood.",
+        text: "1Oh to talking improve produce in limited offices fifteen an. Wicket branch to answer do we. Place are decay men hours tiled. If or of ye throwing friendly required. Marianne interest in exertion as. Offering my branched confined oh dashwood.",
         likes: {
           like: true,
           value: 15,
         },
+        postID: "5e8882f1f0c9216397e05a9b",
+        replies: [],
         createdAt: "2022-11-03T18:26:51.000Z",
       },
     ],
@@ -64,6 +78,7 @@ export let comments: Comment[] = [
       like: true,
       value: 6,
     },
+    postID: "5e8882f1f0c9",
     createdAt: "2022-11-03T18:26:51.000Z",
     replies: [
       {
@@ -76,6 +91,8 @@ export let comments: Comment[] = [
           like: true,
           value: 9,
         },
+        postID: "5e8882f1f0c9",
+        replies: [],
         createdAt: "2022-11-03T18:26:51.000Z",
       },
     ],
@@ -90,6 +107,7 @@ export let comments: Comment[] = [
       like: true,
       value: 2,
     },
+    postID: "516397e05a9b",
     createdAt: "2022-11-03T18:26:51.000Z",
     replies: [
       {
@@ -103,6 +121,8 @@ export let comments: Comment[] = [
           like: true,
           value: 0,
         },
+        replies: [],
+        postID: "516397e05a9b",
       },
       {
         id: "25446547978423gdrgrdgrdgrd4574435",
@@ -115,6 +135,8 @@ export let comments: Comment[] = [
           like: true,
           value: 6,
         },
+        replies: [],
+        postID: "516397e05a9b",
       },
     ],
   },
@@ -126,3 +148,33 @@ export let comments: Comment[] = [
 // ==============================|| MOCK SERVICES ||============================== //
 
 services.onGet("/api/comments").reply(200, [...comments]);
+
+services.onPost("/comment/add").reply((request) => {
+  // try {
+  const data = JSON.parse(request.data);
+  const { userID, postID, text } = data;
+  console.log("text", text);
+  const user = users.find((user) => user.id === userID);
+  if (!user) {
+    return [500, { message: "Nie znaleziono autora" }];
+  }
+
+  const newComment: Comment = {
+    id: UIDV4(),
+    user,
+    postID,
+    text,
+    likes: {
+      like: true,
+      value: 3,
+    },
+    replies: [],
+    createdAt: "2022-11-03T18:26:51.000Z",
+  };
+
+  return [200, newComment];
+  // } catch (err) {
+  //   console.error(err);
+  //   return [500, { message: "Internal server error1" }];
+  // }
+});

@@ -6,30 +6,21 @@ import { yupResolver } from "@hookform/resolvers/yup";
 //project imports
 import Avatar from "ui-component/extended/Avatar";
 import Comment from "./Comment";
+import CommentCreate from "./Comment/Create";
 import Shares from "./Shares";
 import Content from "./Content";
 import Vote from "./Vote";
 import Bar from "./Bar";
 // import AnimateButton from 'ui-component/extended/AnimateButton';
-import {
-  Post,
-  FormInputProps,
-} from "types";
+import { Post, FormInputProps } from "types";
 
 //material ui
 import { useTheme } from "@mui/material/styles";
 import MainCard from "ui-component/MainCard";
-import {
-  Button,
-  Grid,
-  Stack,
-  TextField,
-  useMediaQuery,
-} from "@mui/material";
+import { Button, Grid, Stack, TextField, useMediaQuery } from "@mui/material";
 
 //assets
 import ChatBubbleTwoToneIcon from "@mui/icons-material/ChatBubbleTwoTone";
-
 
 const validationSchema = yup.object().shape({
   name: yup.string().required("To pole nie może zostać puste!"),
@@ -178,15 +169,16 @@ const SinglePost = (post: Post) => {
               </Grid>
             </Grid>
           </Grid>
+        </Grid>
 
-    
+        <Grid sx={{ mt: 1.25 }} item xs={12} spacing={2}>
+          <CommentCreate postID={id} />
         </Grid>
         {comments.map((comment) => (
           <Comment
             postID={id}
             comment={comment}
             key={comment.id}
-            user={comment.user}
             // replyAdd={replyAdd}
             // handleCommentLikes={handleCommentLikes}
             // handleReplayLikes={handleReplayLikes}

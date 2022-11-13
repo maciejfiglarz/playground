@@ -1,9 +1,14 @@
-import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  createAsyncThunk,
+  current,
+  PayloadAction,
+} from "@reduxjs/toolkit";
 
 //project imports
 import axios from "utils/axios";
 // import store from 'store';
-import { Post } from "types";
+import { Comment, Post } from "types";
 import { RootState } from "store";
 
 type PostsData = {
@@ -61,6 +66,32 @@ export const slice = createSlice({
   name: "posts",
   initialState,
   reducers: {
+    addComment: (state, action: PayloadAction<Comment>) => {
+      const { payload: comment } = action;
+      const { postID } = comment;
+      let posts = state.data.posts;
+      state.data.posts = posts.map((post) => {
+        // item.id === action.payload.id ? action.payload : item;
+        if (post.id === postID) {
+          post.comments.unshift(comment);
+          console.log("item", current(post));
+        }
+        return post;
+      });
+      // const post = current(state).data.posts.find((post) => post.id === comment.postID);
+
+      // state.data = [
+      //   ...state.data,
+      //   {
+      //     id: "2",
+      //     title: "testowy",
+      //     author: "empty",
+      //     description: "opis",
+      //     imageUrl: "",
+      //   },
+      // ];
+    },
+
     // addTodo: (state, action: PayloadAction<string>) => {
     //     state.data = [
     //         ...state.data,
@@ -80,11 +111,9 @@ export const slice = createSlice({
 
   extraReducers: (builder) => {
     builder.addCase(pagination.pending, (state, action) => {
-      if (!state.loading) {
-        state.loading = true;
-        state.error = null;
-        state.currentRequestId = action.meta.requestId;
-      }
+      state.loading = true;
+      state.error = null;
+      state.currentRequestId = action.meta.requestId;
     });
     builder.addCase(pagination.fulfilled, (state, action) => {
       const prevPosts = current(state).data.posts;
@@ -103,46 +132,10 @@ export const slice = createSlice({
       state.currentRequestId = undefined;
     });
   },
-
-  // extraReducers: (builder) => {
-  //   builder.addCase(pagination.pending, (state, action) => {
-  //     if (!state.loading) {
-  //       state.loading = true;
-  //       state.error = null;
-  //       state.currentRequestId = action.meta.requestId;
-  //     }
-  //   });
-  //   builder.addCase(pagination.fulfilled, (state, action) => {
-  //     const { requestId } = action.meta;
-  //     const prevResults = current(state).data.results;
-  //     const results = action.payload.results;
-
-  //     console.log("action", current(state));
-
-  //     //   console.log("action", action.payload, {
-  //     //     ...state,
-  //     //     data: { ...action.payload, results: { ...results, ...prevResults } },
-  //     //   });
-
-  //     if (state.loading && state.currentRequestId === requestId) {
-  //       state.loading = false;
-  //       state.data = {
-  //         ...action.payload,
-  //         results: [...results, ...prevResults],
-  //       };
-  //       state.currentRequestId = undefined;
-  //     }
-  //   });
-  //   builder.addCase(pagination.rejected, (state, action) => {
-  //     state.loading = false;
-  //     state.error = action.error;
-  //     state.currentRequestId = undefined;
-  //   });
-  // },
 });
 
 export const selectPosts = (state: RootState) => state.posts;
 
-// export const { addTodo, removeTodo } = slice.actions;
+export const { addComment } = slice.actions;
 
 export default slice.reducer;

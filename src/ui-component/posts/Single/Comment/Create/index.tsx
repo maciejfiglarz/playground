@@ -13,6 +13,7 @@ import {
 //project imports
 import Avatar from "ui-component/extended/Avatar";
 import { useAppSelector, useAppDispatch } from "store";
+import { addComment } from "store/postsSlice";
 // import AnimateButton from 'ui-component/extended/AnimateButton';
 import { Post, Comment, FormInputProps, User } from "types";
 
@@ -35,6 +36,12 @@ const validationSchema = yup.object().shape({
 });
 
 type CreateProps = {
+  postID: string;
+};
+
+type NewCommentData = {
+  userID: string;
+  text: string;
   postID: string;
 };
 
@@ -95,27 +102,22 @@ const Create = ({ postID }: CreateProps) => {
 
   const onSubmit = async (comment: any) => {
     if (!userInfo) return false;
-    console.log("comment", comment);
-
-    type NewCommentData = {
-      userID: string;
-      text: string;
-      postID: string;
-    };
+    console.log("comment", comment.text);
 
     const newComment: NewCommentData = {
       userID: userInfo.id,
-      text: "comment",
+      text: comment.text,
       postID,
     };
 
     try {
-      const result = await axios.post(`/comment/add`, {
+      const { data } = await axios.post("/comment/add", {
         ...newComment,
       });
-      console.log("result",result);
+      dispatch(addComment(data));
+      console.log("result", data);
     } catch (e) {
-      console.log("catch",);
+      console.log("catch", e);
     }
 
     // dispatch
