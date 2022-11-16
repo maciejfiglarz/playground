@@ -211,5 +211,5 @@ services.onGet(/\/api\/category\/\w+/).reply((request) => {
     return [500, { message: "Internal server error1" }];
   }
 });
-
+console.log(categories)
 services.onGet("/api/categories").reply(200, [...categories]);
