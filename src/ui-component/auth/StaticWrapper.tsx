@@ -35,7 +35,7 @@ type Props = {
 const AuthWrapper = ({
   children,
   isLoading,
-  isLogo = true,
+  isLogo = false,
   title,
   renderBottom,
   isSocialAuth = true,

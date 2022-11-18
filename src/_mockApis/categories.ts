@@ -196,13 +196,14 @@ let categories: Category[] = [
   },
 ];
 
-// const delay = (timeout: number) =>
-//     new Promise((res) => setTimeout(res, timeout));
+const delay = (timeout: number) =>
+  new Promise((res) => setTimeout(res, timeout));
 
 // ==============================|| MOCK SERVICES ||============================== //
 
-services.onGet(/\/api\/category\/\w+/).reply((request) => {
+services.onGet(/\/api\/category\/\w+/).reply(async (request) => {
   try {
+    await delay(500);
     const id = request.url?.replace("/api/category/", "");
     const category = categories.find((_item) => _item.id === id);
     return [200, { ...category }];

@@ -10,6 +10,7 @@ import axios from "utils/axios";
 // import store from 'store';
 import { Comment, Post } from "types";
 import { RootState } from "store";
+import { comments } from "_mockApis/comments";
 
 type PostsData = {
   posts: Post[];
@@ -71,13 +72,15 @@ export const slice = createSlice({
       const { postID } = comment;
       let posts = state.data.posts;
       state.data.posts = posts.map((post) => {
-        // item.id === action.payload.id ? action.payload : item;
         if (post.id === postID) {
           post.comments.unshift(comment);
-          console.log("item", current(post));
         }
         return post;
       });
+
+      //   post.comments.map(comments =>{
+      //     const isExist =  comments.find(comment =>)
+      // });
       // const post = current(state).data.posts.find((post) => post.id === comment.postID);
 
       // state.data = [
@@ -92,6 +95,46 @@ export const slice = createSlice({
       // ];
     },
 
+    addReplyComment: (state, action: PayloadAction<Comment>) => {
+      const { payload: comment } = action;
+      const { postID, parentID } = comment;
+      let posts = state.data.posts;
+      state.data.posts = posts.map((post) => {
+        if (post.id === postID) {
+          console.log("post", post.id , postID, post.id === postID);
+          // post.comments.unshift(comment);
+          post.comments.map((_comment) => {
+            // console.log("reply", _comment.id === parentID);
+            if (_comment.id === parentID) {
+              _comment.replies.unshift(comment);
+              console.log(
+                "reply",
+                _comment.id,
+                parentID,
+                _comment.id === parentID
+              );
+            } else {
+
+              // _comment.replies.map((_comment2) => {
+              //   console.log("else", current(_comment2));
+              //   if (_comment2.id === parentID) {
+              //     console.log(
+              //       "reply2",
+              //       _comment2.id,
+              //       parentID,
+              //       _comment2.id === parentID
+              //     );
+              //     _comment2.replies.unshift(comment);
+              //   }
+              // });
+
+
+            }
+          });
+        }
+        return post;
+      });
+    },
     // addTodo: (state, action: PayloadAction<string>) => {
     //     state.data = [
     //         ...state.data,
@@ -136,6 +179,6 @@ export const slice = createSlice({
 
 export const selectPosts = (state: RootState) => state.posts;
 
-export const { addComment } = slice.actions;
+export const { addComment, addReplyComment } = slice.actions;
 
 export default slice.reducer;

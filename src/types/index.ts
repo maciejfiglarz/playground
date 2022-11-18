@@ -1,6 +1,7 @@
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 import { SvgIconTypeMap } from "@mui/material";
 import { TablerIcon } from "@tabler/icons";
+import { number } from "yup/lib/locale";
 
 export type OverrideIcon =
   | (OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
@@ -45,6 +46,7 @@ export type Comment = {
   likes: Likes;
   createdAt: string;
   postID: string;
+  parentID: null | string;
   // voteUp: 0;
   // voteDown: 2;
   // video?: string;

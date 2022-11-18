@@ -112,8 +112,7 @@ const Item = ({
             <Grid container wrap="nowrap" alignItems="center" spacing={1}>
               <Grid item>
                 <Avatar
-                  sx={{ width: 24, height: 24 }}
-                  size="sm"
+                  size="badge"
                   alt="User 1"
                   src={user.avatar}
                 />

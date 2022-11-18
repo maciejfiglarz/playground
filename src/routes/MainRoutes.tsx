@@ -18,6 +18,7 @@ const Register = Loadable(lazy(() => import("views/pages/register")));
 const Login = Loadable(lazy(() => import("views/authentication/login")));
 const ForgotPassword = Loadable(lazy(() => import("views/authentication/forgot-password")));
 
+const UserSettings = Loadable(lazy(() => import("views/user/settings")));
 
 
 const AuthAdmin = Loadable(lazy(() => import("views/admin/auth")));
@@ -64,6 +65,10 @@ const MainRoutes = {
     {
       path: "/kategoria/:id",
       element: <SingleCategory />,
+    },
+    {
+      path: "/ustawienia",
+      element: <UserSettings />,
     },
   ],
 };

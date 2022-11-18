@@ -34,7 +34,7 @@ const AuthWrapper = ({
     children,
     isLoading,
     setIsLoading,
-    isLogo = true,
+    isLogo = false,
     title,
     type,
     renderBottom

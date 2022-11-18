@@ -83,14 +83,16 @@ export let users: User[] = [
   },
 ];
 
-// const delay = (timeout: number) =>
-//     new Promise((res) => setTimeout(res, timeout));
+const delay = (timeout: number) =>
+  new Promise((res) => setTimeout(res, timeout));
 
 // ==============================|| MOCK SERVICES ||============================== //
 
-services.onPost("/auth/login").reply((request) => {
+services.onPost("/auth/login").reply(async (request) => {
   try {
+    await delay(500);
     const { email } = JSON.parse(request.data);
+
     const user = users.find((_user) => _user.email === email);
     console.log("email", email, user);
     if (!user) {
@@ -112,21 +114,34 @@ services.onPost("/auth/login").reply((request) => {
   }
 });
 
+// services.onPost("/api/users").reply(async (request) => {
+//   try {
+//     delay(500);
+
+
+//   }catch(e){
+//     return [500, { message: "Internal server error" }];
+//   }
+
+// });
+
 services.onGet("/api/users").reply(200, { users });
 
-services.onGet(/\/api\/user\/\w+/).reply((request) => {
+services.onGet(/\/api\/user\/\w+/).reply(async (request) => {
   try {
+    delay(2500);
     const id = request.url?.replace("/api/user/", "");
-    const category = users.find((_item) => _item.id === id);
-    return [200, { ...category }];
+    const user = users.find((_item) => _item.id === id);
+    return [200, { ...user }];
   } catch (err) {
     console.error(err);
     return [500, { message: "Internal server error" }];
   }
 });
 
-services.onGet("/auth/user-details").reply((request) => {
+services.onGet("/auth/user-details").reply(async (request) => {
   try {
+    delay(500);
     const userID = getCookie("user");
     const user = users.find((_user) => _user.id === userID);
 
@@ -137,8 +152,8 @@ services.onGet("/auth/user-details").reply((request) => {
     return [
       200,
       {
-        ...user
-      }
+        ...user,
+      },
     ];
   } catch (err) {
     return [500, { message: "Server Error" }];

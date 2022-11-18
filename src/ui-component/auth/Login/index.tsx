@@ -37,8 +37,6 @@ import { useTheme } from "@mui/material/styles";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
-
-
 const Login = () => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
@@ -48,12 +46,6 @@ const Login = () => {
   const [checked, setChecked] = useState(true);
   const userState = useAppSelector((state) => state.user);
   console.log("errorsLogin", error);
-
-
-
-  
-
-
 
   // useEffect(()=>{
   //   const data = async() =>{
@@ -81,9 +73,12 @@ const Login = () => {
 
   useEffect(() => {
     if (userInfo) {
-      navigate("/profil/:id");
+      navigate(`/profil/${userInfo.id}`);
     }
   }, [navigate, userInfo]);
+
+
+  console.log("isFetching", isFetching);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -108,8 +103,6 @@ const Login = () => {
   );
 
 
-
-
   return (
     <AuthWrapper
       isLoading={isFetching}
@@ -117,7 +110,6 @@ const Login = () => {
       renderBottom={renderBottom}
       type="login"
     >
-
       <Grid item xs={12}>
         {error && <Alert type="error" message={error} />}
         <Formik

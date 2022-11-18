@@ -158,8 +158,8 @@ let posts: Post[] = [
   },
 ];
 
-// const delay = (timeout: number) =>
-//     new Promise((res) => setTimeout(res, timeout));
+const delay = (timeout: number) =>
+  new Promise((res) => setTimeout(res, timeout));
 
 // ==============================|| MOCK SERVICES ||============================== //
 
@@ -167,8 +167,9 @@ services
   .onGet("/api/posts")
   .reply(200, { posts: posts.slice(0, 5), total: posts.length });
 
-services.onGet(/\/api\/post\/\w+/).reply((request) => {
+services.onGet(/\/api\/post\/\w+/).reply(async (request) => {
   try {
+    delay(500);
     const id = request.url?.replace("/api/post/", "");
     const post = posts.find((item) => item.id === id);
     return [200, { ...post }];
@@ -178,9 +179,9 @@ services.onGet(/\/api\/post\/\w+/).reply((request) => {
   }
 });
 
-
-services.onPost("/api/posts/add").reply((request) => {
+services.onPost("/api/posts/add").reply(async (request) => {
   try {
+    delay(500);
     const { data } = JSON.parse(request.data);
     const { title, description, author } = data;
     const post = {

@@ -171,8 +171,8 @@ const SinglePost = (post: Post) => {
           </Grid>
         </Grid>
 
-        <Grid sx={{ mt: 1.25 }} item xs={12} spacing={2}>
-          <CommentCreate postID={id} />
+        <Grid sx={{ mt: 0 }} item xs={12} spacing={2}>
+          <CommentCreate isMain={true} postID={id} />
         </Grid>
         {comments.map((comment) => (
           <Comment

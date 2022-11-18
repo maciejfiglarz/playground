@@ -170,10 +170,10 @@ const CommentWrapper = ({ comment, postID }: CommentComponentProps) => {
 
   return (
     <>
-      <Grid item xs={12}>
+      <Grid item xs={12} sx={{ pl: 0.5 }}>
         <Grid container spacing={1}>
           <Grid item xs={12}>
-            <Box sx={{ ml: 3.5 }}>
+            <Box>
               <Item
                 comment={comment}
                 postID={postID}
@@ -184,14 +184,34 @@ const CommentWrapper = ({ comment, postID }: CommentComponentProps) => {
                 in={activeReplies.includes(comment.id) ? true : false}
                 sx={{ width: "100%" }}
               >
-                <Create postID={postID} />
+                <Create setActiveReplies={setActiveReplies} postID={postID} />
               </Collapse>
             </Box>
           </Grid>
 
           {comment.replies.map((firstLevelComment) => (
             <>
-              <Box sx={{ ml: 3.5 }}>
+              <Box
+                sx={{
+                  ml: 3.5,
+                  position: "relative",
+                }}
+              >
+                {/* <Box
+                  style={{
+                    height: 24,
+                    width: 24,
+                    borderLeft: "1px solid black",
+                    borderBottom: "1px solid black",
+                    borderBottomLeftRadius: 10,
+                    position: "absolute",
+                    top: "50%",
+                    transform: "translateX(-100%)",
+                    left: 0,
+                    borderBottomWidth: 2,
+                    borderLeftWidth: 2,
+                  }}
+                ></Box> */}
                 <Item
                   comment={firstLevelComment}
                   postID={postID}
@@ -204,7 +224,11 @@ const CommentWrapper = ({ comment, postID }: CommentComponentProps) => {
                   }
                   sx={{ width: "100%" }}
                 >
-                  <Create postID={postID} />
+                  <Create
+                    setActiveReplies={setActiveReplies}
+                    parentID={firstLevelComment.id}
+                    postID={postID}
+                  />
                 </Collapse>
               </Box>
 
@@ -224,7 +248,11 @@ const CommentWrapper = ({ comment, postID }: CommentComponentProps) => {
                     }
                     sx={{ width: "100%" }}
                   >
-                    <Create postID={postID} />
+                    <Create
+                      setActiveReplies={setActiveReplies}
+                      parentID={secondLevelComment.id}
+                      postID={postID}
+                    />
                   </Collapse>
                 </Box>
               ))}

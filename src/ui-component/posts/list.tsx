@@ -14,7 +14,7 @@ const PostsList = () => {
             <Box>
                 {tab === 0 && <InfiniteList />}
                 {tab === 1 && <InfiniteList />}
-                {tab === 2 && <>Grupy</>}
+                {/* {tab === 2 && <>Grupy</>} */}
             </Box>
         </>
     );

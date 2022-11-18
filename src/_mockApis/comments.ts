@@ -19,6 +19,7 @@ export let comments: Comment[] = [
       value: 1,
     },
     postID: "5e8882f1f0c9216397e05a9b",
+    parentID: null,
     createdAt: "2022-11-03T18:26:51.000Z",
     replies: [
       {
@@ -34,6 +35,7 @@ export let comments: Comment[] = [
         },
         postID: "5e8882f1f0c9216397e05a9b",
         createdAt: "2022-11-03T18:26:51.000Z",
+        parentID: "5e8882f1f0c9216397e05a9b",
         replies: [
           {
             id: "25446547978423gdrgrdgrdgrd4574435",
@@ -47,6 +49,7 @@ export let comments: Comment[] = [
               value: 6,
             },
             postID: "516397e05a9b",
+            parentID: "b2339dgggac",
             replies: [],
           },
         ],
@@ -63,6 +66,7 @@ export let comments: Comment[] = [
           value: 15,
         },
         postID: "5e8882f1f0c9216397e05a9b",
+        parentID: "b2339dgggac",
         replies: [],
         createdAt: "2022-11-03T18:26:51.000Z",
       },
@@ -79,6 +83,7 @@ export let comments: Comment[] = [
       value: 6,
     },
     postID: "5e8882f1f0c9",
+    parentID: null,
     createdAt: "2022-11-03T18:26:51.000Z",
     replies: [
       {
@@ -91,7 +96,8 @@ export let comments: Comment[] = [
           like: true,
           value: 9,
         },
-        postID: "5e8882f1f0c9",
+        postID: "b2339d45436565431gc",
+        parentID: "b2339dgggrggrd4435gac",
         replies: [],
         createdAt: "2022-11-03T18:26:51.000Z",
       },
@@ -108,6 +114,7 @@ export let comments: Comment[] = [
       value: 2,
     },
     postID: "516397e05a9b",
+    parentID: null,
     createdAt: "2022-11-03T18:26:51.000Z",
     replies: [
       {
@@ -123,6 +130,7 @@ export let comments: Comment[] = [
         },
         replies: [],
         postID: "516397e05a9b",
+        parentID: "b2339dgggrggrd4435gac",
       },
       {
         id: "25446547978423gdrgrdgrdgrd4574435",
@@ -137,23 +145,24 @@ export let comments: Comment[] = [
         },
         replies: [],
         postID: "516397e05a9b",
+        parentID: "b2339dgggrggrd4435gac",
       },
     ],
   },
 ];
 
-// const delay = (timeout: number) =>
-//     new Promise((res) => setTimeout(res, timeout));
+const delay = (timeout: number) =>
+  new Promise((res) => setTimeout(res, timeout));
 
 // ==============================|| MOCK SERVICES ||============================== //
 
 services.onGet("/api/comments").reply(200, [...comments]);
 
-services.onPost("/comment/add").reply((request) => {
+services.onPost("/comment/add").reply(async (request) => {
   // try {
+  delay(500);
   const data = JSON.parse(request.data);
-  const { userID, postID, text } = data;
-  console.log("text", text);
+  const { userID, postID, text, parentID } = data;
   const user = users.find((user) => user.id === userID);
   if (!user) {
     return [500, { message: "Nie znaleziono autora" }];
@@ -164,6 +173,7 @@ services.onPost("/comment/add").reply((request) => {
     user,
     postID,
     text,
+    parentID,
     likes: {
       like: true,
       value: 3,

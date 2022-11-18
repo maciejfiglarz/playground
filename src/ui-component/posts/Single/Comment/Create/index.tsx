@@ -13,7 +13,7 @@ import {
 //project imports
 import Avatar from "ui-component/extended/Avatar";
 import { useAppSelector, useAppDispatch } from "store";
-import { addComment } from "store/postsSlice";
+import { addComment, addReplyComment } from "store/postsSlice";
 // import AnimateButton from 'ui-component/extended/AnimateButton';
 import { Post, Comment, FormInputProps, User } from "types";
 
@@ -37,15 +37,24 @@ const validationSchema = yup.object().shape({
 
 type CreateProps = {
   postID: string;
+  isMain?: boolean;
+  parentID?: string;
+  setActiveReplies?: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
 type NewCommentData = {
   userID: string;
   text: string;
   postID: string;
+  parentID?: string;
 };
 
-const Create = ({ postID }: CreateProps) => {
+const Create = ({
+  postID,
+  isMain = false,
+  parentID,
+  setActiveReplies,
+}: CreateProps) => {
   const theme = useTheme();
   const { setIsGuardModal } = useContext(AppContext);
   const { userInfo } = useAppSelector((state) => state.user);
@@ -86,6 +95,7 @@ const Create = ({ postID }: CreateProps) => {
               fullWidth={fullWidth}
               type="text"
               variant="outlined"
+              size={!isMain ? "small" : "medium"}
               value={value}
               onChange={onChange}
               error={!!error}
@@ -102,19 +112,23 @@ const Create = ({ postID }: CreateProps) => {
 
   const onSubmit = async (comment: any) => {
     if (!userInfo) return false;
-    console.log("comment", comment.text);
-
     const newComment: NewCommentData = {
       userID: userInfo.id,
       text: comment.text,
       postID,
+      parentID,
     };
 
     try {
       const { data } = await axios.post("/comment/add", {
         ...newComment,
       });
-      dispatch(addComment(data));
+      const { parentID, id } = data;
+      parentID ? dispatch(addReplyComment(data)) : dispatch(addComment(data));
+      if (setActiveReplies) {
+        setActiveReplies((prev) => prev.filter((id) => id !== parentID));
+      }
+
       console.log("result", data);
     } catch (e) {
       console.log("catch", e);
@@ -128,7 +142,12 @@ const Create = ({ postID }: CreateProps) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Grid container spacing={2} alignItems="flex-start">
+      <Grid
+        sx={{ pl: isMain ? 0 : 2, mt: 1, mb: 1 }}
+        container
+        spacing={2}
+        alignItems="flex-start"
+      >
         <Grid
           item
           sx={{
@@ -140,14 +159,14 @@ const Create = ({ postID }: CreateProps) => {
               sx={{ mt: 0.75 }}
               alt="User 1"
               src={userInfo.avatar}
-              size="xs"
+              size={!isMain ? "badge" : "xs"}
             />
           ) : (
             <Avatar
               sx={{ mt: 0.75 }}
               alt="User 1"
               // src={userInfo.avatar}
-              size="xs"
+              size={!isMain ? "xs" : "sm"}
             />
           )}
         </Grid>
@@ -168,7 +187,7 @@ const Create = ({ postID }: CreateProps) => {
             type={!userInfo ? "button" : "submit"}
             variant="contained"
             color="secondary"
-            size={matchesXS ? "small" : "large"}
+            size={matchesXS || !isMain ? "small" : "large"}
             onClick={() => (!userInfo ? setIsGuardModal(true) : null)}
             sx={{ mt: 0.5 }}
           >

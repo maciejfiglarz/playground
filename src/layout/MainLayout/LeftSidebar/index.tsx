@@ -1,10 +1,11 @@
 import { useState } from "react";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import "react-perfect-scrollbar/dist/css/styles.css";
 import { BrowserView, MobileView } from "react-device-detect";
 
 // project imports
 import { leftSidebarWidth } from "config/theme";
-import MenuList from "./MenuList";
+import MenuList from "./CategoryList";
 
 // material-ui
 import { useTheme } from "@mui/material/styles";
@@ -27,6 +28,7 @@ import CloseIcon from "@mui/icons-material/Close";
 const LeftSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const theme = useTheme();
+  const matchDownSM = useMediaQuery(theme.breakpoints.down("sm"));
 
   const renderDrawer = (
     <>
@@ -36,18 +38,19 @@ const LeftSidebar = () => {
         </Box>
       </Box>
 
-      <BrowserView>
-        <PerfectScrollbar
-          component="div"
-          style={{
-            // height: !matchUpMd ? 'calc(100vh - 56px)' : 'calc(100vh - 88px)',
-            paddingLeft: "16px",
-            paddingRight: "16px",
-          }}
-        >
-          <MenuList />
-        </PerfectScrollbar>
-      </BrowserView>
+      {/* <BrowserView> */}
+      <PerfectScrollbar
+        component="div"
+        style={{
+          marginTop: 20,
+          // height: !matchUpMd ? 'calc(100vh - 56px)' : 'calc(100vh - 88px)',
+          // paddingLeft: "16px",
+          // paddingRight: "16px",
+        }}
+      >
+        <MenuList />
+      </PerfectScrollbar>
+      {/* </BrowserView> */}
       <MobileView>
         <Box sx={{ px: 2 }}>
           {/* <MenuList />
@@ -114,7 +117,7 @@ const LeftSidebar = () => {
           onClose={() => setIsOpen(false)}
           sx={{
             "& .MuiDrawer-paper": {
-              width: leftSidebarWidth,
+              width: matchDownSM ? "100%" : leftSidebarWidth,
               background: theme.palette.background.default,
               color: theme.palette.text.primary,
               borderRight: "none",

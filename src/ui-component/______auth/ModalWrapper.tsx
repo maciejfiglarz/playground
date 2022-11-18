@@ -34,16 +34,14 @@ const AuthWrapper = ({
     children,
     isLoading,
     setIsLoading,
-    isLogo = true,
+    isLogo = false,
     title,
     type,
     renderBottom
 }: Props) => {
     const { authModal, setAuthModal } = useContext(AppContext);
     const theme = useTheme();
-
-    const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
-
+    const matchDownSM = useMediaQuery(theme.breakpoints.down('sm'));
     const handleClose = () => {
         setAuthModal(null);
     };
