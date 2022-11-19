@@ -7,6 +7,7 @@ import AuthGuard from "utils/route-guard/AuthGuard";
 
 // const Profile = Loadable(lazy(() => import("views/user/profile")));
 const Create = Loadable(lazy(() => import("views/pages/create")));
+const UserSettings = Loadable(lazy(() => import("views/user/settings")));
 
 const MainRoutes = {
   path: "/",
@@ -23,6 +24,10 @@ const MainRoutes = {
     {
       path: "/dodaj",
       element: <Create />,
+    },
+    {
+      path: "/ustawienia",
+      element: <UserSettings />,
     },
   ],
 };

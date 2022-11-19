@@ -108,6 +108,7 @@ export type User = {
   login: string;
   avatar: string;
   cover: string;
+  description: string | null;
 };
 
 export interface FormInputProps {

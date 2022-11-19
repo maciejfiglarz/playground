@@ -6,7 +6,7 @@ import MainCard from "ui-component/MainCard";
 import axios from "utils/axios";
 import { User } from "types";
 import Avatar from "ui-component/extended/Avatar";
-import Header from "./Header";
+import Header from "ui-component/user/Header";
 
 import { gridSpacing } from "config/theme";
 import { borderRadius as themeBorderRadius } from "config/theme";

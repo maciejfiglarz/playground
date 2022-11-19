@@ -84,10 +84,9 @@ const Header = ({ avatar, cover, login, id }: User) => {
                   {isOwner ? (
                     <Button
                       component={Link}
-                      to="/about"
+                      to="/ustawienia"
                       variant="contained"
                       startIcon={<SettingsIcon />}
-                      onClick={() => setIsGuardModal(true)}
                     >
                       Ustawienia
                     </Button>
