@@ -212,5 +212,16 @@ services.onGet(/\/api\/category\/\w+/).reply(async (request) => {
     return [500, { message: "Internal server error1" }];
   }
 });
+services.onGet(/\/api\/pagination\/\w+/).reply((request) => {
+  try {
+    const page = request.url?.replace("/api/pagination/", ""); 
+    const category = categories.find((_item) => _item.id === page);
+    return [200, { ...category }];
+  } catch (err) {
+    console.error(err);
+    return [500, { message: "Internal server error" }];
+  }
+});
 
 services.onGet("/api/categories").reply(200, [...categories]);
+

@@ -11,15 +11,16 @@ const SingleCategory = Loadable(
   lazy(() => import("views/pages/category/single"))
 );
 const Profile = Loadable(lazy(() => import("views/user/profile")));
-
+const Categories = Loadable(lazy(() => import("views/pages/categories")));
 
 // const AuthLogin = Loadable(lazy(() => import('views/pages/authentication/login')));
 const Register = Loadable(lazy(() => import("views/pages/register")));
 const Login = Loadable(lazy(() => import("views/authentication/login")));
-const ForgotPassword = Loadable(lazy(() => import("views/authentication/forgot-password")));
+const ForgotPassword = Loadable(
+  lazy(() => import("views/authentication/forgot-password"))
+);
 
 const UserSettings = Loadable(lazy(() => import("views/user/settings")));
-
 
 const AuthAdmin = Loadable(lazy(() => import("views/admin/auth")));
 
@@ -27,9 +28,7 @@ const AuthAdmin = Loadable(lazy(() => import("views/admin/auth")));
 
 const MainRoutes = {
   path: "/",
-  element: (
-    <MainLayout />
-  ),
+  element: <MainLayout />,
   children: [
     {
       path: "/",
@@ -69,6 +68,10 @@ const MainRoutes = {
     {
       path: "/ustawienia",
       element: <UserSettings />,
+    },
+    {
+      path: "/kategorie",
+      element: <Categories />,
     },
   ],
 };

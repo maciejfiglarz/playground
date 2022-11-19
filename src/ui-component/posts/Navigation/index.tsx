@@ -21,7 +21,7 @@ const Navigation = ({ tab, setTab }: Props) => {
     if (newValue === 3) {
       setTab(newValue);
     } else {
-        navigate("/kategorie");
+      navigate("/kategorie");
     }
   };
   return (
