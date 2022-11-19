@@ -93,7 +93,7 @@ const Header = ({ avatar, cover, login, id }: User) => {
         {/* width: { xs: 72, sm: 80, md: 90 }, */}
         <Grid sx={{ mt: matchDownMD ? 0 : 3.5 }} item xs={12} md={10}>
           <Grid container alignItems={"center"} spacing={gridSpacing}>
-            <Grid item xs={11} md={8}>
+            <Grid item xs={7} md={8}>
               <Typography
                 sx={{
                   fontWeight: 600,
@@ -105,15 +105,15 @@ const Header = ({ avatar, cover, login, id }: User) => {
                 {login}
               </Typography>
             </Grid>
-            <Grid item xs={1} md={4}>
+            <Grid item xs={5} md={4}>
               <Grid
                 container
                 spacing={1}
                 sx={{
                   justifyContent: "flex-end",
-                  [theme.breakpoints.down("lg")]: {
-                    justifyContent: "center",
-                  },
+                  // [theme.breakpoints.down("lg")]: {
+                  //   justifyContent: "center",
+                  // },
                 }}
               >
                 <Grid item>

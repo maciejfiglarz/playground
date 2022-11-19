@@ -7,11 +7,8 @@ import axios from "utils/axios";
 import { User } from "types";
 import Avatar from "ui-component/extended/Avatar";
 import Header from "ui-component/user/Header";
-
+import Modal from 'ui-component/Modal';
 import { gridSpacing } from "config/theme";
-import { borderRadius as themeBorderRadius } from "config/theme";
-import PostsList from "ui-component/posts/list";
-import SidebarComments from "ui-component/sidebar/comments";
 import MainGrid from "ui-component/MainGrid";
 
 // material-ui
@@ -40,11 +37,8 @@ const ProfileIndex = () => {
   }, []);
 
   return (
-    <MainGrid>
-      {/* <Grid item lg={2} xl={2} sx={{ display: { xs: "none", lg: "block" } }}>
-    <SidebarCategories />
-  </Grid> */}
-      <Grid item xs={12} lg={10} xl={12}>
+    <MainGrid maxWidth="lg">
+      <Grid  item xs={12}>
         {user ? (
           <>
             <Header {...user} />

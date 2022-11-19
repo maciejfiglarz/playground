@@ -7,6 +7,8 @@ import MainGrid from "ui-component/MainGrid";
 import MainCard from "ui-component/MainCard";
 import Profile from "./Profile";
 import ChangePassword from "./security/ChangePassword";
+import Modal from 'ui-component/Modal';
+import Menu from "./Menu";
 
 //material ui
 import Header from "ui-component/user/Header";
@@ -67,16 +69,18 @@ const UserSettings = () => {
   const { userInfo } = useAppSelector((state) => state.user);
   const [tab, setTab] = useState("profile");
   const theme = useTheme();
-  const [openCollapses, setOpenCollapses] = useState<string[]>([]);
-  console.log("openCollapse", openCollapses);
-  const toggleOpenCollapse = (key: string) => {
-    console.log("toggle");
-    openCollapses.includes(key)
-      ? setOpenCollapses(openCollapses.filter((i) => i !== key))
-      : setOpenCollapses([...openCollapses, key]);
-  };
+  const [isOpen, setIsOpen] = useState(false);
+
+
   return (
-    <MainGrid>
+    <>
+          <Modal
+                isOpen={isOpen}
+                handleClose={()=>setIsOpen(false)}
+            >
+   <Menu tab={tab} setTab={setTab} />
+            </Modal>
+    <MainGrid maxWidth="lg">
       <Grid item xs={12} lg={10} xl={12}>
         {userInfo && (
           <>
@@ -87,68 +91,9 @@ const UserSettings = () => {
               container
               spacing={gridSpacing}
             >
-              <Grid item xs={12} md={3}>
+              <Grid sx={{display: {sm:"none",md:"block"}}} item xs={12} md={3}>
                 <MainCard border={true}>
-                  <List
-                    sx={{
-                      width: "100%",
-                      maxWidth: 360,
-                      bgcolor: "background.paper",
-                    }}
-                    component="nav"
-                    aria-labelledby="nested-list-subheader"
-                  >
-                    {tabs.map(({ icon, key, name, children }) => (
-                      <>
-                        {children ? (
-                          <>
-                            <ListItemButton
-                              onClick={() => toggleOpenCollapse(key)}
-                            >
-                              <ListItemIcon>{icon}</ListItemIcon>
-                              <ListItemText primary={name} />
-                              {openCollapses.includes(key) ? (
-                                <ExpandLess />
-                              ) : (
-                                <ExpandMore />
-                              )}
-                            </ListItemButton>
-
-                            {children && (
-                              <Collapse
-                                in={openCollapses.includes(key)}
-                                timeout="auto"
-                                unmountOnExit
-                              >
-                                <List component="div" disablePadding>
-                                  {children.map(({ icon, key, name }) => (
-                                    <ListItemButton
-                                      sx={{ pl: 4 }}
-                                      key={key}
-                                      onClick={() => setTab(key)}
-                                      selected={tab === key ? true : false}
-                                    >
-                                      <ListItemIcon>{icon}</ListItemIcon>
-                                      <ListItemText primary={name} />
-                                    </ListItemButton>
-                                  ))}
-                                </List>
-                              </Collapse>
-                            )}
-                          </>
-                        ) : (
-                          <ListItemButton
-                            selected={tab === key ? true : false}
-                            key={key}
-                            onClick={() => setTab(key)}
-                          >
-                            <ListItemIcon>{icon}</ListItemIcon>
-                            <ListItemText primary={name} />
-                          </ListItemButton>
-                        )}
-                      </>
-                    ))}
-                  </List>
+                <Menu tab={tab} setTab={setTab} />
                 </MainCard>
               </Grid>
               <Grid item xs={12} md={9}>
@@ -167,6 +112,7 @@ const UserSettings = () => {
         )}
       </Grid>
     </MainGrid>
+    </>
   );
 };
 

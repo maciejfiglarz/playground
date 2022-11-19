@@ -8,12 +8,13 @@ import { Grid } from "@mui/material";
 
 type PropsType = {
   children: React.ReactNode;
+  maxWidth?: "lg" |  "xl"
 };
 
-const MainGrid = ({ children }: PropsType) => {
+const MainGrid = ({ children , maxWidth = "xl" }: PropsType) => {
   return (
     <Grid
-      maxWidth="xl"
+      maxWidth={maxWidth}
       //   sx={{ margin: "0 auto" }}
       // sx={{ outline: "1px solid pink" }}
       container
