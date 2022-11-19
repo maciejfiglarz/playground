@@ -44,8 +44,8 @@ const Categories = ({ text }: PropType) => {
   }, [page]);
 
   const getCategories = async () => {
-    const response = await axios.get(`/api/pagination/${page}`);
-    // [
+    // const response = await axios.get(`/api/pagination/${page}`);
+    const response = await axios.get(`/api/categories`);
     //   {
     //     id: "1644df54654654",
     //     slug: "cytaty",
@@ -55,7 +55,6 @@ const Categories = ({ text }: PropType) => {
     //     cover: cover,
     //     thumb: thumb20,
     //   },
-    // ];
     setCategories(response.data);
   };
 

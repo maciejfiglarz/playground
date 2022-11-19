@@ -15,11 +15,11 @@ import SidebarComments from "ui-component/sidebar/comments";
 import MainGrid from "ui-component/MainGrid";
 
 // material-ui
-import { Grid, CardMedia, Typography, Button, Stack } from "@mui/material";
+import { Grid, Stack } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import InfiniteList from "ui-component/InfinityList";
 
 //assets
-import PersonAddTwoToneIcon from "@mui/icons-material/PersonAddTwoTone";
 import Loader from "ui-component/loaders/Content";
 
 const ProfileIndex = () => {
@@ -63,7 +63,7 @@ const ProfileIndex = () => {
                 </MainCard>
               </Grid>
               <Grid item xs={12} md={6}>
-                <PostsList />
+                <InfiniteList />
               </Grid>
               <Grid item xs={12} md={3}>
                 Right

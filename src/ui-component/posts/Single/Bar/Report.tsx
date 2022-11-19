@@ -52,6 +52,7 @@ const Report = () => {
 
   const handleCloseModal = () => {
     setIsOpen(false);
+    setAnchorEl(null);
   };
 
   const handleClick = (event: React.SyntheticEvent) => {
