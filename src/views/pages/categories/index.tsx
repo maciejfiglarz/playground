@@ -1,15 +1,24 @@
-
-
 import { useEffect, useState } from "react";
-
-// material-ui
 
 // project imports
 import NavItem from "./NavItem";
 import { Category } from "types";
-import { List, Typography, useTheme, useMediaQuery } from "@mui/material";
-import SidebarTitle from "./../../../ui-component/sidebar/Title";
+import SidebarTitle from "ui-component/sidebar/Title";
 import axios from "utils/axios";
+import MainCard from "ui-component/MainCard";
+import MainGrid from "ui-component/MainGrid";
+
+// material-ui
+import {
+  List,
+  Typography,
+  useTheme,
+  useMediaQuery,
+  Grid,
+  Button,
+} from "@mui/material";
+
+//assets
 
 // ==============================|| MAIN SIDEBAR MENU LIST ||============================== //
 
@@ -17,40 +26,67 @@ type PropType = {
   text: string;
 };
 
-const SidebarCategories = ({ text }: PropType) => {
+const Categories = ({ text }: PropType) => {
   const theme = useTheme();
-    const [categories, setCategories] = useState<Category[] | []>([]);
-    const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
+  const [categories, setCategories] = useState<Category[] | []>([]);
+  const matchDownSM = useMediaQuery(theme.breakpoints.down("md"));
+  const [page, setPage] = useState(0);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get(`/api/pagination/${page}`);
+    };
+    const category = fetchData();
+
+    //zrobić update categories
+
+    // setCategories([...categories,category]);
+  }, [page]);
 
   const getCategories = async () => {
-    const response = await axios.get(`/api/categories`);
+    const response = await axios.get(`/api/pagination/${page}`);
+    // [
+    //   {
+    //     id: "1644df54654654",
+    //     slug: "cytaty",
+    //     name: "Najlepsze cytaty w historii świata",
+    //     description:
+    //       "INK is a solution for founders who want to win at content marketing. We use proprietary AI to analyze the competition for your topic, and to help you create optimized content faster with state of the art AI generation.",
+    //     cover: cover,
+    //     thumb: thumb20,
+    //   },
+    // ];
     setCategories(response.data);
   };
+
+  const data = [
+    { key: "growing", name: "Rosnące" },
+    { key: "popular", name: "Popularne" },
+    { key: "active", name: "Aktywne" },
+  ];
 
   useEffect(() => {
     getCategories();
   }, []);
+
   return (
-    <div style={matchDownSM? {display:"block"} : {display:"flex"}}>
-      <List subheader={<SidebarTitle text={"Rosnące"} />}>
-        {categories.map((item: Category) => (
-          <NavItem key={item.id} item={item} />
+    <MainGrid>
+      <Grid container justifyContent="space-between" spacing={2}>
+        {data.map(({ key, name }) => (
+          <Grid item>
+            <MainCard border={true}>
+              <List key={key} subheader={<SidebarTitle text={name} />}>
+                {categories.map((item: Category) => (
+                  <NavItem key={item.id} item={item} />
+                ))}
+              </List>
+              <Button onClick={() => setPage(page + 1)}>więcej</Button>
+            </MainCard>
+          </Grid>
         ))}
-          </List>
-          <List subheader={<SidebarTitle text={"Popularne"} />}>
-        {categories.map((item: Category) => (
-          <NavItem key={item.id} item={item} />
-        ))}
-          </List>
-          <List subheader={<SidebarTitle text={"Aktywne"} />}>
-        {categories.map((item: Category) => (
-          <NavItem key={item.id} item={item} />
-        ))}
-      </List>
-    </div>
+      </Grid>
+    </MainGrid>
   );
 };
 
-export default SidebarCategories;
-
-
+export default Categories;
