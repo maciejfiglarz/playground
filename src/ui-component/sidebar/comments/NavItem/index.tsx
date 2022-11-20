@@ -15,7 +15,7 @@ import {
 const Item = ({ id, user, text }: Comment) => {
   const { avatar, login, id: userId } = user;
   return (
-    <ListItemButton component="a" href={`/profil/${userId}`}>
+    <ListItemButton component="a" href={`/post/${id}`}>
       <Grid container wrap="nowrap">
         <Avatar
           sx={{ width: 34, height: 34, mr: 1.5 }}

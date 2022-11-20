@@ -11,7 +11,13 @@ import { gridSpacing } from "config/theme";
 import { borderRadius as themeBorderRadius } from "config/theme";
 
 // material-ui
-import { Grid, CardMedia, Typography, Button } from "@mui/material";
+import {
+  Grid,
+  CardMedia,
+  Typography,
+  Button,
+  useMediaQuery,
+} from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import AppContext from "contexts/AppContext";
 
@@ -21,6 +27,7 @@ import PersonAddTwoToneIcon from "@mui/icons-material/People";
 const Header = ({ thumb, cover, name }: Category) => {
   const theme = useTheme();
   const { setIsGuardModal } = useContext(AppContext);
+  const matchDownMD = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <MainCard
       border={true}
@@ -37,7 +44,6 @@ const Header = ({ thumb, cover, name }: Category) => {
           // m: 0.1
         }}
       />
-
       <Grid container spacing={gridSpacing}>
         <Grid item xs={12} md={2}>
           <Avatar
@@ -57,10 +63,16 @@ const Header = ({ thumb, cover, name }: Category) => {
             }}
           />
         </Grid>
-        <Grid sx={{ mt: 3.5 }} item xs={12} md={10}>
+        <Grid sx={{ mt: matchDownMD ? 0 : 3.5 }} item xs={12} md={10}>
           <Grid container spacing={gridSpacing}>
             <Grid item xs={12} md={8}>
-              <Typography sx={{ fontWeight: 600 }} variant="h3">
+              <Typography
+                sx={{
+                  fontWeight: 600,
+                  textAlign: matchDownMD ? "center" : "left",
+                }}
+                variant="h3"
+              >
                 {name}
               </Typography>
             </Grid>

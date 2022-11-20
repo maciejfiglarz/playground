@@ -26,7 +26,7 @@ const MainRoutes = {
       element: <Create />,
     },
     {
-      path: "/ustawienia",
+      path: "/ustawienia/:page",
       element: <UserSettings />,
     },
   ],

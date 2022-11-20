@@ -5,12 +5,14 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useAppDispatch, useAppSelector } from "store";
 import { pagination, selectPosts } from "store/postsSlice";
 import SinglePost from "./posts/Single";
+import Loader from "./loaders/Content";
+import { Box } from "@mui/system";
 // import Loader from './Loader';
 
 const InfiniteList = () => {
   const [page, setPage] = useState(0);
   const { data } = useAppSelector(selectPosts);
-  const { posts,  total } = data;
+  const { posts, total } = data;
   const dispatch = useAppDispatch();
 
   const updateData = () => {
@@ -22,10 +24,9 @@ const InfiniteList = () => {
     setPage((prev) => page + 1);
   }, []);
 
-
   return (
-    <>
-      {posts.length > 0 ? (
+    <Box sx={{ position: "relative" }}>
+      {/* {posts.length > 0 ? ( */}
         <InfiniteScroll
           dataLength={total}
           next={updateData}
@@ -42,10 +43,10 @@ const InfiniteList = () => {
             return <SinglePost key={index} {...post} />;
           })}
         </InfiniteScroll>
-      ) : (
-        <div>Brak rezultatów</div>
-      )}
-    </>
+      {/* ) : (
+        <Loader />
+      )} */}
+    </Box>
   );
 };
 

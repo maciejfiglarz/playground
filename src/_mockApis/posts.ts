@@ -108,7 +108,7 @@ let posts: Post[] = [
     voteUp: 20,
     isActive: true,
     isWaiting: false,
-    user: users[0],
+    user: users[3],
     createdAt: "2022-11-03T18:26:51.000Z",
   },
   {
@@ -131,7 +131,7 @@ let posts: Post[] = [
     voteUp: 20,
     isActive: true,
     isWaiting: false,
-    user: users[0],
+    user: users[4],
     createdAt: "2022-11-03T18:26:51.000Z",
   },
   {
@@ -153,7 +153,7 @@ let posts: Post[] = [
     voteUp: 20,
     isActive: true,
     isWaiting: false,
-    user: users[0],
+    user: users[2],
     createdAt: "2022-11-03T18:26:51.000Z",
   },
 ];

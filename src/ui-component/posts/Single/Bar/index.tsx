@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import moment from "moment";
 import "moment/locale/pl";
 
@@ -26,13 +27,12 @@ import {
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
-
 //assets
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import emptyAvatar from "assets/images/emptyAvatar.png";
 
 const Bar = ({ user, createdAt }: Post) => {
-  const { login, avatar } = user;
+  const { login, avatar, id } = user;
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -55,7 +55,6 @@ const Bar = ({ user, createdAt }: Post) => {
   };
   return (
     <>
-    
       <Modal
         isLoading={isLoading}
         setIsLoading={setIsLoading}
@@ -72,14 +71,18 @@ const Bar = ({ user, createdAt }: Post) => {
       </Modal>
       <Grid container wrap="nowrap" alignItems="center" spacing={1}>
         <Grid item>
-          {<Avatar size="xs" alt={login} src={avatar ? avatar : emptyAvatar} />}
+          <ButtonBase component={Link} to={`/profil/${id}`}>
+            <Avatar size="xs" alt={login} src={avatar ? avatar : emptyAvatar} />
+          </ButtonBase>
         </Grid>
         <Grid item xs zeroMinWidth>
           <Grid container alignItems="center" spacing={1}>
             <Grid item>
-              <Typography align="left" variant="h5" component="div">
-                {login}
-              </Typography>
+              <ButtonBase component={Link} to={`/profil/${id}`}>
+                <Typography align="left" variant="h5" component="div">
+                  {login}
+                </Typography>
+              </ButtonBase>
             </Grid>
             <Grid item>
               <Typography align="left" variant="caption">
@@ -98,51 +101,7 @@ const Bar = ({ user, createdAt }: Post) => {
         </Grid>
 
         <Grid item>
-          {/* <ButtonBase sx={{ borderRadius: "12px" }} onClick={handleClick}>
-            <Avatar
-              variant="rounded"
-              size="badge"
-              sx={{
-                ...theme.typography.commonAvatar,
-                ...theme.typography.smallAvatar,
-                background:
-                  theme.palette.mode === "dark"
-                    ? theme.palette.dark.main
-                    : theme.palette.secondary.light,
-                color:
-                  theme.palette.mode === "dark"
-                    ? theme.palette.dark.light
-                    : theme.palette.secondary.dark,
-                zIndex: 1,
-                transition: "all .2s ease-in-out",
-                '&[aria-controls="menu-list-grow"],&:hover': {
-                  background: theme.palette.secondary.main,
-                  color: theme.palette.secondary.light,
-                },
-              }}
-            >
-              <MoreVertTwoToneIcon fontSize="small" />
-            </Avatar>
-          </ButtonBase> */}
           <Report />
-          {/* <Menu
-            id="menu-post"
-            anchorEl={anchorEl}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-            variant="selectedMenu"
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "right",
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-          >
-            <MenuItem onClick={handleClose}>Zgłoś</MenuItem>
-          </Menu> */}
         </Grid>
       </Grid>
     </>

@@ -15,7 +15,7 @@ const MainGrid = ({ children , maxWidth = "xl" }: PropsType) => {
   return (
     <Grid
       maxWidth={maxWidth}
-      //   sx={{ margin: "0 auto" }}
+        // sx={{ margin: "0 auto" }}
       // sx={{ outline: "1px solid pink" }}
       container
       justifyContent="justify-content"

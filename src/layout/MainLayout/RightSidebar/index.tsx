@@ -109,14 +109,14 @@ const UserSidebar = () => {
               src={UserImage}
               sx={{
                 ...theme.typography.mediumAvatar,
-                margin: "8px 0 8px 8px !important",
+                margin: "6px -6px 6px 6px !important",
                 cursor: "pointer",
               }}
               ref={anchorRef}
               aria-haspopup="true"
               color="inherit"
             />
-            <SettingsIcon style={{ marginLeft: 10, fontSize: 20 }} />
+            {/* <SettingsIcon style={{ marginLeft: 10, fontSize: 20 }} /> */}
           </>
         }
         onClick={() => setIsOpen(true)}

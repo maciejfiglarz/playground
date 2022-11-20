@@ -12,7 +12,7 @@ import { borderRadius as themeBorderRadius } from "config/theme";
 import PostsList from "ui-component/posts/list";
 import SidebarComments from "ui-component/sidebar/comments";
 import MainGrid from "ui-component/MainGrid";
-import Header from "./Header";
+import Header from "../../../ui-component/category/Header";
 
 // material-ui
 import {

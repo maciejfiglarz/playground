@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Checkbox, FormControlLabel } from "@mui/material";
 import { Stack, Box } from "@mui/system";
 import Loader from "ui-component/loaders/Content";
+import Categories from "./Categories";
 
 export type PostTypes = "post" | "link" | "graphic";
 export type LabelTypes = "post" | "link" | "graphic";
@@ -114,6 +115,7 @@ const CreatePost = () => {
     // >
     <CreatePostContext.Provider value={{ setState, state }}>
       {isLoading && <Loader />}
+      <Categories />
       <Navigation tab={tab} setTab={setTab} />
 
       {/* <Box

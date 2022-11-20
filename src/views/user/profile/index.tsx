@@ -7,12 +7,12 @@ import axios from "utils/axios";
 import { User } from "types";
 import Avatar from "ui-component/extended/Avatar";
 import Header from "ui-component/user/Header";
-import Modal from 'ui-component/Modal';
+import Modal from "ui-component/Modal";
 import { gridSpacing } from "config/theme";
 import MainGrid from "ui-component/MainGrid";
 
 // material-ui
-import { Grid, Stack } from "@mui/material";
+import { Grid, Stack, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import InfiniteList from "ui-component/InfinityList";
 
@@ -23,6 +23,7 @@ const ProfileIndex = () => {
   const { id: idParam } = useParams();
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [tab, setTab] = useState("profile");
   const theme = useTheme();
 
   const getUser = async () => {
@@ -38,30 +39,35 @@ const ProfileIndex = () => {
 
   return (
     <MainGrid maxWidth="lg">
-      <Grid  item xs={12}>
+      <Grid item xs={12}>
         {user ? (
           <>
-            <Header {...user} />
+            <Header user={user} />
             <Grid
               justifyContent="space-between"
               container
               spacing={gridSpacing}
             >
-              <Grid item xs={12} md={3}>
-                <MainCard border={true} sx={{}}>
+              <Grid item xs={12} md={4}>
+                <MainCard border={true}>
+                  <Typography sx={{ mb: 2, fontWeight: 500 }} variant="h4">
+                    O mnie
+                  </Typography>
+                  <Typography paragraph>{user.description}</Typography>
+                </MainCard>
+              </Grid>
+              <Grid item xs={12} md={8}>
+                <InfiniteList />
+              </Grid>
+              {/* <Grid item xs={12} md={2}>
+              <MainCard border={true} sx={{}}>
                   <>
                     Europe: 50 (+6) countries, 230 languages, 746M people… 1
                     subreddit.
                   </>
                   <Stack></Stack>
                 </MainCard>
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <InfiniteList />
-              </Grid>
-              <Grid item xs={12} md={3}>
-                Right
-              </Grid>
+              </Grid> */}
             </Grid>
           </>
         ) : (
