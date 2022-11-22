@@ -44,23 +44,23 @@ const NavCollapse = ({
     // setSelected(null);
   };
 
+  console.log("action", action);
+
   return (
     <>
       <ListItemButton
         key={id}
-        component="a"
-        href={url}
+        {...(action
+          ? { onClick: ()=>action() }
+          : { component: "a", href: url })}
+        // component="a"
+        // href={url}
         sx={{
           borderRadius: `${themeBorderRadius}px`,
           mb: 0.5,
           alignItems: "center",
-          // backgroundColor:
-          //     level > 1 ? 'transparent !important' : 'inherit',
-          // py: level > 1 ? 1 : 1.25,
-          // pl: `${level * 24}px`
         }}
         selected={isOpen}
-        onClick={handleClick}
       >
         <ListItemIcon
         // sx={{ my: 'auto', minWidth: !menu.icon ? 18 : 36 }}

@@ -62,7 +62,7 @@ const Navigation = ({ tab, setTab }: Props) => {
         }}
       >
         {matchDownSM ? (
-          <Grid item>
+          <Grid alignItems="center" item>
             <TextField
               id="standard-select-currency"
               select
@@ -94,7 +94,7 @@ const Navigation = ({ tab, setTab }: Props) => {
           <Button
             startIcon={<AddCircleOutlineIcon />}
             variant="contained"
-            size="small"
+            size="medium"
             component={Link}
             to="/dodaj"
           >

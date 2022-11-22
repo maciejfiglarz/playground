@@ -59,6 +59,7 @@ const MenuList = ({ setIsOpenNavigation }: Props) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    console.log("logout");
     dispatch(logout());
     navigate("/", { replace: true });
   };

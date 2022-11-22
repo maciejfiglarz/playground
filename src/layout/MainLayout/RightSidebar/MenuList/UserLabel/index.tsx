@@ -21,40 +21,40 @@ import {
 import UserImage from "assets/images/users/user-round.svg";
 
 const UserLabel = () => {
-  const userState = useAppSelector((state) => state.user);
+  const { userInfo } = useAppSelector((state) => state.user);
   const theme = useTheme();
 
   return (
-    <ListItemButton
-      component="a"
-      href={`/profil/${userState?.userInfo?.id}`}
-      sx={{
-        borderRadius: `${borderRadius}px`,
-        // padding: 2
-        // backgroundColor: theme.palette.background.paper,
-      }}
-    >
-      <ListItemIcon sx={{ minWidth: 35 }}>
-        <Avatar
-          src={UserImage}
+    <>
+      {userInfo && (
+        <ListItemButton
+          component="a"
+          href={`/profil/${userInfo?.id}`}
           sx={{
-            ...theme.typography.smallAvatar,
-            // margin: '8px 0 8px 8px !important',
-            cursor: "pointer",
+            borderRadius: `${borderRadius}px`,
+            // padding: 2
+            // backgroundColor: theme.palette.background.paper,
           }}
-          aria-haspopup="true"
-          color="inherit"
-        />
-      </ListItemIcon>
-      <ListItemText
-        sx={{ pl: 2.5 }}
-        primary={
-          <Typography variant="body2">
-            {userState.userInfo?.login}
-          </Typography>
-        }
-      />
-    </ListItemButton>
+        >
+          <ListItemIcon sx={{ minWidth: 35 }}>
+            <Avatar
+              src={userInfo.avatar}
+              sx={{
+                ...theme.typography.smallAvatar,
+                // margin: '8px 0 8px 8px !important',
+                cursor: "pointer",
+              }}
+              aria-haspopup="true"
+              color="inherit"
+            />
+          </ListItemIcon>
+          <ListItemText
+            sx={{ pl: 2.5 }}
+            primary={<Typography variant="body2">{userInfo?.login}</Typography>}
+          />
+        </ListItemButton>
+      )}
+    </>
   );
 };
 

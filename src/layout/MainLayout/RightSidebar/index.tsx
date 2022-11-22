@@ -47,16 +47,16 @@ const Header = styled("div")(({ theme }: { theme: Theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  position:"relative",
+  position: "relative",
 }));
 
 const UserSidebar = () => {
   // const navigate = useNavigate();=
   const { mode, setMode, setAuthModal } = useContext(AppContext);
+  const { userInfo } = useAppSelector((state) => state.user);
   const [isOpen, setIsOpen] = useState(false);
   const theme = useTheme();
   const anchorRef = useRef(null);
-  const userState = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const matchUpMd = useMediaQuery(theme.breakpoints.up("md"));
 
@@ -66,14 +66,13 @@ const UserSidebar = () => {
   ) => {
     if (newMode !== null) {
       setMode(newMode);
-      setCookie("mode",newMode);
+      setCookie("mode", newMode);
     }
   };
 
   // const handleSetAuthModal = (type: "login" | "register") => {
   //   setAuthModal(type);
   // };
-
 
   return (
     <>
@@ -107,7 +106,7 @@ const UserSidebar = () => {
         icon={
           <>
             <Avatar
-              src={UserImage}
+              src={userInfo ? userInfo.avatar : UserImage}
               sx={{
                 ...theme.typography.mediumAvatar,
                 margin: "6px -6px 6px 6px !important",
@@ -131,24 +130,20 @@ const UserSidebar = () => {
           style: { padding: 15, width: matchUpMd ? "auto" : "100%" },
         }}
       >
-
         <Header>
           <Box sx={{ margin: "25px auto" }}>
             <Logo />
           </Box>
 
-
           <IconButton
-          style={{ position: "absolute", left: 15, top: 15 }}
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          <CloseIcon />
-        </IconButton>
-
+            style={{ position: "absolute", left: 15, top: 15 }}
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            <CloseIcon />
+          </IconButton>
         </Header>
 
         {/* <Divider /> */}
-
 
         <Divider sx={{ margin: "25px 0" }} />
 

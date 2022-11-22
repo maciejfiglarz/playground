@@ -14,6 +14,7 @@ import { Button, Checkbox, FormControlLabel } from "@mui/material";
 import { Stack, Box } from "@mui/system";
 import Loader from "ui-component/loaders/Content";
 import Categories from "./Categories";
+import Survey from "./Survey";
 
 export type PostTypes = "post" | "link" | "graphic";
 export type LabelTypes = "post" | "link" | "graphic";
@@ -72,7 +73,7 @@ export interface ContextProps {
 export const CreatePostContext = React.createContext({} as ContextProps);
 
 const CreatePost = () => {
-  const [tab, setTab] = useState<number>(1);
+  const [tab, setTab] = useState<number>(2);
   const [isLoading, setIsLoading] = useState(false);
   const [state, setState] = useState<CreatePostState>(initialData);
   const userState = useAppSelector((state) => state.user);
@@ -133,24 +134,8 @@ const CreatePost = () => {
             > */}
       {tab === 0 && <Post />}
       {tab === 1 && <Graphic />}
-      <Stack sx={{ pb: 2 }} alignItems={"center"}>
-        <FormControlLabel
-          control={<Checkbox defaultChecked />}
-          label="Akceptuję regulamin serwisu Komentatory.pl"
-        />
-      </Stack>
-      <Stack alignItems={"center"}>
-        <Button
-          fullWidth
-          color="primary"
-          variant="contained"
-          type="submit"
-          sx={{ maxWidth: 250 }}
-          onClick={saveForm}
-        >
-          Opublikuj
-        </Button>
-      </Stack>
+      {tab === 2 && <Survey />}
+  
     </CreatePostContext.Provider>
     // </Modal>
   );
