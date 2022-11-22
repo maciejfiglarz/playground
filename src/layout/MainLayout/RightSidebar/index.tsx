@@ -8,6 +8,7 @@ import Logo from "ui-component/Logo";
 import { useAppSelector } from "store";
 import { useAppDispatch } from "store";
 import MenuList from "./MenuList";
+import { setCookie } from "utils/cookies";
 
 //material ui
 import Drawer from "@mui/material/Drawer";
@@ -65,7 +66,7 @@ const UserSidebar = () => {
   ) => {
     if (newMode !== null) {
       setMode(newMode);
-      //   setLocalStorage("mode", newMode);
+      setCookie("mode",newMode);
     }
   };
 

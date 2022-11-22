@@ -38,9 +38,9 @@ const MainCard = ({
         width: "100%",
         height: isSection ? "100%" : "auto",
         borderColor:
-          theme.palette.mode === "dark"
-            ? theme.palette.background.default
-            : theme.palette.primary[200] + 75,
+        theme.palette.mode === 'dark'
+        ? theme.palette.dark.light + 20
+        : theme.palette.grey[100],
         ":hover": {
           // boxShadow: boxShadow
           //     ? shadow ||

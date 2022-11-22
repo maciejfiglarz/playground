@@ -5,6 +5,8 @@ import { ReactElement } from "react";
 import { useAppDispatch, useAppSelector } from "store";
 import { getUserDetails } from "store/user/userSlice";
 import Loader from "ui-component/loaders/Content";
+import { getCookie } from "utils/cookies";
+
 
 export interface AppContextProps {
   readonly isOpenNavigation: boolean;
@@ -30,7 +32,8 @@ const AppContextProvider = ({ children }: { children: ReactElement }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [authModal, setAuthModal] = useState<"login" | "register" | null>(null);
   const [isGuardModal, setIsGuardModal] = useState(false);
-  const [mode, setMode] = useState<"light" | "dark">("light");
+  const defaultMode = getCookie("mode");
+  const [mode, setMode] = useState<"light" | "dark">( defaultMode === "light"|| defaultMode === "dark" ? defaultMode : "light");
 
   useEffect(() => {
     const fetchData = async () => {
