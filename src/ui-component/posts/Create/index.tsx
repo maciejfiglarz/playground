@@ -35,6 +35,8 @@ type CreatePostState = {
   graphic: {
     title: string;
     description: string;
+    textColor: string;
+    backgroundColor: string;
     // imageID: null | string;
     // imageUrl: null | string;
   };
@@ -57,6 +59,8 @@ const initialData: CreatePostState = {
   graphic: {
     title: "",
     description: "",
+    textColor: "#000000",
+    backgroundColor: "",
   },
 };
 
@@ -68,12 +72,11 @@ export interface ContextProps {
 export const CreatePostContext = React.createContext({} as ContextProps);
 
 const CreatePost = () => {
-  const [tab, setTab] = useState<number>(0);
+  const [tab, setTab] = useState<number>(1);
   const [isLoading, setIsLoading] = useState(false);
   const [state, setState] = useState<CreatePostState>(initialData);
   const userState = useAppSelector((state) => state.user);
   const navigate = useNavigate();
-
 
   useEffect(() => {
     // console.log("tab", tabs[tab]);

@@ -7,7 +7,7 @@ import NavCollapse from "./NavCollapse";
 import AppContext from "contexts/AppContext";
 import UserLabel from "./UserLabel";
 import { logout } from "store/user/userSlice";
-import { useAppDispatch,useAppSelector } from "store";
+import { useAppDispatch, useAppSelector } from "store";
 
 //material ui
 import {
@@ -36,7 +36,7 @@ export interface MenuProps {
   title: string;
   type: string;
   icon: OverrideIcon;
-  url?: string;
+  url: string;
   action?: () => void;
   children?: {
     id: string;
@@ -46,31 +46,6 @@ export interface MenuProps {
     icon: OverrideIcon;
   }[];
 }
-
-const menuItems: MenuProps[] = [
-  {
-    id: "info",
-    title: "Informacje",
-    type: "collapse",
-    icon: <IconInfoCircle />,
-    children: [
-      {
-        id: "statute",
-        title: "Regulamin",
-        type: "item",
-        url: "/dashboard/default",
-        icon: <IconReportAnalytics />,
-      },
-      {
-        id: "policy",
-        title: "Polityka prywatności",
-        type: "item",
-        url: "/dashboard/analytics",
-        icon: <IconCookie />,
-      },
-    ],
-  },
-];
 
 type Props = {
   setIsOpenNavigation: React.Dispatch<React.SetStateAction<boolean>>;
@@ -101,14 +76,41 @@ const MenuList = ({ setIsOpenNavigation }: Props) => {
       title: "Ustawienia",
       type: "item",
       icon: <IconSettings />,
-      url: "/ustawienia",
+      url: "/ustawienia/profil",
     },
     {
       id: "logout",
       title: "Wyloguj",
       type: "item",
+      url: "/logout",
       icon: <IconLogout />,
       action: () => handleLogout(),
+    },
+  ];
+
+  const menuItems: MenuProps[] = [
+    {
+      id: "info",
+      title: "Informacje",
+      type: "collapse",
+      url: "/informacje",
+      icon: <IconInfoCircle />,
+      children: [
+        {
+          id: "statute",
+          title: "Regulamin",
+          type: "item",
+          url: "/dashboard/default",
+          icon: <IconReportAnalytics />,
+        },
+        {
+          id: "policy",
+          title: "Polityka prywatności",
+          type: "item",
+          url: "/dashboard/analytics",
+          icon: <IconCookie />,
+        },
+      ],
     },
   ];
 
@@ -121,7 +123,6 @@ const MenuList = ({ setIsOpenNavigation }: Props) => {
       {!userState.userInfo && (
         <>
           <Button
-            // onClick={() => handleSetAuthModal("login")}
             component={Link}
             to="/login"
             style={{ marginBottom: 15 }}
@@ -131,7 +132,6 @@ const MenuList = ({ setIsOpenNavigation }: Props) => {
             Zaloguj się
           </Button>
           <Button
-            // onClick={() => handleSetAuthModal("register")}
             component={Link}
             to="/register"
             variant="outlined"
@@ -169,9 +169,9 @@ const MenuList = ({ setIsOpenNavigation }: Props) => {
           </>
         )}
 
-        {menuItems.map((menu) => (
+        {/* {menuItems.map((menu) => (
           <NavCollapse key={menu.id} {...menu} />
-        ))}
+        ))} */}
       </List>
     </>
   );

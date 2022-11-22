@@ -1,125 +1,166 @@
-//material ui
-import { Box } from '@mui/system';
-import { styled } from '@mui/system';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
+import { useContext, useEffect, useState } from "react";
 
-type Props = {
-    currentBackgroundColor: string;
-    setCurrentBackgroundColor: React.Dispatch<React.SetStateAction<string>>;
-    currentTextColor: string;
-    setCurrentTextColor: React.Dispatch<React.SetStateAction<string>>;
-};
+//project imports
+import Avatar from "ui-component/extended/Avatar";
+
+//material ui
+import { styled } from "@mui/system";
+import { useTheme } from "@mui/material/styles";
+import {
+  Box,
+  Button,
+  // ButtonBase,
+  Grid,
+  Card,
+  ButtonBase,
+  Collapse,
+  // FormHelperText,
+  // Grid,
+  InputAdornment,
+  Menu,
+  MenuItem,
+  Stack,
+  TextField,
+  Typography,
+  // useMediaQuery
+} from "@mui/material";
+
+// assets
+import MoreVertTwoToneIcon from "@mui/icons-material/MoreVertTwoTone";
+import { CreatePostContext } from "..";
 
 // type SchematTextColors = {
-//     [key: string]: string[];
+//   [key: string]: string[];
 // };
 
-// const schematTextColors: SchematTextColors = {
-//     black: ['white', '#ffb23e', '#F02000'],
-//     white: ['#000000', '#c9000f']
+// const textColors: SchematTextColors = {
+//   dark: ["#FFFFFF", "#ffb23e", "#F02000"],
+//   light: ["#000000", "#c9000f"],
 // };
 
-const Wrapper = styled(Box)(() => ({
-    display: 'flex'
-}));
+// const backgroundColors: SchematTextColors = {
+//   dark: ["#000000", "#ffb23e", "#F02000"],
+//   light: ["#FFFFFF", "#c9000f"],
+// };
 
-// const Title = styled('div')(({ theme }) => ({
-//     backgroundColor: theme.palette.primary.main,
-//     borderTopLeftRadius: 4,
-//     borderTopRightRadius: 4,
-//     fontSize: 10,
-//     display: 'inline-block',
-//     color: 'white',
-//     padding: '1px 7px',
-//     fontWeight: 600,
-//     top: 2,
-//     position:"relative"
-// }));
+type Pallete = {
+  [key: string]: { text: string; background: string; name: string };
+};
 
-// const List = styled('div')(({ theme }) => ({
-//     backgroundColor: theme.palette.primary.main,
-//     padding: 5,
-//     display: 'flex'
-// }));
+const paletteSchema: Pallete = {
+  dark: { text: "#FFFFFF", background: "#000000", name: "Ciemny" },
+  light: { text: "#000000", background: "#FFFFFF", name: "Jasny" },
+};
 
-const ListItem = styled(Box)<{ color: string }>`
-    background-color: ${(props) => props.color};
-    width: 15px;
-    height: 15px;
-    cursor: pointer;
-`;
 
-const ColorSwitcher = ({
-    currentBackgroundColor,
-    setCurrentBackgroundColor,
-    currentTextColor,
-    setCurrentTextColor
-}: Props) => {
-    // const onChangeColor = (type: string, value: string) => {
-    //     if (type === 'background') {
-    //         setCurrentBackgroundColor(value);
-    //         setCurrentTextColor(value === 'white' ? 'black' : 'white');
-    //         console.log('val1', value, value === 'white' ? 'black' : 'white');
-    //     } else {
-    //         setCurrentTextColor(value);
-    //     }
-    // };
+const ColorSwitcher = () => {
+  const [palette, setPalette] = useState<string>("dark");
+  const { state, setState } = useContext(CreatePostContext);
+  // const onChangeColor = (type: string, value: string) => {
+  //     if (type === 'background') {
+  //         setCurrentBackgroundColor(value);
+  //         setCurrentTextColor(value === 'white' ? 'black' : 'white');
+  //         console.log('val1', value, value === 'white' ? 'black' : 'white');
+  //     } else {
+  //         setCurrentTextColor(value);
+  //     }
+  // };
 
-    return (
+  const theme = useTheme();
+  const [anchorElText, setAnchorElText] = useState<Element | null>(null);
+
+
+  const handleClick = (event: React.SyntheticEvent) => {
+    setAnchorElText(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorElText(null);
+  };
+
+  useEffect(() => {
+    setState({
+      ...state,
+      graphic: {
+        ...state.graphic,
+        ...{
+          textColor: paletteSchema[palette].text,
+          backgroundColor: paletteSchema[palette].background,
+        },
+      },
+    });
+
+    setAnchorElText(null);
+  }, [palette]);
+
+  return (
+    <>
+      <Button
+        size="small"
+        variant="outlined"
+        color="primary"
+        sx={{ mb: 3, mr: 2 }}
+        // onClick={() => setIsOpen(true)}
+        onClick={(event: React.SyntheticEvent) =>
+          setAnchorElText(event.currentTarget)
+        }
+      >
+        Schemat
         <Box
-            sx={{
-                position: 'absolute',
-                top: 0,
-                right: 0,
-                transform: 'translateY(-100%)'
-            }}
-        >
-            <Wrapper>
-                <Stack direction="row" spacing={2}>
-                    <Button size="small">
-                        Tekst
-                        <ListItem
-                            sx={{ ml: 0.7 }}
-                            color={currentTextColor}
-                        ></ListItem>
-                    </Button>
-                    <Button size="small">
-                        Tło
-                        <ListItem
-                            sx={{ ml: 0.7 }}
-                            color={currentBackgroundColor}
-                        ></ListItem>
-                    </Button>
-                </Stack>
-                {/* <Box>
-                    <Title>Tekst</Title>
-                    <List sx={{ mr: 4 }}>
-                        {schematTextColors[currentBackgroundColor].map(
-                            (color: string) => (
-                                <ListItem
-                                    onClick={() => onChangeColor('text', color)}
-                                    color={color}
-                                />
-                            )
-                        )}
-                    </List>
-                </Box>
-                <Box>
-                    <Title>Tło</Title>
-                    <List sx={{ mr: 1 }}>
-                        <ListItem
-                            onClick={() => onChangeColor('background', 'black')}
-                            color="black"
-                        />
-                        <ListItem
-                            color="white"
-                            onClick={() => onChangeColor('background', 'white')}
-                        />
-                    </List>
-                </Box> */}
-            </Wrapper>
-        </Box>
-    );
+          sx={{ ml: 1, width: 20, height: 20, backgroundColor: "#ffb23e" }}
+        ></Box>
+      </Button>
+      <Menu
+        id="menu-post"
+        anchorEl={anchorElText}
+        keepMounted
+        open={Boolean(anchorElText)}
+        onClose={() => setAnchorElText(null)}
+        variant="selectedMenu"
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        sx={{ display: "flex" }}
+      >
+        {Object.keys(paletteSchema).map((key) => (
+          <MenuItem
+            sx={
+              {
+                // backgroundColor: paletteSchema[key].background,
+                // color: paletteSchema[key].text,
+                // opacity: 0.9,
+                // "&:hover": {
+                //   backgroundColor: paletteSchema[key].background,
+                //   color: paletteSchema[key].text,
+                //   opacity: 1,
+                // },
+              }
+            }
+            onClick={() => setPalette(key)}
+          >
+            <Box
+              sx={{
+                mr: 1,
+                borderRadius: 1,
+                width: 20,
+                height: 20,
+                backgroundColor: paletteSchema[key].background,
+                border: "1px solid",
+                borderColor:
+                  theme.palette.mode === "dark"
+                    ? theme.palette.dark.light
+                    : theme.palette.grey[100],
+              }}
+            ></Box>
+            {paletteSchema[key].name}
+          </MenuItem>
+        ))}
+      </Menu>
+    </>
+  );
 };
 export default ColorSwitcher;
