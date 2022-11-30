@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useTheme } from "@mui/material/styles";
 
 //material ui
 import {
@@ -17,7 +16,10 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import BottomAction from "./../BottomAction";
+import { useTheme } from "@mui/material/styles";
+
+//project imports
+
 
 //assets
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -130,7 +132,7 @@ const Survey = () => {
       >
         Dodaj odpowiedź
       </Button>
-      <BottomAction />
+
     </>
   );
 };

@@ -43,18 +43,39 @@ import { CreatePostContext } from "..";
 //   light: ["#FFFFFF", "#c9000f"],
 // };
 
-type Pallete = {
-  [key: string]: { text: string; background: string; name: string };
+type PalleteColor = {
+  [key: string]: string[];
 };
 
-const paletteSchema: Pallete = {
-  dark: { text: "#FFFFFF", background: "#000000", name: "Ciemny" },
-  light: { text: "#000000", background: "#FFFFFF", name: "Jasny" },
+const paletteColorSchema: PalleteColor = {
+  dark: ["#FFFFFF", "#f7c145", "#fd8c08", "#ff4e25", "#fffd0d"],
+  light: ["#000000", "#00359e"],
 };
 
+type PalleteBackground = {
+  [key: string]: string;
+};
 
-const ColorSwitcher = () => {
-  const [palette, setPalette] = useState<string>("dark");
+const paletteBackgroundSchema: PalleteBackground = {
+  dark: "#000000",
+  light: "#FFFFFF",
+};
+
+type ColorSwitcherProps = {
+  backgroundColor: string;
+  setBackgroundColor: React.Dispatch<React.SetStateAction<string>>;
+  textColor: string;
+  setTextColor: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const ColorSwitcher = ({
+  backgroundColor,
+  setBackgroundColor,
+  textColor,
+  setTextColor,
+}: ColorSwitcherProps) => {
+  const [palette, setPalette] = useState<string>("light");
+
   const { state, setState } = useContext(CreatePostContext);
   // const onChangeColor = (type: string, value: string) => {
   //     if (type === 'background') {
@@ -68,29 +89,23 @@ const ColorSwitcher = () => {
 
   const theme = useTheme();
   const [anchorElText, setAnchorElText] = useState<Element | null>(null);
+  const [anchorElBackground, setAnchorElBackground] = useState<Element | null>(
+    null
+  );
 
 
-  const handleClick = (event: React.SyntheticEvent) => {
-    setAnchorElText(event.currentTarget);
+
+  const handleChangePalette = (newPallete: string) => {
+    setPalette(newPallete);
+    setBackgroundColor(paletteBackgroundSchema[newPallete]);
+    setTextColor(paletteColorSchema[newPallete][0]);
+    setAnchorElBackground(null);
   };
-  const handleClose = () => {
+
+  const handleChangeColor = (key: string) => {
     setAnchorElText(null);
+    setTextColor(key);
   };
-
-  useEffect(() => {
-    setState({
-      ...state,
-      graphic: {
-        ...state.graphic,
-        ...{
-          textColor: paletteSchema[palette].text,
-          backgroundColor: paletteSchema[palette].background,
-        },
-      },
-    });
-
-    setAnchorElText(null);
-  }, [palette]);
 
   return (
     <>
@@ -101,21 +116,31 @@ const ColorSwitcher = () => {
         sx={{ mb: 3, mr: 2 }}
         // onClick={() => setIsOpen(true)}
         onClick={(event: React.SyntheticEvent) =>
-          setAnchorElText(event.currentTarget)
+          setAnchorElBackground(event.currentTarget)
         }
       >
-        Schemat
+        Tło
         <Box
-          sx={{ ml: 1, width: 20, height: 20, backgroundColor: "#ffb23e" }}
+          sx={{
+            ml: 1,
+            width: 20,
+            height: 20,
+            border: "1px solid",
+            borderColor:
+              theme.palette.mode === "dark"
+                ? theme.palette.dark.light
+                : theme.palette.grey[100],
+            backgroundColor,
+          }}
         ></Box>
       </Button>
       <Menu
-        id="menu-post"
-        anchorEl={anchorElText}
+        id="menu-background"
+        anchorEl={anchorElBackground}
         keepMounted
-        open={Boolean(anchorElText)}
-        onClose={() => setAnchorElText(null)}
-        variant="selectedMenu"
+        open={Boolean(anchorElBackground)}
+        onClose={() => setAnchorElBackground(null)}
+        variant="menu"
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "right",
@@ -126,37 +151,81 @@ const ColorSwitcher = () => {
         }}
         sx={{ display: "flex" }}
       >
-        {Object.keys(paletteSchema).map((key) => (
-          <MenuItem
-            sx={
-              {
-                // backgroundColor: paletteSchema[key].background,
-                // color: paletteSchema[key].text,
-                // opacity: 0.9,
-                // "&:hover": {
-                //   backgroundColor: paletteSchema[key].background,
-                //   color: paletteSchema[key].text,
-                //   opacity: 1,
-                // },
-              }
-            }
-            onClick={() => setPalette(key)}
-          >
+        {Object.keys(paletteBackgroundSchema).map((key) => (
+          <MenuItem onClick={() => handleChangePalette(key)}>
             <Box
               sx={{
-                mr: 1,
                 borderRadius: 1,
-                width: 20,
+                width: 40,
                 height: 20,
-                backgroundColor: paletteSchema[key].background,
+                backgroundColor: paletteBackgroundSchema[key],
                 border: "1px solid",
                 borderColor:
                   theme.palette.mode === "dark"
                     ? theme.palette.dark.light
-                    : theme.palette.grey[100],
+                    : theme.palette.grey[300],
               }}
             ></Box>
-            {paletteSchema[key].name}
+          </MenuItem>
+        ))}
+      </Menu>
+
+      <Button
+        size="small"
+        variant="outlined"
+        color="primary"
+        sx={{ mb: 3, mr: 2 }}
+        onClick={(event: React.SyntheticEvent) =>
+          setAnchorElText(event.currentTarget)
+        }
+      >
+        Tekst
+        <Box
+          sx={{
+            ml: 1,
+            width: 20,
+            height: 20,
+            border: "1px solid",
+            borderColor:
+              theme.palette.mode === "dark"
+                ? theme.palette.dark.light
+                : theme.palette.grey[300],
+            backgroundColor: textColor,
+          }}
+        ></Box>
+      </Button>
+      <Menu
+        id="menu-text"
+        anchorEl={anchorElText}
+        keepMounted
+        open={Boolean(anchorElText)}
+        onClose={() => setAnchorElText(null)}
+        variant="menu"
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        sx={{ display: "flex" }}
+      >
+        {paletteColorSchema[palette].map((key) => (
+          <MenuItem onClick={() => handleChangeColor(key)}>
+            <Box
+              sx={{
+                borderRadius: 1,
+                width: 40,
+                height: 20,
+                backgroundColor: key,
+                border: "1px solid",
+                borderColor:
+                  theme.palette.mode === "dark"
+                    ? theme.palette.dark.light
+                    : theme.palette.grey[300],
+              }}
+            />
           </MenuItem>
         ))}
       </Menu>

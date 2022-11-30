@@ -44,7 +44,7 @@ type CreatePostState = {
 };
 
 const initialData: CreatePostState = {
-  type: "post",
+  type: "graphic",
   post: {
     title: "",
     description: "",
@@ -73,7 +73,7 @@ export interface ContextProps {
 export const CreatePostContext = React.createContext({} as ContextProps);
 
 const CreatePost = () => {
-  const [tab, setTab] = useState<number>(2);
+  const [tab, setTab] = useState<number>(1);
   const [isLoading, setIsLoading] = useState(false);
   const [state, setState] = useState<CreatePostState>(initialData);
   const userState = useAppSelector((state) => state.user);

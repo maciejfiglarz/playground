@@ -30,9 +30,9 @@ type TabsData = {
 const tabs: TabsData = {
   0: { icon: <ChromeReaderModeIcon />, key: "post", label: "Post" },
   1: { icon: <PhotoSizeSelectActualIcon />, key: "graphic", label: "Grafika" },
-  2: { icon: <PollIcon />, key: "pool", label: "Ankieta" },
-  3: { icon: <LinkIcon />, key: "link", label: "Link" },
-  4: { icon: <CollectionsBookmarkIcon />, key: "gallery", label: "Galeria" },
+  // 2: { icon: <PollIcon />, key: "pool", label: "Ankieta" },
+  // 3: { icon: <LinkIcon />, key: "link", label: "Link" },
+  // 4: { icon: <CollectionsBookmarkIcon />, key: "gallery", label: "Galeria" },
 };
 
 const Switcher = ({ tab, setTab }: Props) => {

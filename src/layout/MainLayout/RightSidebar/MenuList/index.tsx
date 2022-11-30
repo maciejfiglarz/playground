@@ -126,6 +126,7 @@ const MenuList = ({ setIsOpenNavigation }: Props) => {
           <Button
             component={Link}
             to="/login"
+            size="large"
             style={{ marginBottom: 15 }}
             variant="contained"
             onClick={() => setIsOpenNavigation(false)}
@@ -135,12 +136,13 @@ const MenuList = ({ setIsOpenNavigation }: Props) => {
           <Button
             component={Link}
             to="/register"
+            size="large"
             variant="outlined"
             onClick={() => setIsOpenNavigation(false)}
           >
             Załóż konto
           </Button>
-          <Divider sx={{ margin: "25px 0" }} />
+      
         </>
       )}
 
@@ -162,11 +164,13 @@ const MenuList = ({ setIsOpenNavigation }: Props) => {
       >
         {userState.userInfo && (
           <>
+          
             <UserLabel />
+            
             {menuItemsLoggedUser.map((menu) => (
               <NavCollapse key={menu.id} {...menu} />
             ))}
-            <Divider sx={{ margin: "25px 0" }} />
+            {/* <Divider sx={{ margin: "25px 0" }} /> */}
           </>
         )}
 

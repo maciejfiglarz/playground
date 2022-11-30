@@ -11,7 +11,7 @@ const CreatePage = () => {
       isSection={true}
       sx={{
         marginBottom: 5,
-        maxWidth: 900,
+        maxWidth: 700,
       }}
     >
       <Create />

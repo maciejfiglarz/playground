@@ -149,7 +149,7 @@ const UserSidebar = () => {
 
         <MenuList setIsOpenNavigation={setIsOpen} />
 
-        <Divider sx={{ margin: "25px 0" }} />
+        {/* <Divider sx={{ margin: "25px 0" }} /> */}
 
         <Box
           sx={{

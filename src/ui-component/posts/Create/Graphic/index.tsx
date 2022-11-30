@@ -1,11 +1,7 @@
 import { useContext, useState } from "react";
-// import { useNavigate } from 'react-router-dom';
-// import {
-//     useQuery,
-// } from 'react-query';
 
-//project imports
 import { TextField, Grid } from "@mui/material";
+import BottomAction from "./../BottomAction";
 
 //material ui
 import FormGroup from "@mui/material/FormGroup";
@@ -38,9 +34,17 @@ const CreateGraphic = () => {
   const theme = useTheme();
   const { state } = useContext(CreatePostContext);
   const [isTopTitle, setIsTopTitle] = useState(false);
-  const [topTitle, setTopTitle] = useState("");
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [isStatueConfirm, setIsStatueConfirm] = useState(false);
+  const [topTitle, setTopTitle] = useState<null | string>(null);
+  const [title, setTitle] = useState<null | string>(null);
+  const [description, setDescription] = useState<null | string>(null);
+
+  const [backgroundColor, setBackgroundColor] = useState("#FFFFFF");
+  const [textColor, setTextColor] = useState("#000000");
+
+  const onSubmit = () =>{
+    
+  }
 
   return (
     <>
@@ -69,10 +73,10 @@ const CreateGraphic = () => {
       )}
 
       <TextField
-        id="outlined-multiline-flexible"
+        id=""
         label="Tytuł"
         multiline
-        rows={2}
+        minRows={1}
         fullWidth
         sx={{ mb: 3 }}
         value={title}
@@ -80,10 +84,10 @@ const CreateGraphic = () => {
       />
 
       <TextField
-        id="outlined-multiline-flexible"
+        id=""
         label="Opis"
         multiline
-        minRows={5}
+        minRows={2}
         fullWidth
         sx={{ mb: 5 }}
         value={description}
@@ -94,48 +98,50 @@ const CreateGraphic = () => {
           <Uploader />
         </Grid>
         <Grid item>
-          <ColorsSwitcher />
+          <ColorsSwitcher
+            backgroundColor={backgroundColor}
+            setBackgroundColor={setBackgroundColor}
+            textColor={textColor}
+            setTextColor={setTextColor}
+          />
         </Grid>
       </Grid>
 
       <Box
         sx={{
-          m: "-10px auto 10px auto",
-  
-          backgroundColor: state.graphic.backgroundColor,
+          m: "0 auto",
+          backgroundColor,
           position: "relative",
-          border: "1px solid",
-          maxWidth: 600,
-          borderColor:
-            theme.palette.mode === "dark"
-              ? theme.palette.dark.light
-              : theme.palette.grey[300],
+          top: 0,
+          left: 0,
+          mb: 1,
+          // border: "1px solid",
+          maxWidth: 550,
+          // borderColor:
+          //   theme.palette.mode === "dark"
+          //     ? theme.palette.dark.light
+          //     : theme.palette.grey[300],
         }}
       >
-        {isTopTitle && topTitle && (
-          <Title color={state.graphic.textColor}>{topTitle}</Title>
-        )}
-        <Box sx={{ textAlign: "center", width: "100%" }}>
+        {isTopTitle && topTitle && <Title color={textColor}>{topTitle}</Title>}
+        <Box sx={{ textAlign: "center" }}>
           <img
             style={{
               width: "100%",
-              margin: "0 auto",
-              maxWidth: "600px",
+              // margin: "0 auto",
+              // maxWidth: 579,
             }}
             src={emptyImage}
           />
         </Box>
 
-        {isTopTitle && topTitle && (
-          <Title color={state.graphic.textColor}>{title}</Title>
-        )}
+        {title && <Title color={textColor}>{title}</Title>}
 
         {description && (
-          <Description color={state.graphic.textColor}>
-            {description}
-          </Description>
+          <Description color={textColor}>{description}</Description>
         )}
       </Box>
+      <BottomAction isStatueConfirm={isStatueConfirm} setIsStatueConfirm={setIsStatueConfirm} onSubmit={onSubmit} />
     </>
   );
 };

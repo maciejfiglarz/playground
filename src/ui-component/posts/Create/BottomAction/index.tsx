@@ -5,12 +5,26 @@ import { useEffect, useState } from "react";
 //material ui
 import { Button, Checkbox, FormControlLabel, Stack } from "@mui/material";
 
-const BottomNavigation = () => {
+type BottomNavigationProps = {
+  isStatueConfirm: boolean;
+  setIsStatueConfirm: React.Dispatch<React.SetStateAction<boolean>>;
+  onSubmit: () => void;
+};
+
+const BottomNavigation = ({
+  isStatueConfirm,
+  setIsStatueConfirm,
+}: BottomNavigationProps) => {
   return (
     <>
       <Stack sx={{ pb: 2 }} alignItems={"center"}>
         <FormControlLabel
-          control={<Checkbox defaultChecked />}
+          control={
+            <Checkbox
+              checked={isStatueConfirm}
+              onChange={(e) => setIsStatueConfirm(e.target.checked)}
+            />
+          }
           label="Akceptuję regulamin serwisu Komentatory.pl"
         />
       </Stack>
@@ -21,7 +35,7 @@ const BottomNavigation = () => {
           variant="contained"
           type="submit"
           sx={{ maxWidth: 250 }}
-        //   onClick={saveForm}
+          //   onClick={saveForm}
         >
           Opublikuj
         </Button>

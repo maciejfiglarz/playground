@@ -1,14 +1,10 @@
-// import { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import {
-//     useQuery,
-// } from 'react-query';
+import { useContext,useState } from "react";
 
 //project imports
 
-import { useContext } from "react";
 import { CreatePostContext } from "..";
 import Upload from "../Upload";
+import BottomAction from "../BottomAction";
 
 //material ui
 import { TextField, Box, IconButton } from "@mui/material";
@@ -16,11 +12,10 @@ import { useTheme } from "@mui/material/styles";
 import { Close } from "@mui/icons-material";
 
 const CreatePost = () => {
-  const { state, setState } = useContext(CreatePostContext);
-  const data = state.post;
   const theme = useTheme();
-  // const [isLoading, setIsLoading] = useState(false);
-  // const navigate = useNavigate();
+  const { state, setState } = useContext(CreatePostContext);
+  const [isStatueConfirm, setIsStatueConfirm] = useState(false);
+  const data = state.post;
 
   const clearPreview = () => {
     setState({
@@ -72,6 +67,8 @@ const CreatePost = () => {
     setState({ ...state, post: { ...state.post, [key]: value } });
   };
 
+  const onSubmit = () => {};
+
   return (
     <>
       <Upload />
@@ -96,6 +93,11 @@ const CreatePost = () => {
         sx={{ mb: 3 }}
         onChange={(e) => handleInputText("description", e.target.value)}
         value={data.description}
+      />
+      <BottomAction
+        isStatueConfirm={isStatueConfirm}
+        setIsStatueConfirm={setIsStatueConfirm}
+        onSubmit={onSubmit}
       />
     </>
   );
