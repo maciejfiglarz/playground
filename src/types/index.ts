@@ -38,7 +38,6 @@ export type ReplyComment = {
   replies?: Comment[];
 };
 
-
 export type Comment = {
   id: string;
   user: User;
@@ -50,8 +49,6 @@ export type Comment = {
   // video?: string;
   replies?: Comment[];
 };
-
-
 
 // export interface PostData {
 //   title?: string;
@@ -102,6 +99,11 @@ export interface Category {
   description?: string;
 }
 
+export interface CategoryAdmin {
+  id: string;
+  name: string;
+  slug: string;
+}
 
 export type User = {
   id: string;
