@@ -1,6 +1,6 @@
 import React from "react";
 
-import SidebarCategoriesAdmin from "ui-component/sidebar/admin-panel/index";
+import SidebarCategoriesAdmin from "views/admin/components/admin-panel/index";
 
 import { Grid } from "@mui/material";
 import MainGrid from "ui-component/MainGrid";

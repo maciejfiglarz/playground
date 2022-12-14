@@ -112,7 +112,7 @@ services.onPost("/auth/login").reply((request) => {
   }
 });
 
-services.onGet("/api/users").reply(200, { users });
+services.onGet("/api/users").reply(200, [ ...users ]);
 
 services.onGet(/\/api\/user\/\w+/).reply((request) => {
   try {

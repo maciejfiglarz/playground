@@ -5,6 +5,7 @@ import AdminLayout from "layout/AdminLayout";
 import Loadable from "ui-component/Loadable";
 
 const Homepage = Loadable(lazy(() => import("views/admin/index")));
+const Users = Loadable(lazy(() => import("views/admin/users")));
 const Auth = Loadable(lazy(() => import("views/admin/index")));
 
 const MainRoutes = {
@@ -18,6 +19,10 @@ const MainRoutes = {
     {
       path: "/admin",
       element: <Homepage />,
+    },
+    {
+      path: "/admin/users",
+      element: <Users />,
     },
   ],
 };

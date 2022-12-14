@@ -7,7 +7,7 @@ import Link from "@mui/material/Link";
 import NavItem from "./NavItem";
 import { Category } from "types";
 import { List, Typography, useTheme } from "@mui/material";
-import SidebarTitle from "./../Title";
+import SidebarTitle from "../../../../ui-component/sidebar/Title";
 import axios from "utils/axios";
 
 // ==============================|| MAIN SIDEBAR MENU LIST ||============================== //
