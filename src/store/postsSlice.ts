@@ -78,21 +78,6 @@ export const slice = createSlice({
         return post;
       });
 
-      //   post.comments.map(comments =>{
-      //     const isExist =  comments.find(comment =>)
-      // });
-      // const post = current(state).data.posts.find((post) => post.id === comment.postID);
-
-      // state.data = [
-      //   ...state.data,
-      //   {
-      //     id: "2",
-      //     title: "testowy",
-      //     author: "empty",
-      //     description: "opis",
-      //     imageUrl: "",
-      //   },
-      // ];
     },
 
     addReplyComment: (state, action: PayloadAction<Comment>) => {

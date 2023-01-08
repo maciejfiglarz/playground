@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import {
     QueryClient,
     QueryClientProvider
-} from 'react-query';
+} from '@tanstack/react-query';
 
 import { CssBaseline, StyledEngineProvider } from '@mui/material';
 // import { ThemeProvider, Theme } from '@mui/material/styles';
